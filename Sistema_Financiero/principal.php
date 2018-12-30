@@ -8,7 +8,7 @@
     }else{
         header('Location: php_cerrar.php');
     }
-    
+    //
     #$oUsuario=new Consultar_Usuario($_SESSION['cod_user']);
     #$Nombre=$oUsuario->consultar('nom');
     
