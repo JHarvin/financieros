@@ -51,16 +51,16 @@
 </head>
 
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color:#1A7B85;">
+        <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header" style="background-color:#FF8B41;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
  
             <ul class="nav navbar-top-links navbar-right">                
@@ -91,7 +91,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
            <?php include_once "menu/m_principal.php"; ?>
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
                 <!-- /. ROW  -->
 
@@ -102,16 +102,13 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                     <div class="row">
                       <DIV align="center">
                        <?php
-                        if (file_exists("img/usuario/".$_SESSION['cod_user'].".gif")){
-                        echo '<img src="img/usuario/'.$_SESSION['cod_user'].'.gif" class="user-image img-responsive"/>';
+                        if (file_exists("img/fina.png")){
+                        echo '<img src="img/fina.png" with="500%" class="user-image img-responsive"/>';
                         }else{
-                        echo '<img src="img/usuario/default.png" class="user-image img-responsive"/>';
+                        echo '<img src="img/fina.png" class="user-image img-responsive"/>';
                         }
                     ?>
-                        <div class="alert alert-info">
-                            <h1 class="text-success">Bienvenido al Sistema<br> <?php echo $_SESSION['user_name']; ?></h1><br>
-                        <strong class="text-info"><?php echo usuario($_SESSION['tipo_user']); ?></strong>
-                        </div>
+                        
                         
                     </DIV>
                     </div>             
