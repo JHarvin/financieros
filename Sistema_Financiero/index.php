@@ -25,12 +25,12 @@
 	<body>
 <!--login modal-->
 <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
-<div class="alert alert-danger" align="center"><strong>FINANCIERO EL MILAGRO V1 </strong></div><br>
+
 <form name="form1" method="post" action="" class="form col-md-11 center-block">
   <div class="modal-dialog">
   <div class="modal-content">     
       <div class="modal-body">         
-      	<center><img src="img/empresa1.png" width="200" height="200"></center><br>
+      	<center><img src="img/fina.png" width="200" height="200"></center><br>
       	<?php 
 	  	if(!empty($_POST['usu']) and !empty($_POST['con'])){ 
 			$usu=limpiar($_POST['usu']);
@@ -72,7 +72,7 @@
 			<input type="password" name="con" class="form-control input-lg" placeholder="Password" autocomplete="off" required>
 			</div><br>
 			<div class="form-group">
-			<div align="right"><button class="btn btn-success btn-lg btn-block" type="submit"><i class="glyphicon glyphicon-log-in"></i> <strong>Entrar</strong></button></div>
+			<div align="right"><button class="btn btn-success btn-lg btn-block" type="submit"><i class="glyphicon "></i> <strong>Entrar</strong></button></div>
 			</div>';		
 		}
 	  ?>
