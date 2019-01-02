@@ -844,7 +844,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                             }
                                         }
 
-                                            $impuesto=$neto*$iv/100;
+                                            $impuesto=$total*$iv/100;
                                             
                                         ?>
                                      <form name="form3" method="get" action="index.php">

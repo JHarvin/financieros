@@ -60,16 +60,16 @@
     <link href="../../assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper">
-         <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color:#1A7B85;">
+         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header" style="background-color:#FF8B41;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
  
             <ul class="nav navbar-top-links navbar-right">
@@ -102,7 +102,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <?php include_once "../../menu/m_pagos.php"; ?>
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+        <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
                  <?php
                 if(!empty($_POST['valor'])){
@@ -135,11 +135,11 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                     <strong>Total Deuda</strong><br>
                     <strong> <?php echo $s.' '.formato($deuda); ?></strong>
                 </div>
-                <div class="col-md-4 text-info" align="center" style="font-size:16px">
+                <div class="col-md-4 text-info" align="center" style="font-size:16px; color:black">
                     <strong>Total Abonado</strong><br>
                     <strong><?php echo $s.' '.formato(abonos_saldo($id)); ?></strong>
                 </div>
-                <div class="col-md-4 text-success" align="center" style="font-size:16px">
+                <div class="col-md-4 text-success" align="center" style="font-size:16px; color:white">
                     <strong>Saldo Faltante</strong><br>
                     <strong><?php echo $s.' '.formato($deuda-abonos_saldo($id)); ?></strong>
                 </div>

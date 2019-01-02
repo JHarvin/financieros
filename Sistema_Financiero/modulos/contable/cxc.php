@@ -4,6 +4,7 @@
     include_once "class/class.php";
     include_once "../funciones.php";
     include_once "../class_buscar.php";
+    $verdaderaMora;
     if($_SESSION['cod_user']){
     }else{
         header('Location: ../../php_cerrar.php');
@@ -164,7 +165,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <?php include_once "../../menu/m_venta.php"; ?>
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+        <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">                
                  <?php
                 if(!empty($_POST['valor'])){
@@ -217,15 +218,15 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                 </tr>
             </table>
             <div class="row-fluid">
-                <div class="col-md-4 text-danger" align="center" style="font-size:16px">
+                <div class="col-md-4 text-danger" align="center" style="font-size:20px; color: red">
                     <strong>Total Deuda</strong><br>
                     <strong> <?php echo $s.' '.formato($deuda); ?></strong>
                 </div>
-                <div class="col-md-4 text-info" align="center" style="font-size:16px">
+                <div class="col-md-4 text-info" align="center" style="font-size:20px; color: black">
                     <strong>Total Abonado</strong><br>
                     <strong><?php echo $s.' '.formato(abonos_saldo($id)); ?></strong>
                 </div>
-                <div class="col-md-4 text-success" align="center" style="font-size:16px">
+                <div class="col-md-4 text-success" align="center" style="font-size:20px; color: white">
                     <strong>Saldo Faltante</strong><br>
                     <strong><?php echo $s.' '.formato($deuda-abonos_saldo($id)); ?></strong>
                 </div>
@@ -239,15 +240,15 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             </div>
             <!-- intereses-->
                 <div class="row-fluid">
-                <div class="col-md-4 text-danger" align="center" style="font-size:16px">
+                <div class="col-md-4 text-danger" align="center" style="font-size:20px; color: red">
                     <strong>Total de interes</strong><br>
                     <strong> <?php echo $s.' '.formato($interesT); ?></strong>
                 </div>
-                <div class="col-md-4 text-info" align="center" style="font-size:16px">
+                <div class="col-md-4 text-info" align="center" style="font-size:20px; color: black">
                     <strong>Total Abonado</strong><br>
                     <strong><?php echo $s.' '.formato(abonos_interes($id)); ?></strong>
                 </div>
-                <div class="col-md-4 text-success" align="center" style="font-size:16px">
+                <div class="col-md-4 text-success" align="center" style="font-size:20px; color: white">
                     <strong>Saldo Faltante</strong><br>
                     <strong><?php echo $s.' '.formato($interesT-abonos_interes($id)); ?></strong>
                 </div>
@@ -262,8 +263,9 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <!--fin de interese-->
             <div class="col-md-3">                                                                                          
                      <label>Mora</label>
+
                     <input type="text" name="moraVer" value="<?php echo $verdaderaMora;?>" autocomplete="off" class="form-control">
-                                            </div>  
+                    </div>  
             <div class="col-md-4"></div>
             <div class="col-md-4">
                          <div class="panel-body" align="center">                                                                                 
