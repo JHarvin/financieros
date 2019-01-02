@@ -72,16 +72,16 @@
     </script>
 </head>
 <body>
-    <div id="wrapper">
-         <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color:#1A7B85;">
+         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header" style="background-color:#FF8B41;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                 <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
  
             <ul class="nav navbar-top-links navbar-right">
@@ -112,7 +112,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
             <?php include_once "../../menu/m_proveedor.php"; ?>
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+        <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
@@ -196,12 +196,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                     </tbody>                                    
                                 </table><br><br><br><br>
                                      <hr/>
-                                     <center>
-                                        <strong><?php echo $nombre_empresa; ?></strong><br>
-                                        <strong><?php echo $tel_empresa; ?></strong><br>
-                                        <strong><?php echo $pais_empresa; ?></strong><br>
-                                        <strong><?php echo $dir_empresa; ?></strong><br>
-                                    </center>
+                                     
                             </div>                                                                     
                     <!--End Advanced Tables -->
                 </div>

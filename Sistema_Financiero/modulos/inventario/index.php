@@ -54,16 +54,16 @@
     <link href="../../assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper">
-         <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color:#1A7B85;">
+         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header" style="background-color:#FF8B41;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
  
             <ul class="nav navbar-top-links navbar-right">
@@ -93,7 +93,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <?php include_once "../../menu/m_categoria.php"; ?>
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+        <div id="page-wrapper"  style="background-color:#4161CF;">
             <div id="page-inner">
             <?php if(permiso($_SESSION['cod_user'],'6')==TRUE){ ?>            			 
                      <!--  Modals-->

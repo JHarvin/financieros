@@ -119,12 +119,35 @@
                     <li>
                        <a href="#"><i class="fa fa-cloud-download fa-2x"></i> Mantenimiento de Datos<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            <ul class="nav nav-second-level">
                             <li>
-                                <a href="../../modulos/backup/backup.php"> Respaldo de Datos</a>
+                                <a href="modulos/reportes/cat.php"> Articulos por Categorias</a>
+                            </li>
+                             <li>
+                                <a href="modulos/reportes/report_costo.php"> Articulos por Almacen Costo</a>
                             </li>
                             <li>
-                                <a href="../../modulos/backup/restore.php">Restauraración de Datos</a>
+                                <a href="modulos/reportes/dep.php"> Articulos por Almacen Precios Venta</a>
                             </li>
+                            <li>
+                                <a href="modulos/reportes/compra_dia.php"> Compras de Articulos por Fecha</a>
+                            </li>
+                             <li>
+                                <a href="modulos/reportes/compra_cat.php"> Compras de Articulos por Categoria</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/compra_gen.php"> Compras General de Articulos</a>
+                            </li>
+                             <li>
+                                <a href="modulos/reportes/venta_dia.php"> Ventas de Articulos por fecha</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/venta_cat.php"> Ventas de Articulos por Categoria</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/venta_gen.php"> Ventas General de Articulos</a>
+                            </li>                                
+                        </ul>
                         </ul>
                     </li>
                 </ul>
