@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "class/class.php";
@@ -8,26 +8,26 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
-    
+
     if(!empty($_GET['del'])){
         $id=$_GET['del'];
         mysql_query("DELETE FROM almacen WHERE id='$id'");
@@ -45,7 +45,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -65,7 +65,7 @@
                 </button>
                 <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -90,23 +90,23 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
 </div>
         </nav>
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+        
             <?php include_once "../../menu/m_admin.php"; ?>
-        </nav>
+
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
             <?php if(permiso($_SESSION['cod_user'],'16')==TRUE){ ?>
 			 <div class="row">
-                    <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
+                    <div class="col-md-12">
+                          <div class="panel-body" align="center">
                             <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x"></i>
                             </button>
                             <button type="button" class="btn btn-info btn-circle"><i class="fa fa-question fa-2x"></i>
-                            </button>                                                                                 
+                            </button>
                   </div>
                     </div>
-                </div> 
+                </div>
                  <!-- /. ROW  -->
                   <!--  Modals-->
                      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -115,86 +115,86 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        
+
                                             <h3 align="center" class="modal-title" id="myModalLabel">Nuevo Almacen</h3>
                                         </div>
                                         <div class="panel-body">
-                                        <div class="row">                                       
-                                            <div class="col-md-12">                                                                                   
-                                                <input class="form-control" name="nombre" placeholder="Nombre" autocomplete="off" required><br>                                          
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input class="form-control" name="nombre" placeholder="Nombre" autocomplete="off" required><br>
                                             </div>
-                                            <div class="col-md-12">                                                                                   
-                                                <input class="form-control" name="direccion" placeholder="Direccion" autocomplete="off" required><br>                                          
+                                            <div class="col-md-12">
+                                                <input class="form-control" name="direccion" placeholder="Direccion" autocomplete="off" required><br>
                                             </div>
-                                            <div class="col-md-6">                                                                                   
-                                                <input class="form-control" name="encargado" placeholder="Encargado" autocomplete="off" required><br>                                          
+                                            <div class="col-md-6">
+                                                <input class="form-control" name="encargado" placeholder="Encargado" autocomplete="off" required><br>
                                             </div>
-                                             <div class="col-md-6">                                                                                   
-                                                <input class="form-control" name="tel" placeholder="Telefono" autocomplete="off" required><br>                                          
+                                             <div class="col-md-6">
+                                                <input class="form-control" name="tel" placeholder="Telefono" autocomplete="off" required><br>
                                             </div>
-                                            <div class="col-md-6">                                                                                                                                         
+                                            <div class="col-md-6">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Nom. Impuesto</span>
-                                                  <input class="form-control" name="nom_imp" placeholder="Nombre" autocomplete="off" required><br>                
+                                                  <input class="form-control" name="nom_imp" placeholder="Nombre" autocomplete="off" required><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-6">                                                                                                                                         
+                                            <div class="col-md-6">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Valor Impuesto</span>
-                                                  <input class="form-control" type="number" name="val" step="any" min="0" autocomplete="off" required><br>                
+                                                  <input class="form-control" type="number" name="val" step="any" min="0" autocomplete="off" required><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-7">                                                                                                                                         
+                                            <div class="col-md-7">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Nom. Doc </span>
-                                                  <input class="form-control" type="text" name="docc"  placeholder="RUC" autocomplete="off" required><br>                
+                                                  <input class="form-control" type="text" name="docc"  placeholder="RUC" autocomplete="off" required><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-5">                                                                                                                                         
+                                            <div class="col-md-5">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Formato</span>
-                                                  <input class="form-control" type="text" name="vdocc"  placeholder="9999-9999-99" autocomplete="off" required><br>                
+                                                  <input class="form-control" type="text" name="vdocc"  placeholder="9999-9999-99" autocomplete="off" required><br>
                                                 </div><br>
                                             </div>
-                                               <div class="col-md-7">                                                                                                                                         
+                                               <div class="col-md-7">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Nom. otro Doc</span>
-                                                  <input class="form-control" type="text" name="doco"  autocomplete="off"><br>                
+                                                  <input class="form-control" type="text" name="doco"  autocomplete="off"><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-5">                                                                                                                                         
+                                            <div class="col-md-5">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Formato</span>
-                                                  <input class="form-control" type="text" name="vdoco"  placeholder="9999-9999-99" autocomplete="off"><br>                
+                                                  <input class="form-control" type="text" name="vdoco"  placeholder="9999-9999-99" autocomplete="off"><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-6">                                                                                                                                         
+                                            <div class="col-md-6">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Formato Tel.</span>
-                                                  <input class="form-control" type="text" name="ftel"  placeholder="9999-9999-99" autocomplete="off"><br>                
+                                                  <input class="form-control" type="text" name="ftel"  placeholder="9999-9999-99" autocomplete="off"><br>
                                                 </div><br>
                                             </div>
-                                            <div class="col-md-6">                                                                                                                                         
+                                            <div class="col-md-6">
                                                <div class="input-group">
                                                   <span class="input-group-addon">Estado</span>
                                                   <select class="form-control" name="estado" autocomplete="off" required>
                                                     <option value="s">Activo</option>
-                                                    <option value="n">No Activo</option>                                            
-                                                </select>                                               
+                                                    <option value="n">No Activo</option>
+                                                </select>
                                                 </div>
-                                            </div>                                                                          
-                                        </div> 
-                                        </div> 
+                                            </div>
+                                        </div>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                      <!-- End Modals-->
-               
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -204,12 +204,12 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                            <?php 
-                                    if(!empty($_POST['nombre'])){                                               
+                            <?php
+                                    if(!empty($_POST['nombre'])){
                                         $nombre=limpiar($_POST['nombre']);
                                         $direccion=limpiar($_POST['direccion']);
-                                        $tel=limpiar($_POST['tel']);    
-                                        $encargado=limpiar($_POST['encargado']);                                                                                                                                             
+                                        $tel=limpiar($_POST['tel']);
+                                        $encargado=limpiar($_POST['encargado']);
                                         $estado=limpiar($_POST['estado']);
                                         $nom_imp=limpiar($_POST['nom_imp']);
                                         $val=limpiar($_POST['val']);
@@ -219,7 +219,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                         $vdoco=limpiar($_POST['vdoco']);
                                         $ftel=limpiar($_POST['ftel']);
 
-                                        
+
                                         if(empty($_POST['id'])){
                                             $oAlamacen=new Proceso_Almacen('',$nombre,$direccion,$tel,$encargado,$estado,$nom_imp,$val,$docc,$vdocc,$doco,$vdoco,$ftel);
                                             $oAlamacen->crear();
@@ -240,12 +240,12 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                             <th>NOM. IMPUESTO</th>
                                             <th>VALOR IMPUESTO</th>
                                             <th>ESTADO</th>
-                                            <th>ACCIONES</th>                                          
+                                            <th>ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php                                             
-                                            $pame=mysql_query("SELECT * FROM almacenes ORDER BY nombre");                                                        
+                                    <?php
+                                            $pame=mysql_query("SELECT * FROM almacenes ORDER BY nombre");
                                             while($row=mysql_fetch_array($pame)){
                                         ?>
                                         <tr class="odd gradeX">
@@ -259,7 +259,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                               <ul class="dropdown-menu">
                                                 <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                                                 <li class="divider"></li>
-                                                <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>                                                                                                                                             
+                                                <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>
                                               </ul>
                                             </div>
                                             </td>
@@ -272,142 +272,142 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            
+
                                                                 <h3 align="center" class="modal-title" id="myModalLabel">Editar Almacen</h3>
                                                             </div>
                                                             <div class="panel-body">
-                                                            <div class="row">                                       
+                                                            <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Nombre</span>
-                                                                          <input class="form-control" name="nombre" value="<?php echo $row['nombre']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                       
-                                                                </div>         
+                                                                          <input class="form-control" name="nombre" value="<?php echo $row['nombre']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
+                                                                </div>
                                                                 <div class="col-md-12">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Dirección</span>
-                                                                          <input class="form-control" name="direccion" value="<?php echo $row['direccion']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                      
+                                                                          <input class="form-control" name="direccion" value="<?php echo $row['direccion']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
                                                                 </div>
                                                                    <div class="col-md-6">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Encargado</span>
-                                                                          <input class="form-control" name="encargado" value="<?php echo $row['encargado']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                      
+                                                                          <input class="form-control" name="encargado" value="<?php echo $row['encargado']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Teléfono</span>
-                                                                          <input class="form-control" name="tel" value="<?php echo $row['telefono']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                      
+                                                                          <input class="form-control" name="tel" value="<?php echo $row['telefono']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
                                                                 </div>
-                                                                <div class="col-md-6">                                                                                                                                         
+                                                                <div class="col-md-6">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Nom. Impuesto</span>
-                                                                      <input class="form-control" name="nom_imp" placeholder="Nombre" value="<?php echo $row['nom_imp']; ?>" autocomplete="off" required><br>                
+                                                                      <input class="form-control" name="nom_imp" placeholder="Nombre" value="<?php echo $row['nom_imp']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-6">                                                                                                                                         
+                                                                <div class="col-md-6">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Valor Impuesto</span>
-                                                                      <input class="form-control" type="number" name="val" step="any" min="0" value="<?php echo $row['val_imp']; ?>" autocomplete="off" required><br>                
+                                                                      <input class="form-control" type="number" name="val" step="any" min="0" value="<?php echo $row['val_imp']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-7">                                                                                                                                         
+                                                                <div class="col-md-7">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Nom. Doc </span>
-                                                                      <input class="form-control" type="text" name="docc"  placeholder="RUC" value="<?php echo $row['docc']; ?>" autocomplete="off" required><br>                
+                                                                      <input class="form-control" type="text" name="docc"  placeholder="RUC" value="<?php echo $row['docc']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-5">                                                                                                                                         
+                                                                <div class="col-md-5">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Formato</span>
-                                                                      <input class="form-control" type="text" name="vdocc"  placeholder="9999-9999-99" value="<?php echo $row['vdocc']; ?>" autocomplete="off" required><br>                
+                                                                      <input class="form-control" type="text" name="vdocc"  placeholder="9999-9999-99" value="<?php echo $row['vdocc']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
                                                                 </div>
-                                                                   <div class="col-md-7">                                                                                                                                         
+                                                                   <div class="col-md-7">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Nom. otro Doc</span>
-                                                                      <input class="form-control" type="text" name="doco" value="<?php echo $row['doco']; ?>" autocomplete="off"><br>                
+                                                                      <input class="form-control" type="text" name="doco" value="<?php echo $row['doco']; ?>" autocomplete="off"><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-5">                                                                                                                                         
+                                                                <div class="col-md-5">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Formato</span>
-                                                                      <input class="form-control" type="text" name="vdoco" value="<?php echo $row['vdoco']; ?>" placeholder="9999-9999-99" autocomplete="off"><br>                
+                                                                      <input class="form-control" type="text" name="vdoco" value="<?php echo $row['vdoco']; ?>" placeholder="9999-9999-99" autocomplete="off"><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-6">                                                                                                                                         
+                                                                <div class="col-md-6">
                                                                    <div class="input-group">
                                                                       <span class="input-group-addon">Formato Tel.</span>
-                                                                      <input class="form-control" type="text" name="ftel" value="<?php echo $row['ftel']; ?>" placeholder="9999-9999-99" autocomplete="off"><br>                
+                                                                      <input class="form-control" type="text" name="ftel" value="<?php echo $row['ftel']; ?>" placeholder="9999-9999-99" autocomplete="off"><br>
                                                                     </div><br>
                                                                 </div>
-                                                                <div class="col-md-6">                                                                                          
+                                                                <div class="col-md-6">
                                                                      <div class="input-group">
                                                                       <span class="input-group-addon">Estado</span>
                                                                       <select class="form-control" name="estado" autocomplete="off" required>
                                                                         <option value="s" <?php if($row['estado']=='s'){ echo 'selected'; } ?>>Activo</option>
-                                                                        <option value="n" <?php if($row['estado']=='n'){ echo 'selected'; } ?>>No Activo</option>                                                   
-                                                                    </select>                                               
-                                                                    </div>                                          
-                                                                </div>                                                                        
-                                                            </div> 
-                                                            </div> 
+                                                                        <option value="n" <?php if($row['estado']=='n'){ echo 'selected'; } ?>>No Activo</option>
+                                                                    </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                                                 <button type="submit" class="btn btn-primary">Actualizar</button>
-                                                            </div>                                       
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
                                          <!-- End Modals-->
-                                         <!-- Modal -->                     
+                                         <!-- Modal -->
                                                 <div class="modal fade" id="eliminar<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <form name="contado" action="index.php?del=<?php echo $row['id']; ?>" method="get">
                                                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                                                    
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                                             <h3 align="center" class="modal-title" id="myModalLabel">Seguridad</h3>
                                                                         </div>
                                                             <div class="panel-body">
-                                                            <div class="row" align="center">                                       
-                                                                                                        
+                                                            <div class="row" align="center">
+
                                                                 <strong>Hola! <?php echo $cajero_nombre; ?></strong><br><br>
                                                                 <div class="alert alert-danger">
-                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br> 
+                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br>
                                                                     una vez Eliminada la categoria <strong>[ <?php echo $row['nombre']; ?> ]</strong> no podra ser Recuperada.</h4>
-                                                                </div>                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                            </div> 
-                                                            </div> 
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                 <a href="index.php?del=<?php echo $row['id']; ?>"  class="btn btn-danger" title="Eliminar">
                                                                     <i class="fa fa-times" ></i> <strong>Eliminar</strong>
-                                                                </a>                                                                
-                                                            </div>                                       
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
-                                         <!-- End Modals-->      
-                                        <?php } ?>                                                                             
+                                         <!-- End Modals-->
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
                 <!-- /. ROW  -->
-                                
+
         </div>
-               <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>   
+               <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -432,6 +432,6 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
     <script src="../../assets/js/custom-scripts.js"></script>
     <!-- VALIDACIONES -->
     <script src="../../assets/js/jasny-bootstrap.min.js"></script>
-   
+
 </body>
 </html>

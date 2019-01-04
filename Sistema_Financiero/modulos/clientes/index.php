@@ -69,49 +69,18 @@
     <link href="../../assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper" style="background-color:#1A7B85;">
-         <nav class="navbar navbar-default top-navbar" role="navigation"  style="background-color:#FF8B41;">
-            <div class="navbar-header" style="background-color:#FF8B41;">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
-            </div>
 
-            <ul class="nav navbar-top-links navbar-right">
+
+
                 <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> My Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="../../php_cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
-</div>
-        </nav>
+
+
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+
             <?php include_once "../../menu/m_clientes.php"; ?>
-        </nav>
+
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" style="background-color:#4161CF;">
+        <div id="wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
 <?php if(permiso($_SESSION['cod_user'],'9')==TRUE){ ?>
 			 <div class="row">
@@ -258,7 +227,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                             <td><?php echo $row['dir']; ?></td>
                                             <td class="center">
                                             <div class="btn-group">
-    <button data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
+    <button data-toggle="dropdown" class="btn btn-secondary btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
                                               <ul class="dropdown-menu">
         <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                      <li class="divider"></li>

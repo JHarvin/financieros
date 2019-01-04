@@ -1,9 +1,9 @@
-<?php 
+<?php
     session_start();
     include_once "modulos/php_conexion.php";
     include_once "modulos/class_buscar.php";
     include_once "modulos/funciones.php";
-    
+
     if($_SESSION['cod_user']){
     }else{
         header('Location: php_cerrar.php');
@@ -11,20 +11,20 @@
     //
     #$oUsuario=new Consultar_Usuario($_SESSION['cod_user']);
     #$Nombre=$oUsuario->consultar('nom');
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
-           
+
  $im=$conexion->query("SELECT MAX(id) AS id FROM eventos"); // Aqui buscamos el id con el mayor valor
     $row = $im->fetch_row();                                   // lo traemos
     $id = trim($row[0]);                                       // y guardamos en la variable $id
@@ -51,54 +51,21 @@
 </head>
 
 <body>
-    <div id="wrapper" style="background-color:#1A7B85;">
-        <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
-            <div class="navbar-header" style="background-color:#FF8B41;">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
-            </div>
- 
-            <ul class="nav navbar-top-links navbar-right">                
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="modulos/usuarios/perfil.php"><i class="fa fa-user fa-fw"></i> My Perfil</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="php_cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
-</div>
-        </nav>
+
+
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">       
-           <?php include_once "menu/m_principal.php"; ?>
-        </nav>
+
+           <?php include_once "menu/menu.php"; ?>
+
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" style="background-color:#4161CF;">
+        <div id="wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
                 <!-- /. ROW  -->
 
                 <div class="row">
                 <?php if(permiso($_SESSION['cod_user'],'1')==TRUE){ ?>
-                <?php }else{ echo mensajes("USTED HA INGRESADO COMO USUARIO INVITADO AL SISTEMA","rojo"); }?>  
-                </div>                                 
+                <?php }else{ echo mensajes("USTED HA INGRESADO COMO USUARIO INVITADO AL SISTEMA","rojo"); }?>
+                </div>
                     <div class="row">
                       <DIV align="center">
                        <?php
@@ -108,16 +75,16 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                         echo '<img src="img/fina.png" class="user-image img-responsive"/>';
                         }
                     ?>
-                        
-                        
+
+
                     </DIV>
-                    </div>             
+                    </div>
                 <!-- /. ROW  -->
             </div>
             <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
-    </div>
+
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
     <!-- jQuery Js -->
