@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "class/class.php";
@@ -8,32 +8,32 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
-    
+
    $bus='';#inicializar la variable
         if(!empty($_GET['estado'])){
             $nit=limpiar($_GET['estado']);
             $cans=mysql_query("SELECT * FROM resumen WHERE id='$nit'");
             if($dat=mysql_fetch_array($cans)){
-                if($dat['status']=='PROCESADO'){                    
+                if($dat['status']=='PROCESADO'){
                     $xSQL="Update resumen Set status='PENDIENTE' WHERE id='$nit'";
                     mysql_query($xSQL);
                     header('location:index.php');
@@ -56,7 +56,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -76,7 +76,7 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -108,33 +108,33 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
         <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
             <?php if(permiso($_SESSION['cod_user'],'11')==TRUE){ ?>
-             <?php 
+             <?php
                 if(!empty($_POST['trans']) and !empty($_POST['concepto1'])){
-                    $tipo=limpiar($_POST['trans']);                 
+                    $tipo=limpiar($_POST['trans']);
                     $valor=limpiar($_POST['valor']);
-                    $concepto1=limpiar($_POST['concepto1']);        
+                    $concepto1=limpiar($_POST['concepto1']);
                     $fecha=date('Y-m-d');
-                    $concepto2=limpiar($_POST['concepto2']);        
+                    $concepto2=limpiar($_POST['concepto2']);
                     $hora=date('H:i:s');
-                    
+
                     $sql=mysql_query("SELECT * FROM contable WHERE concepto1='$concepto1' and concepto2='$concepto2' and fecha='$fecha' and valor='$valor' and tipo='$tipo'");
                     if($row=mysql_fetch_array($sql)){
                         echo mensajes('No se permiten datos duplicados en la base de datos','rojo');
                     }else{
-                        mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio) 
+                        mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio)
                         VALUES ('$concepto1','$concepto2','$tipo','$valor','$fecha','$hora','$usu','$id_almacen')");
                         echo mensajes('El Registro Contable ha sido Registrado con Exito','verde');
                     }
                 }
             ?>
-           
-			  <?php 
+
+			  <?php
                 if(!empty($_GET['fechai']) and !empty($_GET['fechaf'])){
                     $fechai=limpiar($_GET['fechai']);
                     $fechaf=limpiar($_GET['fechaf']);
                 }else{
-                    $fechai=date('Y-m-d');  
-                    $fechaf=date('Y-m-d');  
+                    $fechai=date('Y-m-d');
+                    $fechaf=date('Y-m-d');
                 }
                 $usu='';    $trans='';      $where='';
                 $act_trans='active';$act_usu='';
@@ -145,12 +145,12 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                     if($trans<>'TODOS'){
                         $where="WHERE tipo='".$trans."' and fecha between '$fechai' AND '$fechaf'";
                     }else{
-                        $where='';  
+                        $where='';
                     }
                 }elseif(!empty($_GET['usu'])){
                     $usu=limpiar($_GET['usu']);
                     $act_usu='active';
-                    $act_trans='';  
+                    $act_trans='';
                     $where="WHERE usu='".$usu."' and fecha between '$fechai' AND '$fechaf'";
                 }
                             $venta_total=0;$entrada=0;$cxp=0;$cxc=0;
@@ -161,27 +161,22 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                 }
                                 elseif($row['tipo']=='ENTRADA'){
                                     $venta_total=$venta_total+$row['valor'];
-                                    
+
                                 }
                                 elseif($row['tipo']=='CXP'){
-                                    
+
                                 }
                             }
             ?>
-               <center>
-                <button type="button" class="btn btn-info btn-circle" data-toggle="modal" data-target="#venta" title="Ver Caja"><i class="fa fa-search fa-2x"></i>
-                </button>
-                 <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#add" title="Agregar Gasto"><i class="fa fa-plus fa-2x"></i>
-                </button>
-                </center><br>
-                
-                <!-- Modal -->                      
+               <br>
+
+                <!-- Modal -->
              <div class="modal fade" id="venta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <form name="contado" action="pro_contado.php" method="get">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="panel-body">
-                                        <div class="row" align="center">                                       
+                                        <div class="row" align="center">
                                         <div class="col-md-12 col-sm-12 col-xs-12">
                                             <div class="panel panel-primary text-center no-boder bg-color-red">
                                                 <div class="panel-footer back-footer-red">
@@ -189,27 +184,27 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 </div>
                                                 <div class="panel-body">
                                                     <div style=" bg-color: red;font-size:50px"><?php echo $s.' '.formato($venta_total); ?></div>
-                                                </div>                           
+                                                </div>
                                             </div>
-                                        </div>                                                                                                                                                                                                                                                                                                                                 
-                                        </div> 
-                                        </div> 
+                                        </div>
+                                        </div>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             <!--<button type="submit" class="btn btn-primary">Procesar</button>-->
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                      <!-- End Modals-->
-                      <!-- Modal -->                      
+                      <!-- Modal -->
                             <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <form name="form2" action="" method="post">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="panel-body">
-                                        <div class="col-md-6" > 
+                                        <div class="col-md-6" >
                                             <strong>Concepto 1</strong><br>
                                             <input  class="form-control" name="concepto1" value="" autocomplete="off" required><br>
                                             <strong>Valor</strong><br>
@@ -220,21 +215,21 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 <option value="SALIDA">SALIDA</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-6" > 
+                                        <div class="col-md-6" >
                                             <strong>Concepto 2</strong><br>
                                             <textarea class="form-control" name="concepto2" style="width:90%; height:140px">Sin Observaciones</textarea>
                                         </div>
-                                        </div> 
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary">Procesar</button>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
-                     <!-- End Modals-->                             
-            
+                     <!-- End Modals-->
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
@@ -243,10 +238,18 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                              VENTAS, COMPRAS, CXC Y CXP
                         </div>
                         <div class="panel-body">
+                          <right>
+                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#venta" title="Ver Caja"><i class="fa fa-search fa-2x"></i>
+                             Buscar
+                           </button>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add" title="Agregar Gasto"><i class="fa fa-plus fa-2x"></i>
+                              Agregar
+                           </button>
+                         </right>
                          <table class="table table-bordered">
                                 <tr>
                                     <td>
-                                        <?php 
+                                        <?php
                                             $salida=0;$entrada=0;$cxp=0;$cxc=0;
                                             $sql=mysql_query("SELECT * FROM contable");
                                             while($row=mysql_fetch_array($sql)){
@@ -255,7 +258,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 }elseif($row['tipo']=='SALIDA' or $row['tipo']=='CXC'){
                                                     $salida=$salida+$row['valor'];
                                                 }elseif($row['tipo']=='CXP'){
-                                                    
+
                                                 }
                                             }
                                         ?>
@@ -276,20 +279,20 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                     </td>
                                 </tr>
                             </table>
-                         <div class="panel panel-default">                      
+                         <div class="panel panel-default">
                         <div class="panel-body">
                             <ul class="nav nav-pills">
                                 <li class="active"><a href="#transaccion" data-toggle="tab">Consultar por Tipo de Transaccion</a>
                                 </li>
                                  <li class=""><a href="#usuario" data-toggle="tab">Consultar por Usuario</a>
-                                </li>  
+                                </li>
                             </ul>
 
                             <div class="tab-content">
                                <div class="tab-pane fade active in" id="transaccion">
                                 <form name="form1" action="" method="get" class="form-inline">
                            <div class="panel-body">
-                           <div class="row"> 
+                           <div class="row">
                                 <div class="col-md-4">
                                     <strong>Fecha Inicial</strong><br>
                                     <input class="form-control" value="<?php echo $fechai; ?>" name="fechai" type="date" autocomplete="off" required>
@@ -301,35 +304,35 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                 <div class="col-md-4">
                                     <strong>Tipo de Transaccion</strong><br>
                                     <select class="form-control" name="trans">
-                                        <option value="TODOS" <?php if($trans=='TODOS'){ echo 'selected'; } ?>>TODOS</option>                                       
+                                        <option value="TODOS" <?php if($trans=='TODOS'){ echo 'selected'; } ?>>TODOS</option>
                                         <option value="ENTRADA" <?php if($trans=='VENTA'){ echo 'selected'; } ?>>ENTRADA</option>
                                         <option value="SALIDA" <?php if($trans=='SALIDA'){ echo 'selected'; } ?>>SALIDA</option>
                                         <option value="CXC" <?php if($trans=='CXC'){ echo 'selected'; } ?>>Cuentas por Cobrar</option>
-                                        <option value="CXP" <?php if($trans=='CXP'){ echo 'selected'; } ?>>Cuentas por Pagar</option>                                       
+                                        <option value="CXP" <?php if($trans=='CXP'){ echo 'selected'; } ?>>Cuentas por Pagar</option>
                                     </select>
                                      <button type="submit"  class="btn btn-primary"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                            </div>
                         </form>
-                                                                 
+
                                 </div>
                                 <div class="tab-pane fade fade" id="usuario">
                                 <form name="form2" action="" method="get" class="form-inline">
                             <div class="panel-body">
-                            <div class="row"> 
-                                <div class="col-md-4">  
+                            <div class="row">
+                                <div class="col-md-4">
                                     <strong>Fecha Inicial</strong><br>
                                     <input class="form-control" value="<?php echo $fechai; ?>" name="fechai" type="date" autocomplete="off" required>
                                 </div>
-                                <div class="col-md-4">  
+                                <div class="col-md-4">
                                     <strong>Fecha Finalizacion</strong><br>
                                     <input class="form-control" value="<?php echo $fechaf; ?>" name="fechaf" type="date" autocomplete="off" required>
                                 </div>
-                                <div class="col-md-4">  
+                                <div class="col-md-4">
                                     <strong>Usuario</strong><br>
                                     <select class="form-control" name="usu">
-                                        <?php 
+                                        <?php
                                             $sql=mysql_query("SELECT * FROM persona ORDER BY nom");
                                             while($row=mysql_fetch_array($sql)){
                                                 if($row['doc']==$usu){
@@ -345,9 +348,9 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                             </div>
                             </div>
                         </form>
-                                                                                             
-                                </div>         
-                                                        
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -356,16 +359,16 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>DESCRIPCION</th>                                                                                      
-                                            <th>TIPO</th>                                                                                     
+                                            <th>DESCRIPCION</th>
+                                            <th>TIPO</th>
                                             <th>FECHA REGISTRO</th>
                                             <th>VALOR</th>
                                             <th>RESPONSABLE</th>
-                                            <th></th>                                         
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                   <?php 
+                                   <?php
                                                 $sql=mysql_query("SELECT * FROM contable ".$where);
                                                 while($row=mysql_fetch_array($sql)){
                                                     if($row['tipo']=='ENTRADA'){
@@ -387,8 +390,8 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                     }
                                                     else
                                                     {
-                                                       $c_nombre=$row['concepto1'];     
-                                                    }                                                  
+                                                       $c_nombre=$row['concepto1'];
+                                                    }
                                             ?>
                                         <tr class="odd gradeX">
                                             <td><?php echo $row['id'] ?></td>
@@ -406,21 +409,21 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 <?php } ?>
                                                 </center>
                                             </td>
-                                        </tr> 
-                                        <?php } ?>                                                                             
+                                        </tr>
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
                 <!-- /. ROW  -->
-                                
+
         </div>
-           <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>     
+           <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -443,7 +446,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
     </script>
          <!-- Custom Js -->
     <script src="../../assets/js/custom-scripts.js"></script>
-    
-   
+
+
 </body>
 </html>

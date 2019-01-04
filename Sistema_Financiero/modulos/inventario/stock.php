@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "class/class.php";
@@ -8,26 +8,26 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
-    
+
     if(!empty($_GET['del'])){
         $id=$_GET['del'];
         mysql_query("DELETE FROM inventario WHERE id='$id'");
@@ -64,7 +64,7 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -94,9 +94,9 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
-            <?php if(permiso($_SESSION['cod_user'],'6')==TRUE){ ?>            			 
+            <?php if(permiso($_SESSION['cod_user'],'6')==TRUE){ ?>
                      <!--  Modals-->
-                       <?php 
+                       <?php
 
                                     if(!empty($_POST['codigo'])){
                                         $codigo=limpiar($_POST['codigo']);
@@ -104,7 +104,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                         $cat=limpiar($_POST['cat']);
                                         $und=limpiar($_POST['und']);
                                         $valor=limpiar($_POST['valor']);
-                                        $detalle=limpiar($_POST['detalle']);                                                                                                          
+                                        $detalle=limpiar($_POST['detalle']);
                                         $estado=limpiar($_POST['estado']);
                                         $iva=limpiar($_POST['iva']);
                                         #tipo y marca
@@ -114,99 +114,98 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                         #stock y precios
                                         $almacen=limpiar($_POST['almacen']);
                                         $stock=limpiar($_POST['stock']);
-                                        $stock_min=limpiar($_POST['stock_min']);                                        
+                                        $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);  
+                                        $pmy=limpiar($_POST['pmy']);
 
-                                        /*$costo=limpiar($_POST['costo']);*/                               
+                                        /*$costo=limpiar($_POST['costo']);*/
                                         $oND=new Consultar_Deposito($almacen);
                                         $nom_depo=$oND->consultar('nombre');
-                                        
-                                        
+
+
                                         $oNDP=new Consultar_Articulos($codigo);
                                         $nom_Pdto=$oNDP->consultar('nombre');
-                                        
+
                                         if(empty($_POST['id'])){
-                                            $pa=mysql_query("SELECT * FROM articulos WHERE codigo='$codigo'");              
+                                            $pa=mysql_query("SELECT * FROM articulos WHERE codigo='$codigo'");
                                             if($row=mysql_fetch_array($pa)){
                                                 echo mensajes('El Articulo "'.$nombre.'" Ya se Encuentra Registrado con el codigo "'.$codigo.'"','rojo');
                                             }else{
                                                 $oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$iva,
                                                                                                    $modelo,$estante,$marca,
                                                                                                    $almacen,$stock,$stock_min,$pv,$pmy);
-                                                $oArticulos->crear();                                               
-                                                echo mensajes('El Articulo "'.$nombre.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');                                            
+                                                $oArticulos->crear();
+                                                echo mensajes('El Articulo "'.$nombre.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');
                                             }
                                         }else{
                                             $id=limpiar($_POST['id']);
                                             $oArticulos=new Proceso_Articulos($id,$almacen,$stock,$stock_min,$pv,$pmy);
-                                            $oArticulos->actualizar();                                           
+                                            $oArticulos->actualizar();
                                             echo mensajes('El Articulo "'.$nombre.'" en el Deposito "'.$nom_depo.'" Actualizado con Exito','verde');
                                         }
-                                        
+
                                     }
                                     if(!empty($_POST['stock']) and !empty($_POST['almacen']) and !empty($_POST['idx'])){
                                         $id=limpiar($_POST['idx']);
                                         $almacen=limpiar($_POST['almacen']);
                                         $stock=limpiar($_POST['stock']);
-                                        $stock_min=limpiar($_POST['stock_min']);                                        
+                                        $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);                       
+                                        $pmy=limpiar($_POST['pmy']);
                                        mysql_query("UPDATE inventario SET almacen='$almacen',
                                                                              stock='$stock',
                                                                              stock_min='$stock_min',
                                                                              pv='$pv',
-                                                                             pmy='$pmy' 
+                                                                             pmy='$pmy'
                                                                              WHERE id='$id'");
                                         echo mensajes('El Stock se ha  Actualizado con Exito','verde');
                                       }
                                 ?>
-                               
-                          
+
+
  <div class="panel-body">
-        
-    
-        
-        <div class="row">
-                    <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
-                            <button type="button" class="btn btn-primary btn-circle"><i class="fa fa-print fa-2x" title="Imprimir"></i>
-                            </button>
-                            <button type="button" class="btn btn-info btn-circle"  onClick="window.location='PDFarticulos_existencia.php'" title="Reporte PDF"><i class="fa fa-list-alt fa-2x"></i>
-                            </button>                                                                                 
-                           </div>
-                    </div>
-        </div> 
-                 <!-- /. ROW  -->       
+
+
+
+
+                 <!-- /. ROW  -->
               <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
-                    <div class="panel panel-danger">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                              EXISTENCIA MINIMA
                         </div>
                         <div class="panel-body">
+                          <div class="panel-body" align="Right">
+                            <button type="button" class="btn btn-secondary"><i class="fa fa-print fa-2x" title="Imprimir"></i>
+                              Imprimir
+                            </button>
+                            <button type="button" class="btn btn-info"  onClick="window.location='PDFarticulos_existencia.php'" title="Reporte PDF"><i class="fa fa-list-alt fa-2x"></i>
+                              Reporte
+                            </button>
+                           </div>
                             <div class="table-responsive">
-                            <div style="width:100%; height:700px; overflow: auto;">                           
+                            <div style="width:100%; height:700px; overflow: auto;">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>CODIGO</th>
                                             <th>ARTICULO</th>
-                                            <th>CATEGORIA</th>                                                              
-                                            <th>EXISTENCIA</th>                                          
+                                            <th>CATEGORIA</th>
+                                            <th>EXISTENCIA</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php   
-                                            $mensaje='no';                                        
-                                            $pame=mysql_query("SELECT * FROM inventario WHERE almacen='$id_almacen'");                                                        
+                                    <?php
+                                            $mensaje='no';
+                                            $pame=mysql_query("SELECT * FROM inventario WHERE almacen='$id_almacen'");
                                             while($row=mysql_fetch_array($pame)){
                                                 $cant=$row['stock'];
                                                 $minima=$row['stock_min'];
                                                 if($cant<=$minima){
                                                     $mensaje='si';
-                                                
+
                                                 $oArticulo=new Consultar_Articulos($row['articulo']);
                                                 $oCat=new Consultar_Categoria($row['cat']);
                                         ?>
@@ -215,20 +214,20 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                             <td><?php echo $oArticulo->consultar('nombre');  ?></td>
                                             <td><?php echo $oCat->consultar('nombre');  ?></td>
                                             <td><span class="badge badge-important"><?php echo $row['stock']; ?></span></td>
-                                        </tr>                                                 
-                                        <?php }} ?>                                                                             
+                                        </tr>
+                                        <?php }} ?>
                                     </tbody>
                                 </table>
                             </div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-                <!-- /. ROW  -->                                                           
-</div>           
+                <!-- /. ROW  -->
+</div>
         </div>
     </div>
 <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
@@ -253,7 +252,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
     </script>
          <!-- Custom Js -->
     <script src="../../assets/js/custom-scripts.js"></script>
-    
-   
+
+
 </body>
 </html>
