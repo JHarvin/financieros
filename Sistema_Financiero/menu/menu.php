@@ -5,13 +5,13 @@
       <a class="navbar-brand" href="#">WebSiteName</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="modulos/inicio/inicio.php">Home</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Articulos
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li>
-              <a href="../../modulos/articulos/index.php">Articulos</a>
+              <a href="modulos/articulos/index.php">Articulos</a>
           </li>
         <li>
               <a href="../../modulos/inventario/index.php">Inventario</a>
