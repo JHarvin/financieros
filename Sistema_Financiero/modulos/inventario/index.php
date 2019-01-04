@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "class/class.php";
@@ -8,26 +8,26 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
-    
+
     if(!empty($_GET['del'])){
         $id=$_GET['del'];
         mysql_query("DELETE FROM inventario WHERE id='$id'");
@@ -45,7 +45,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -65,7 +65,7 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
@@ -95,9 +95,9 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper"  style="background-color:#4161CF;">
             <div id="page-inner">
-            <?php if(permiso($_SESSION['cod_user'],'6')==TRUE){ ?>            			 
+            <?php if(permiso($_SESSION['cod_user'],'6')==TRUE){ ?>
                      <!--  Modals-->
-                       <?php 
+                       <?php
 
                                     if(!empty($_POST['codigo'])){
                                         $codigo=limpiar($_POST['codigo']);
@@ -105,7 +105,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                         $cat=limpiar($_POST['cat']);
                                         $und=limpiar($_POST['und']);
                                         $valor=limpiar($_POST['valor']);
-                                        $detalle=limpiar($_POST['detalle']);                                                                                                          
+                                        $detalle=limpiar($_POST['detalle']);
                                         $estado=limpiar($_POST['estado']);
                                         $iva=limpiar($_POST['iva']);
                                         #tipo y marca
@@ -115,49 +115,49 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                         #stock y precios
                                         $almacen=limpiar($_POST['almacen']);
                                         $stock=limpiar($_POST['stock']);
-                                        $stock_min=limpiar($_POST['stock_min']);                                        
+                                        $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);  
+                                        $pmy=limpiar($_POST['pmy']);
 
-                                        /*$costo=limpiar($_POST['costo']);*/                               
+                                        /*$costo=limpiar($_POST['costo']);*/
                                         $oND=new Consultar_Deposito($almacen);
                                         $nom_depo=$oND->consultar('nombre');
-                                        
-                                        
+
+
                                         $oNDP=new Consultar_Articulos($codigo);
                                         $nom_Pdto=$oNDP->consultar('nombre');
-                                        
+
                                         if(empty($_POST['id'])){
-                                            $pa=mysql_query("SELECT * FROM articulos WHERE codigo='$codigo'");              
+                                            $pa=mysql_query("SELECT * FROM articulos WHERE codigo='$codigo'");
                                             if($row=mysql_fetch_array($pa)){
                                                 echo mensajes('El Articulo "'.$nombre.'" Ya se Encuentra Registrado con el codigo "'.$codigo.'"','rojo');
                                             }else{
                                                 $oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$iva,
                                                                                                    $modelo,$estante,$marca,
                                                                                                    $almacen,$stock,$stock_min,$pv,$pmy);
-                                                $oArticulos->crear();                                               
-                                                echo mensajes('El Articulo "'.$nombre.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');                                            
+                                                $oArticulos->crear();
+                                                echo mensajes('El Articulo "'.$nombre.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');
                                             }
                                         }else{
                                             $id=limpiar($_POST['id']);
                                             $oArticulos=new Proceso_Articulos($id,$almacen,$stock,$stock_min,$pv,$pmy);
-                                            $oArticulos->actualizar();                                           
+                                            $oArticulos->actualizar();
                                             echo mensajes('El Articulo "'.$nombre.'" en el Deposito "'.$nom_depo.'" Actualizado con Exito','verde');
                                         }
-                                        
+
                                     }
                                     if(!empty($_POST['stock']) and !empty($_POST['almacen']) and !empty($_POST['idx'])){
                                         $id=limpiar($_POST['idx']);
                                         $almacen=limpiar($_POST['almacen']);
                                         $stock=limpiar($_POST['stock']);
-                                        $stock_min=limpiar($_POST['stock_min']);                                        
+                                        $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);                       
+                                        $pmy=limpiar($_POST['pmy']);
                                        mysql_query("UPDATE inventario SET almacen='$almacen',
                                                                              stock='$stock',
                                                                              stock_min='$stock_min',
                                                                              pv='$pv',
-                                                                             pmy='$pmy' 
+                                                                             pmy='$pmy'
                                                                              WHERE id='$id'");
                                         echo mensajes('El Stock se ha  Actualizado con Exito','verde');
                                       }
@@ -172,12 +172,12 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                             <ul class="nav nav-tabs nav-justified">
                                             <li class="active"><a href="#datos" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> DATOS</a></li>
                                             <li class="" ><a href="#tipo" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> UBICACION</a></li>
-                                            <li class="" ><a href="#stock" data-toggle="tab"><i class="glyphicon glyphicon-fullscreen" ></i> STOCK Y PRECIOS</a></li>                                                                                                                                                                                     
+                                            <li class="" ><a href="#stock" data-toggle="tab"><i class="glyphicon glyphicon-fullscreen" ></i> STOCK Y PRECIOS</a></li>
                                             </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade active in" id="datos">
-                                                        <br>                                       
-                                                        <div class="col-md-6">                                                                                   
+                                                        <br>
+                                                        <div class="col-md-6">
                                                             <input class="form-control" name="codigo" placeholder="Codigo" autocomplete="off" required onKeyUp="this.value=this.value.toUpperCase();"><br>
                                                             <input class="form-control" name="nombre" placeholder="Nombre" autocomplete="off" required><br>
                                                             <div class="input-group">
@@ -185,178 +185,182 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                               <select class="form-control" name="cat" autocomplete="off" required>
                                                               <option value="" selected disabled>---SELECCIONE---</option>
                                                                <?php
-                                                                    $sal=mysql_query("SELECT * FROM categorias WHERE estado='s'");             
+                                                                    $sal=mysql_query("SELECT * FROM categorias WHERE estado='s'");
                                                                     while($col=mysql_fetch_array($sal)){
                                                                         echo '<option value="'.$col['id'].'">'.$col['nombre'].'</option>';
                                                                     }
-                                                                ?>                                         
-                                                            </select>                                               
+                                                                ?>
+                                                            </select>
                                                             </div><br>
                                                            <div class="input-group">
                                                               <span class="input-group-addon">Unidad</span>
                                                               <select class="form-control" name="und" autocomplete="off" required>
                                                                <option value="" selected disabled>---SELECCIONE---</option>
                                                                  <?php
-                                                                    $sal=mysql_query("SELECT * FROM unidades WHERE estado='s'");             
+                                                                    $sal=mysql_query("SELECT * FROM unidades WHERE estado='s'");
                                                                     while($col=mysql_fetch_array($sal)){
                                                                         echo '<option value="'.$col['id'].'">'.$col['nombre'].'</option>';
                                                                     }
-                                                                ?>                                                 
-                                                            </select>                                               
+                                                                ?>
+                                                            </select>
                                                             </div><br>
                                                            <div class="input-group">
                                                           <span class="input-group-addon">IVA</span>
                                                           <select class="form-control" name="iva" autocomplete="off" required>
                                                             <option value="" selected disabled>---SELECCIONE---</option>
                                                             <option value="s">ACTIVO</option>
-                                                            <option value="n">NO ACTIVO</option>                                            
-                                                        </select>                                               
-                                                        </div><br>  
+                                                            <option value="n">NO ACTIVO</option>
+                                                        </select>
+                                                        </div><br>
                                                         </div>
                                                         <div class="col-md-6">
                                                         <div class="input-group">
                                                                 <span class="input-group-addon">Marca:</span>
-                                                                 <input class="form-control" name="marca" placeholder="Marca" autocomplete="off" required><br>                                         
-                                                          </div><br>   
+                                                                 <input class="form-control" name="marca" placeholder="Marca" autocomplete="off" required><br>
+                                                          </div><br>
                                                         <input type="number" min="0" step="any" class="form-control" name="valor" placeholder="Precio de Compra" autocomplete="off" required><br>
-                                                        <textarea class="form-control" name="detalle" placeholder="Detalle" rows="4" onKeyUp="this.value=this.value.toUpperCase();"></textarea><br>                                                                                                                                            
-                                                        </div>                        
+                                                        <textarea class="form-control" name="detalle" placeholder="Detalle" rows="4" onKeyUp="this.value=this.value.toUpperCase();"></textarea><br>
+                                                        </div>
                                                     </div>
                                                      <div class="tab-pane fade" id="tipo">
-                                                        <br>                                       
-                                                        <div class="col-md-6">                                                                                   
+                                                        <br>
+                                                        <div class="col-md-6">
                                                           <div class="input-group">
                                                                 <span class="input-group-addon">Modelo:</span>
-                                                                <input class="form-control" name="modelo"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>                                         
-                                                          </div><br>                                  
+                                                                <input class="form-control" name="modelo"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>
+                                                          </div><br>
                                                         </div>
                                                         <div class="col-md-6">
-                                                                                                                                                                                                   
+
                                                            <div class="input-group">
                                                                 <span class="input-group-addon">Estante:</span>
-                                                                <input class="form-control" name="estante"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>                                         
-                                                          </div><br>   
-                                                        </div>                        
+                                                                <input class="form-control" name="estante"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>
+                                                          </div><br>
+                                                        </div>
                                                     </div>
-                                                    <div class="tab-pane fade" id="stock">                                                             
+                                                    <div class="tab-pane fade" id="stock">
                                                         <br>
-                                                        <div class="col-md-6">                                                                                                                              
+                                                        <div class="col-md-6">
                                                                     <div class="input-group">
                                                                       <span class="input-group-addon">Almacen</span>
                                                                       <select class="form-control" name="almacen" autocomplete="off" required>
                                                                       <option value="" selected disabled>---SELECCIONE---</option>
                                                                        <?php
-                                                                            $sal=mysql_query("SELECT * FROM almacenes WHERE estado='s'");             
+                                                                            $sal=mysql_query("SELECT * FROM almacenes WHERE estado='s'");
                                                                             while($col=mysql_fetch_array($sal)){
                                                                                 echo '<option value="'.$col['id'].'">'.$col['nombre'].'</option>';
                                                                             }
-                                                                        ?>                                         
-                                                                    </select>                                               
+                                                                        ?>
+                                                                    </select>
                                                                     </div><br>
                                                                        <div class="input-group">
                                                                           <span class="input-group-addon">Stock</span>
-                                                                          <input class="form-control" name="stock"  autocomplete="off" required><br>                                         
+                                                                          <input class="form-control" name="stock"  autocomplete="off" required><br>
                                                                     </div><br>
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Stock Minimo</span>
-                                                                          <input class="form-control" name="stock_min"  autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                                                                                                                                                                                                   
-                                                                    </div>                                                                                    
-                                                                <div class="col-md-6">                                                                                                                                        
+                                                                          <input class="form-control" name="stock_min"  autocomplete="off" required><br>
+                                                                    </div><br>
+                                                                    </div>
+                                                                <div class="col-md-6">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Precio venta</span>
-                                                                          <input type="number" class="form-control" name="pv" min="0" step="any" autocomplete="off" required><br>                                         
-                                                                    </div><br> 
+                                                                          <input type="number" class="form-control" name="pv" min="0" step="any" autocomplete="off" required><br>
+                                                                    </div><br>
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Precio Mayoreo</span>
-                                                                          <input type="number" class="form-control" name="pmy" min="0" step="any" autocomplete="off" required><br>                                         
+                                                                          <input type="number" class="form-control" name="pmy" min="0" step="any" autocomplete="off" required><br>
                                                                     </div><br>
                                                                     <div class="input-group">
                                                                       <span class="input-group-addon">Estado</span>
                                                                       <select class="form-control" name="estado" autocomplete="off" required>
                                                                         <option value="s">Activo</option>
-                                                                        <option value="n">No Activo</option>                                            
-                                                                    </select>                                               
-                                                                    </div><br>                                                                                                                                                                                              
+                                                                        <option value="n">No Activo</option>
+                                                                    </select>
+                                                                    </div><br>
                                                                 </div>
-                                                    </div>                                                                              
-                                                </div>                                            
-                                        </div> 
-                                        </div> 
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                      <!-- End Modals-->
-                          
+
  <div class="panel-body">
-    <div class="row">
-                    <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
-                            <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agregar Articulo"></i>
-                            </button>
-                            <button type="button" class="btn btn-info btn-circle" onClick="window.location='PDFinventario.php'"><i class="fa fa-list-alt fa-2x" title="Reporte PDF"></i>
-                            </button>                                                                                   
-                           </div>
-                    </div>
-        </div> 
+
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                              INVENTARIO
                         </div>
                         <div class="panel-body">
+
                             <div class="table-responsive">
+
                               <table width="100%" border="0">
                                   <tr>
                                     <td width="50%">
-                                        <div align="right">
+                                        <div>
                                         <form method="post" action="" enctype="multipart/form-data" name="form1" id="form1">
-                                          <div class="input-group">
+                                          <div class="input-group" class="col-12">
                                                  <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus>
+
                                                   <datalist id="browsers1">
                                                   <?php
                                                     $buscar=$_POST['bus'];
-                                                    $can=mysql_query("SELECT * FROM articulos"); 
+                                                    $can=mysql_query("SELECT * FROM articulos");
                                                     while($dato=mysql_fetch_array($can)){
                                                         echo '<option value="'.$dato['nombre'].'">';
                                                     }
                                                   ?>
                                               </datalist>
                                             </td>
-                                            <td width="20%">
-                                                <button class="btn" type="submit">Buscar</button>
+                                            <td>
+                                                <button class="btn" type="submit">
+                                                  <li class="fa fa-search"></li>
+                                                  Buscar</button>
+
+                                                  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agregar Articulo"></i>
+                                                    Agregr al inventario
+                                                  </button>
+                                                  <button type="button" class="btn btn-info" onClick="window.location='PDFinventario.php'"><i class="fa fa-list-alt fa-2x" title="Reporte PDF"></i>
+Mostrar reporte
+                                                  </button>
+
                                           </div>
                                         </form>
                                         </div>
                                     </td>
                                   </tr>
-                                </table><br>                           
+                                </table><br>
                                 <table class="table table-striped table-bordered table-hover">
                                     <thead>
                                         <tr>
                                             <th>CODIGO</th>
                                             <th>ARTICULO</th>
-                                            <th>P.V</th>                                           
+                                            <th>P.V</th>
                                             <th>STOCK</th>
-                                            <th></th>                                          
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php                                             
+                                    <?php
                                                  #$pame=mysql_query("SELECT * FROM inventario INNER JOIN articulos ON articulos.id=inventario.articulo WHERE inventario.almacen='$id_almacen' ORDER BY articulos.id DESC LIMIT 10");
                                              if(empty($_POST['bus'])){
                                                 $pame=mysql_query("SELECT * FROM inventario INNER JOIN articulos ON articulos.id=inventario.articulo WHERE inventario.almacen='$id_almacen' ORDER BY articulos.id DESC LIMIT 10");
                                             }else{
                                                 $buscar=$_POST['bus'];
                                                 $pame=mysql_query("SELECT * FROM inventario INNER JOIN articulos ON articulos.id=inventario.articulo WHERE articulos.nombre LIKE '$buscar%' or articulos.codigo LIKE '$buscar%'");
-                                            }                                                         
+                                            }
                                             while($row=mysql_fetch_array($pame)){
                                                 $oAlma=new Consultar_Deposito($row['almacen']);
                                                 $oArticulos=new Consultar_Articulos($row['articulo']);
@@ -372,7 +376,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                         <tr class="odd gradeX">
                                             <td><?php echo $row['codigo']; ?></td>
                                             <td><?php echo $oArticulos->consultar('nombre'); ?></td>
-                                            <td><?php echo $s.' '.formato($row['pv']); ?></td>                                          
+                                            <td><?php echo $s.' '.formato($row['pv']); ?></td>
                                             <td><?php echo $stockx; ?></td>
                                             <td class="center">
                                                 <a href="#edit<?php echo $row['id']; ?>" role="button" class="btn btn-warning btn-sm" data-toggle="modal">
@@ -396,16 +400,16 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                             <div class="panel-body">
                                                             <?php if(permiso($_SESSION['cod_user'],'13')==TRUE){ ?>
                                                              <div class="row">
-                                                             <div class="col-md-12"> 
+                                                             <div class="col-md-12">
                                                               <div class="alert alert-info" align="center"><strong> <?php echo $oArticulos->consultar('nombre'); ?></strong></div>
-                                                              </div>                                                                                
-                                                                <div class="col-md-6">                                                                                                                              
+                                                              </div>
+                                                                <div class="col-md-6">
                                                                     <div class="input-group">
                                                                       <span class="input-group-addon">Categoria</span>
                                                                       <select class="form-control" name="cat" autocomplete="off" required>
                                                                       <option value="" selected disabled>---SELECCIONE---</option>
                                                                       <?php
-                                                                                $p=mysql_query("SELECT * FROM categorias WHERE estado='s'");             
+                                                                                $p=mysql_query("SELECT * FROM categorias WHERE estado='s'");
                                                                                 while($r=mysql_fetch_array($p)){
                                                                                     if($r['id']==$row['cat']){
                                                                                         echo '<option value="'.$r['id'].'" selected>'.$r['nombre'].'</option>';
@@ -413,15 +417,15 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                                                         echo '<option value="'.$r['id'].'">'.$r['nombre'].'</option>';
                                                                                     }
                                                                                 }
-                                                                            ?>                                     
-                                                                    </select>                                               
+                                                                            ?>
+                                                                    </select>
                                                                     </div><br>
                                                                     <div class="input-group">
                                                                       <span class="input-group-addon">Almacen</span>
                                                                       <select class="form-control" name="almacen" autocomplete="off" required>
                                                                       <option value="" selected disabled>---SELECCIONE---</option>
                                                                        <?php
-                                                                            $sal=mysql_query("SELECT * FROM almacenes WHERE estado='s'");             
+                                                                            $sal=mysql_query("SELECT * FROM almacenes WHERE estado='s'");
                                                                             while($col=mysql_fetch_array($sal)){
                                                                                 if($col['id']==$row['almacen']){
                                                                                         echo '<option value="'.$col['id'].'" selected>'.$col['nombre'].'</option>';
@@ -429,72 +433,72 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                                                         echo '<option value="'.$col['id'].'">'.$col['nombre'].'</option>';
                                                                                     }
                                                                             }
-                                                                        ?>                                         
-                                                                    </select>                                               
+                                                                        ?>
+                                                                    </select>
                                                                     </div><br>
                                                                        <div class="input-group">
                                                                           <span class="input-group-addon">Stock</span>
-                                                                          <input class="form-control" name="stock" value="<?php echo $row['stock']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                                                                                                                                                                                                   
-                                                                    </div>                                                                                    
-                                                                <div class="col-md-6">                                                                    
+                                                                          <input class="form-control" name="stock" value="<?php echo $row['stock']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
+                                                                    </div>
+                                                                <div class="col-md-6">
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Stock Minimo</span>
-                                                                          <input class="form-control" name="stock_min" value="<?php echo $row['stock_min']; ?>"  autocomplete="off" required><br>                                         
+                                                                          <input class="form-control" name="stock_min" value="<?php echo $row['stock_min']; ?>"  autocomplete="off" required><br>
                                                                     </div><br>
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Precio venta</span>
-                                                                          <input type="number" min="0" step="any" class="form-control" name="pv" value="<?php echo $row['pv']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br> 
+                                                                          <input type="number" min="0" step="any" class="form-control" name="pv" value="<?php echo $row['pv']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
                                                                     <div class="input-group">
                                                                           <span class="input-group-addon">Precio Mayoreo</span>
-                                                                          <input type="number" min="0" step="any" class="form-control" name="pmy" value="<?php echo $row['pmy']; ?>" autocomplete="off" required><br>                                         
-                                                                    </div><br>                                                                                                                                                                                              
-                                                                </div>                                                                        
+                                                                          <input type="number" min="0" step="any" class="form-control" name="pmy" value="<?php echo $row['pmy']; ?>" autocomplete="off" required><br>
+                                                                    </div><br>
+                                                                </div>
                                                             </div>
-                                                            <?php }else{ echo mensajes("NO TIENES PERMISO PARA REALIZAR ESTA ACCIÓN","rojo"); }?>  
-                                                            </div> 
+                                                            <?php }else{ echo mensajes("NO TIENES PERMISO PARA REALIZAR ESTA ACCIÓN","rojo"); }?>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                                                 <button type="submit" class="btn btn-primary">Actualizar</button>
-                                                            </div>                                       
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
-                                         <!-- End Modals-->                       
-                                         <!-- Modal -->                     
+                                         <!-- End Modals-->
+                                         <!-- Modal -->
                                                 <div class="modal fade" id="eliminar<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <form name="contado" action="index.php?del=<?php echo $row['id']; ?>" method="get">
                                                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                                                    
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                                             <h3 align="center" class="modal-title" id="myModalLabel">Seguridad</h3>
                                                                         </div>
                                                             <div class="panel-body">
-                                                            <div class="row" align="center">                                       
-                                                                                                        
+                                                            <div class="row" align="center">
+
                                                                 <strong>Hola! <?php echo $cajero_nombre; ?></strong><br><br>
                                                                 <div class="alert alert-danger">
-                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br> 
+                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br>
                                                                     una vez Eliminado de Inventario <strong>[ <?php echo $row['nombre']; ?> ]</strong> no podra ser Recuperada la el dato.</h4>
-                                                                </div>                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                            </div> 
-                                                            </div> 
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                 <a href="index.php?del=<?php echo $row['id']; ?>"  class="btn btn-danger" title="Eliminar">
                                                                     <i class="fa fa-times" ></i> <strong>Eliminar</strong>
-                                                                </a>                                                                
-                                                            </div>                                       
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
-                                         <!-- End Modals-->      
-                                        <?php } ?>                                                                             
+                                         <!-- End Modals-->
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -503,10 +507,10 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-                <!-- /. ROW  -->                                                                         
-                                  
-    
-</div>           
+                <!-- /. ROW  -->
+
+
+</div>
         </div>
     </div>
 <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
@@ -531,7 +535,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
     </script>
          <!-- Custom Js -->
     <script src="../../assets/js/custom-scripts.js"></script>
-    
-   
+
+
 </body>
 </html>
