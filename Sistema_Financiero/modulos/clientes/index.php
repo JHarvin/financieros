@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "class/class.php";
@@ -8,27 +8,27 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
         }
     ######### TRAEMOS LOS DATOS DEL ALMACEN #############
-        $pa=mysql_query("SELECT * FROM almacenes WHERE id='$id_almacen'");                
+        $pa=mysql_query("SELECT * FROM almacenes WHERE id='$id_almacen'");
         if($row=mysql_fetch_array($pa)){
             $docc=$row['docc'];
             $vdocc=$row['vdocc'];
@@ -42,7 +42,7 @@
                 $vdoco=$row['vdoco'];
             }
         }
-    
+
     if(!empty($_GET['del'])){
         $id=$_GET['del'];
         mysql_query("DELETE FROM clientes WHERE id='$id'");
@@ -60,7 +60,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -80,7 +80,7 @@
                 </button>
                 <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
@@ -115,69 +115,62 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <div id="page-inner">
 <?php if(permiso($_SESSION['cod_user'],'9')==TRUE){ ?>
 			 <div class="row">
-                    <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
-                            <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#myModal" title="Agregar Nuevo Cliente"><i class="fa fa-plus fa-2x"></i>
-                            </button>
-                             <button type="button" class="btn btn-info btn-circle" onClick="window.location='PDFcliente.php'" title="Reporte PDF"><i class="fa fa-list-alt fa-2x"></i>
-                            </button>                                                                                
-                  </div>
-                    </div>
-                </div> 
-                 <!-- /. ROW  -->                  
+
+                </div>
+                 <!-- /. ROW  -->
                      <!--  Modals-->
                                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                        <form name="form1" method="post" action="">                                       
+                                        <form name="form1" method="post" action="">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                         <div class="panel-body">
                                         <div class="row">
                                                 <div class="tab-content">
                                                  <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                                                
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h3 align="center" class="modal-title" id="myModalLabel">Nuevo Cliente</h3>
-                                                </div>                                           
+                                                </div>
                                                         <br>
                                                          <div class="col-md-12">
                                                         <br>
         <input class="form-control" title="Se necesita un nombre"  name="nombre" placeholder="Nombre Completo" autocomplete="off" required><br>
-        <input class="form-control" title="Se necesita una Direccion" name="dir" placeholder="Procedencia"  autocomplete="off"><br>  
-                                                        </div>                                          
+        <input class="form-control" title="Se necesita una Direccion" name="dir" placeholder="Procedencia"  autocomplete="off"><br>
+                                                        </div>
                             <div class="col-md-6">
-         <input class="form-control" name="tel" title="Se necesita un Telefono" placeholder="Telefono" data-mask="<?php echo $ftel; ?>" autocomplete="off"><br>                                                            
+         <input class="form-control" name="tel" title="Se necesita un Telefono" placeholder="Telefono" data-mask="<?php echo $ftel; ?>" autocomplete="off"><br>
                                                              </div>
                                                              <div class="col-md-6">
                                                         <div class="input-group">
-                                                                <span class="input-group-addon"><?php echo $docc; ?></span>                                                     
+                                                                <span class="input-group-addon"><?php echo $docc; ?></span>
         <input class="form-control" name="nrc"   placeholder="<?php echo $docc; ?>" data-mask="<?php echo $vdocc; ?>" autocomplete="off"><br>
                                                             </div><br>
                                                             </div>
                                                             <div class="col-md-6">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><?php echo $doco; ?></span>
-                                                              <input class="form-control" name="dui"   placeholder="<?php echo $vdoco; ?>" data-mask="<?php echo $vdoco; ?>" autocomplete="off"><br>                                                                                                                                                                          
+                                                              <input class="form-control" name="dui"   placeholder="<?php echo $vdoco; ?>" data-mask="<?php echo $vdoco; ?>" autocomplete="off"><br>
                                                             </div><br>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-6">
                                                                <div class="input-group">
                                                                   <span class="input-group-addon">Sexo</span>
                                                                   <select class="form-control" name="sexo" autocomplete="off" required>
                                                                    <option value="" selected disabled>---SELECCIONE---</option>
                                                                     <option value="m">MASCULINO</option>
-                                                                    <option value="f">FEMENINO</option>                                            
-                                                                    <option value="i">INSTITUCION</option>                                            
-                                                                </select>                                               
+                                                                    <option value="f">FEMENINO</option>
+                                                                    <option value="i">INSTITUCION</option>
+                                                                </select>
                                                                 </div><br>
                                                             </div>
-                                                            
+
                                                             <div class="col-md-6">
                                                             <div class="input-group">
                                                                   <span class="input-group-addon">Tipo</span>
                                                                   <select class="form-control" name="tipo" autocomplete="off" required>
                                                                     <option value="consumidor">CONSUMIDOR FINAL</option>
-                                                                    <option value="contribuyente">CONTRIBUYENTE</option>                                            
-                                                                </select>                                               
+                                                                    <option value="contribuyente">CONTRIBUYENTE</option>
+                                                                </select>
                                                                 </div><br>
                                                                 </div>
                                                                 <div class="col-md-6">
@@ -185,43 +178,52 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                                   <span class="input-group-addon">Estado</span>
                                                                   <select class="form-control" name="estado" autocomplete="off" required>
                                                                     <option value="s">ACTIVO</option>
-                                                                    <option value="n">NO ACTIVO</option>                                            
-                                                                </select>                                               
+                                                                    <option value="n">NO ACTIVO</option>
+                                                                </select>
                                                                 </div>
-                                                            </div>                                                                                                                                                                                                                                                                                
-                                                </div>                                            
-                                        </div> 
-                                        </div> 
+                                                            </div>
+                                                </div>
+                                        </div>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                             <button type="submit" class="btn btn-primary">Guardar</button>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                                 </form>
                             </div>
                      <!-- End Modals-->
-               
+
             <div class="row">
                 <div class="col-md-12">
+
                     <!-- Advanced Tables -->
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                              CLIENTES
                         </div>
                         <div class="panel-body">
+                          <div class="panel-body" align="right">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" title="Agregar Nuevo Cliente"><i class="fa fa-plus fa-2x"></i>
+                              Agregar cliente
+                            </button>
+                             <button type="button" class="btn btn-info" onClick="window.location='PDFcliente.php'" title="Reporte PDF"><i class="fa fa-list-alt fa-2x"></i>
+                               Reporte de clientes
+                            </button>
+                  </div>
                             <div class="table-responsive">
-                            <?php 
-                                    if(!empty($_POST['nombre'])){                                               
+                            <?php
+                                    if(!empty($_POST['nombre'])){
                                         $nombre=limpiar($_POST['nombre']);
-                                        $dir=limpiar($_POST['dir']); 
+                                        $dir=limpiar($_POST['dir']);
                                         $dui=limpiar($_POST['dui']);
-                                        $sexo=limpiar($_POST['sexo']);  
-                                        $tel=limpiar($_POST['tel']); 
-                                        $nrc=limpiar($_POST['nrc']);                                                                                                         
+                                        $sexo=limpiar($_POST['sexo']);
+                                        $tel=limpiar($_POST['tel']);
+                                        $nrc=limpiar($_POST['nrc']);
                                         $estado=limpiar($_POST['estado']);
                                         $tipo=limpiar($_POST['tipo']);
-                                        
+
                                         if(empty($_POST['id'])){
                                             $oCliente=new Proceso_Cliente('',$nombre,$dir,$dui,$sexo,$tel,$nrc,$estado,$tipo);
                                             $oCliente->crear();
@@ -240,27 +242,27 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                             <th><?php echo $doco; ?></th>
                                             <th>NOMBRE</th>
                                             <th>TELEFONO</th>
-                                            <th>DIRECCIÓN</th>                                           
-                                            <th>ACCIONES</th>                                          
+                                            <th>DIRECCIÓN</th>
+                                            <th>ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php                                             
-                                            $pame=mysql_query("SELECT * FROM clientes ORDER BY nombre");                                                        
+                                    <?php
+                                            $pame=mysql_query("SELECT * FROM clientes ORDER BY nombre");
                                             while($row=mysql_fetch_array($pame)){
                                         ?>
                                         <tr class="odd gradeX">
                                             <td><?php echo $row['dui']; ?></td>
                                             <td><?php echo $row['nombre']; ?></td>
                                             <td><?php echo $row['tel']; ?></td>
-                                            <td><?php echo $row['dir']; ?></td>                                             
+                                            <td><?php echo $row['dir']; ?></td>
                                             <td class="center">
                                             <div class="btn-group">
     <button data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
                                               <ul class="dropdown-menu">
         <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                      <li class="divider"></li>
-        <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>                                                                                                                                             
+        <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>
                                               </ul>
                                             </div>
                                             </td>
@@ -273,147 +275,147 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
     <div class="modal-content">
     <div class="modal-header">
      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                            
+
     <h3 align="center" class="modal-title" id="myModalLabel">Editar Cliente</h3>
         </div>
      <div class="panel-body">
-    <div class="row">                                       
+    <div class="row">
      <div class="col-md-12">
      <div class="input-group">
     <span class="input-group-addon">Nombre</span>
-<input class="form-control" title="Se necesita un nombre"  name="nombre"  value="<?php echo $row['nombre']; ?>" autocomplete="off" required><br>                                         
-    </div><br>                                          
+<input class="form-control" title="Se necesita un nombre"  name="nombre"  value="<?php echo $row['nombre']; ?>" autocomplete="off" required><br>
+    </div><br>
     </div>
     <div class="col-md-12">
     <div class="input-group">
      <span class="input-group-addon">Procedencia</span>
-    <input class="form-control" title="Se necesita una Procedencia"  name="dir" value="<?php echo $row['dir']; ?>" autocomplete="off"><br>                                         
-        </div><br>                                          
+    <input class="form-control" title="Se necesita una Procedencia"  name="dir" value="<?php echo $row['dir']; ?>" autocomplete="off"><br>
+        </div><br>
     </div>
     <div class="col-md-6">
      <div class="input-group">
       <span class="input-group-addon">Tel</span>
-    <input class="form-control" title="Se necesita un nombre"  name="tel" data-mask="<?php echo $ftel; ?>" value="<?php echo $row['tel']; ?>" autocomplete="off"><br>                                         
-     </div><br>                                          
+    <input class="form-control" title="Se necesita un nombre"  name="tel" data-mask="<?php echo $ftel; ?>" value="<?php echo $row['tel']; ?>" autocomplete="off"><br>
+     </div><br>
      </div>
     <div class="col-md-6">
      <div class="input-group">
      <span class="input-group-addon"><?php echo $docc; ?></span>
-    <input class="form-control"  name="nrc" data-mask="<?php echo $vdocc; ?>" value="<?php echo $row['nrc']; ?>" autocomplete="off"><br>                                         
-    </div><br>                                          
+    <input class="form-control"  name="nrc" data-mask="<?php echo $vdocc; ?>" value="<?php echo $row['nrc']; ?>" autocomplete="off"><br>
+    </div><br>
     </div>
     <div class="col-md-6">
     <div class="input-group">
     <span class="input-group-addon"><?php echo $doco; ?></span>
-    <input class="form-control" name="dui" data-mask="<?php echo $vdoco; ?>" value="<?php echo $row['dui']; ?>" autocomplete="off"><br>                                         
-                                                                    </div><br>                                          
+    <input class="form-control" name="dui" data-mask="<?php echo $vdoco; ?>" value="<?php echo $row['dui']; ?>" autocomplete="off"><br>
+                                                                    </div><br>
                                                                 </div>
-                                                                 <div class="col-md-6">                                                                                          
+                                                                 <div class="col-md-6">
                                                                      <div class="input-group">
                                                                       <span class="input-group-addon">Sexo</span>
                                                                       <select class="form-control" name="sexo" autocomplete="off" required>
                                                                         <option value="m" <?php if($row['sexo']=='m'){ echo 'selected'; } ?>>MASCULINO</option>
-                                                                        <option value="f" <?php if($row['sexo']=='f'){ echo 'selected'; } ?>>FEMENINO</option>                                                   
-                                                                        <option value="i" <?php if($row['sexo']=='i'){ echo 'selected'; } ?>>INSTITUCION</option>                                                   
-                                                                    </select>                                               
-                                                                    </div><br>                                           
-                                                                </div>      
+                                                                        <option value="f" <?php if($row['sexo']=='f'){ echo 'selected'; } ?>>FEMENINO</option>
+                                                                        <option value="i" <?php if($row['sexo']=='i'){ echo 'selected'; } ?>>INSTITUCION</option>
+                                                                    </select>
+                                                                    </div><br>
+                                                                </div>
                                                                 <div class="col-md-6">
                                                                 <div class="input-group">
                                                                       <span class="input-group-addon">Tipo</span>
                                                                       <select class="form-control" name="tipo" autocomplete="off" required>
                                                                         <option value="consumidor" <?php if($row['tipo']=='consumidor'){ echo 'selected'; } ?>>CONSUMIDOR FINAL</option>
-                                                                        <option value="contribuyente" <?php if($row['tipo']=='consumidor'){ echo 'selected'; } ?>>CONTRIBUYENTE</option>                                                   
-                                                                    </select>                                               
+                                                                        <option value="contribuyente" <?php if($row['tipo']=='consumidor'){ echo 'selected'; } ?>>CONTRIBUYENTE</option>
+                                                                    </select>
                                                                     </div><br>
                                                                     </div>
-                                                                     <div class="col-md-6">                                                                                            
+                                                                     <div class="col-md-6">
                                                                      <div class="input-group">
                                                                       <span class="input-group-addon">Estado</span>
                                                                       <select class="form-control" name="estado" autocomplete="off" required>
                                                                         <option value="s" <?php if($row['estado']=='s'){ echo 'selected'; } ?>>ACTIVO</option>
-                                                                        <option value="n" <?php if($row['estado']=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>                                                   
-                                                                    </select>                                               
+                                                                        <option value="n" <?php if($row['estado']=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>
+                                                                    </select>
                                                                     </div><br>
-                                                                </div>                                                                        
-                                                            </div> 
-                                                            </div> 
+                                                                </div>
+                                                            </div>
+                                                            </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>                                       
+        </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
                                          <!-- End Modals-->
-                                         <!-- Modal -->                     
+                                         <!-- Modal -->
                                                 <div class="modal fade" id="eliminar<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <form name="contado" action="index.php?del=<?php echo $row['id']; ?>" method="get">
                                                     <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                                                    
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                                             <h3 align="center" class="modal-title" id="myModalLabel">Seguridad</h3>
                                                                         </div>
                                                             <div class="panel-body">
-                                                            <div class="row" align="center">                                       
-                                                                                                        
+                                                            <div class="row" align="center">
+
                                                                 <strong>Hola! <?php echo $cajero_nombre; ?></strong><br><br>
                                                                 <div class="alert alert-danger">
-                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br> 
-                                                                    una vez Eliminado el Cliente <strong>[ <?php echo $row['nombre']; ?> ]</strong> sus datos no podran ser Recuperados. 
+                                                                    <h4>¿Esta Seguro de Realizar esta Acción?<br>
+                                                                    una vez Eliminado el Cliente <strong>[ <?php echo $row['nombre']; ?> ]</strong> sus datos no podran ser Recuperados.
                                                                     Recomendamos husar la opcion de "No Activo"</h4>
-                                                                </div>                                                                                                                                      
-                                                            </div> 
-                                                            </div> 
+                                                                </div>
+                                                            </div>
+                                                            </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                 <a href="index.php?del=<?php echo $row['id']; ?>"  class="btn btn-danger" title="Eliminar">
                                                                     <i class="fa fa-times" ></i> <strong>Eliminar</strong>
-                                                                </a>                                                                
-                                                            </div>                                       
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     </form>
                                                 </div>
                                          <!-- End Modals-->
-                                         <!-- Modal -->                     
-                                            <div class="modal fade" id="info<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">                                                   
-                                                <form name="contado">                                                                               
-                                                <div class="modal-dialog">                                             
+                                         <!-- Modal -->
+                                            <div class="modal fade" id="info<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <form name="contado">
+                                                <div class="modal-dialog">
                                                     <div class="modal-content">
                                                     <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                                                    
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     <h3 align="center" class="modal-title" id="myModalLabel">INFORMACION</h3>
                                                     </div>
-                                                    <div class="modal-body">                                     
-                                                    
+                                                    <div class="modal-body">
+
                                                                aqui...
-                                                                                                     
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-                                                    </div>                      
+
+
+                                                    </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                                                                                                      
-                                                    </div>                                       
-                                                    </div>                                          
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                    </div>
                                                 </div>
-                                                </form>                                                 
+                                                </form>
                                             </div>
-                                    <!-- End Modals-->      
-                                        <?php } ?>                                                                             
+                                    <!-- End Modals-->
+                                        <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
                 <!-- /. ROW  -->
-<?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE FORMULARIO","rojo"); }?>                           
+<?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE FORMULARIO","rojo"); }?>
         </div>
     </div>
              <!-- /. PAGE INNER  -->
@@ -438,6 +440,6 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
          <!-- Custom Js -->
     <script src="../../assets/js/custom-scripts.js"></script>
     <!-- VALIDACIONES -->
-    <script src="../../assets/js/jasny-bootstrap.min.js"></script>   
+    <script src="../../assets/js/jasny-bootstrap.min.js"></script>
 </body>
 </html>

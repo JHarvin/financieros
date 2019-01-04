@@ -96,14 +96,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <div id="page-inner">
 <?php if(permiso($_SESSION['cod_user'],'5')==TRUE){ ?>
 			 <div class="row">
-                    <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
-                            <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agrear Articulo"></i>
-                            </button>
-                            <button type="button" class="btn btn-info btn-circle" onClick="window.location='PDFarticulos.php'"><i class="fa fa-list-alt fa-2x" title="Reporte PDF"></i>
-                            </button>                                                                                 
-                  </div>
-                    </div>
+                    
                 </div> 
                  <!-- /. ROW  -->
                   <!--  Modals-->
@@ -206,9 +199,10 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             <div class="row">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
-                    <div class="panel panel-info">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
-                             ARTICULOS
+                            <h3>ARTICULUS</h3>
+                            
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -297,7 +291,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                     <td width="50%">
                                         <div align="right">
                                         <form method="post" action="" enctype="multipart/form-data" name="form1" id="form1">
-                                          <div class="input-group">
+                                          <div class="col-12 form-group">
                                                  <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus>
                                                   <datalist id="browsers1">
                                                   <?php
@@ -309,10 +303,21 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                   ?>
                                               </datalist>
                                             </td>
-                                            <td width="20%">
-                                                <button class="btn" type="submit">Buscar</button>
+                                            <td>
+                                                <button class="btn btn-primary" type="submit">
+                                                <li class="fa fa-search-plus fa-2x"></li>
+                                                Buscar</button>
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agrear Articulo"></i>
+                            Agregar articulos
+                            </button>
+                            <button type="button" class="btn btn-info" onClick="window.location='PDFarticulos.php'"><i class="fa fa-file fa-2x" title="Reporte PDF"></i>
+                            Ver reporte de articulos
+                            </button>  
+                                                                                                          
                                           </div>
+
                                         </form>
+                         
                                         </div>
                                     </td>
                                   </tr>
