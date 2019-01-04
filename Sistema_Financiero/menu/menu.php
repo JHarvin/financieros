@@ -53,7 +53,7 @@
                  <span class="caret"></span></a>
                  <ul class="dropdown-menu">
                    <li>
-                       <a href="../../modulos/reportes/cat.php"> Registro de Activo</a>
+                       <a href="../modulos/activo_fijo/Lista.php"> Registro de Activo</a>
                    </li>
                     <li>
                        <a href="../../modulos/reportes/report_costo.php"> Listado de Activos</a>
