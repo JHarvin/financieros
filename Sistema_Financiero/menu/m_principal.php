@@ -49,6 +49,30 @@
                     <li>
                         <a href="modulos/contable/index.php"><i class="fa fa-retweet fa-2x"></i> Cobros y Pagos</a>
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-list fa-2x"></i> Activo Fijo<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="modulos/reportes/cat.php"> Registro de Activo</a>
+                            </li>
+                             <li>
+                                <a href="modulos/reportes/report_costo.php"> Listado de Activos</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/dep.php"> Tipo de activo</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/compra_dia.php"> Encargado</a>
+                            </li>
+                             <li>
+                                <a href="modulos/reportes/compra_cat.php"> Institucion</a>
+                            </li>
+                            <li>
+                                <a href="modulos/reportes/compra_gen.php"> Departamento</a>
+                            </li>
+                                                            
+                        </ul>
+                    </li>
 
                     <li>
                         <a href="#"><i class="fa fa-list fa-2x"></i> Reportes<span class="fa arrow"></span></a>
