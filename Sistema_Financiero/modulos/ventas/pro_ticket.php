@@ -114,16 +114,16 @@
     </script>
 </head>
 <body>
-    <div id="wrapper">
-         <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper" style="background-color:#1A7B85;">
+         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header"  style="background-color:#FF8B41;">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
+                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
             </div>
  
             <ul class="nav navbar-top-links navbar-right">
@@ -153,7 +153,8 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
              <div class="sidebar-collapse">
-                 <div align="center"><br>
+
+                 <div align="center"><br><br><br>
                            <a href="index.php">
                              <button type="button" class="btn btn-success btn-circle"><i class="fa fa-plus fa-2x" title="Nueva Venta"></i>
                             </button>
@@ -173,7 +174,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
              <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-red">
                             <div class="panel-footer back-footer-red">
-                                Total Factura
+                                Total Facturado
                             </div>
                             <div class="panel-body">
                                 <div style=" bg-color: red;font-size:35px"><?php echo $s.' '.formato($neto); ?> </div>
@@ -193,14 +194,14 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
             </div>                        
         </nav>
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+        <div id="page-wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
              <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-primary text-center no-boder bg-color-blue">
             <div class="panel-footer back-footer-red">
              DETALLE DE TICKET
             </div>
-            <div class="panel-body">
+            <div class="panel-body center">
                 <?php 
                                                 $item=0;
                                                 $pa=mysql_query("SELECT * FROM cliente_tmp, clientes 
@@ -265,7 +266,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                     <tr>
                     <td colspan="4">                                                
                     <div align="center" style="font-size:20px"><strong><?php echo $nombre_empresa; ?></strong><br></div>
-                    <div align="center" style="font-size:14px"><strong><?php echo $web; ?></strong><br></div>
+                    <div align="center" style="font-size:14px"><strong>Siguenos en: <?php echo $web; ?></strong><br></div>
                     <div align="left"><strong>Tel: </strong><?php echo $tel_empresa; ?><br></div>
                     <div align="left"><strong>NIT: </strong><?php echo $nit_empresa; ?><br></div>                                                 
                     <div align="left"></strong><?php echo $dir_empresa; ?><br></strong></div>
@@ -375,7 +376,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 <td colspan="4">&nbsp;</td>
                                               </tr>
                                               <tr>
-                                                <td colspan="4"><center>*GRACIAS POR SU COMPRA*</center></td>
+                                                <td colspan="4"><center>*GRACIAS POR PREFERIRNOS*</center></td>
                                               </tr>
                                               <tr>
                                                 <td colspan="4"><center></center></td>
