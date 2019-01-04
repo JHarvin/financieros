@@ -48,9 +48,11 @@
                <li>
                    <a href="../../modulos/contable/index.php"><i class="fa fa-retweet"></i> Cobros y Pagos</a>
                </li>
-              
+
+
                <li>
 <a href="#" class="btn btn-danger">Ir a activo fijo</a>
+
                </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
