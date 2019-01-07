@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-light" style="background-color: #D0E8E3;">
+<nav class="navbar navbar-light" style="background-color: #03A9F4;">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">WebSiteName</a>
@@ -51,7 +51,7 @@
 
 
                <li>
-<a href="#" class="btn btn-danger">Ir a activo fijo</a>
+<a href="../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
 
                </li>
     </ul>

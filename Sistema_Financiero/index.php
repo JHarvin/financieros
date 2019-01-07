@@ -1,4 +1,4 @@
-<?php 
+<?php
 	session_start();
 	include_once "modulos/php_conexion.php";
 	include_once "modulos/funciones.php";
@@ -28,15 +28,15 @@
 
 <form name="form1" method="post" action="" class="form col-md-11 center-block">
   <div class="modal-dialog">
-  <div class="modal-content">     
-      <div class="modal-body">         
+  <div class="modal-content">
+      <div class="modal-body">
       	<center><img src="img/fina.png" width="200" height="200"></center><br>
-      	<?php 
-	  	if(!empty($_POST['usu']) and !empty($_POST['con'])){ 
+      	<?php
+	  	if(!empty($_POST['usu']) and !empty($_POST['con'])){
 			$usu=limpiar($_POST['usu']);
 			$con=limpiar($_POST['con']);
-			
-			$pa=mysql_query("SELECT * FROM usuario WHERE usuario.doc='$usu' and usuario.con='$con' and usuario.estado='s'");				
+
+			$pa=mysql_query("SELECT * FROM usuario WHERE usuario.doc='$usu' and usuario.con='$con' and usuario.estado='s'");
 			if($row=mysql_fetch_array($pa)){
 				if($row['estado']=='s'){
 					$nombre=$row['nombre'];
@@ -55,14 +55,14 @@
 						echo '<meta http-equiv="refresh" content="2;url=principal.php">';
 					}
 				}else{
-					echo mensajes('Usted no se encuentra Activo en la base de datos<br>Consulte con su Administrador de Sistema','rojo');	
+					echo mensajes('Usted no se encuentra Activo en la base de datos<br>Consulte con su Administrador de Sistema','rojo');
 				}
 			}else{
 				echo mensajes('Usuario y Contraseña Incorrecto<br>','rojo');
 				echo '<center><a href="index.php" class="btn btn-danger btn-lg"><strong>Intentar de Nuevo</strong></a></center>';
 			}
 		}else{
-			echo '	
+			echo '
 			<div class="input-group input-group-lg">
 			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 			<input type="text" name="usu" class="form-control input-lg" placeholder="Usuario" autocomplete="off" required autofocus>
@@ -72,12 +72,12 @@
 			<input type="password" name="con" class="form-control input-lg" placeholder="Password" autocomplete="off" required>
 			</div><br>
 			<div class="form-group">
-			<div align="right"><button class="btn btn-success btn-lg btn-block" type="submit"><i class="glyphicon "></i> <strong>Entrar</strong></button></div>
-			</div>';		
+			<div align="right"><button class="btn btn-info btn-lg btn-block" type="submit"><i class="glyphicon "></i> <strong>Entrar</strong></button></div>
+			</div>';
 		}
 	  ?>
       </form>
-      </div> 
+      </div>
   </div><br>
 </div>
 	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
