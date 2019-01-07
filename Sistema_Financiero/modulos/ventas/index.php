@@ -233,7 +233,7 @@
                              CONSUMIDOR FINAL
                         </div>
                         <div class="panel-body">
-             <div class="col-md-8">
+             <div class="col-md-4" style="float:right;">
 			 <div class="alert alert-default" align="center">
                             <form name="form2" action="" method="post">
                                      <div class="input-group">
@@ -304,8 +304,8 @@ Agregar
                  <!-- /. ROW  -->
             </div>
 
-            <div class="row">
-                <div class="col-md-12">
+            <div class="row" >
+                <div class="col-md-6" style="float:right;">
 
                         <?php
                                 $neto=0;$item=0;

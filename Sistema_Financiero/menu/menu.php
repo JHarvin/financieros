@@ -1,11 +1,30 @@
 
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+ <link rel="stylesheet" type="text/css" href="../../css/materialize.css">
+ <link href="../../css/themes/all-themes.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
+  <link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.css">
+  <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
+
+  <!-- Animation Css -->
+  <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
+
+<script type="text/javascript" src="../../bootstrap/js/bootstrap.js">
+
+</script>
+
 <nav class="navbar navbar-light" style="background-color: #03A9F4;">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+    <div class="navbar-header" style="background-color:white;">
+
+<img src="../../img/fina.png" alt="12" width="75" height="75">
+
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="modulos/inicio/inicio.php">Home</a></li>
+
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Articulos
         <span class="caret"></span></a>
@@ -51,7 +70,7 @@
 
 
                <li>
-<a href="../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
+<a href="../../../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
 
                </li>
     </ul>

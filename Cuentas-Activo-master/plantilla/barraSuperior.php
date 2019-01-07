@@ -2,8 +2,8 @@
 
 <nav class="navbar navbar-light" style="background-color: #03A9F4;">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
+    <div class="navbar-header" style="background-color:white;">
+      <img src="../../Sistema_Financiero/img/fina.png" alt="12" width="75" height="75">
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="../../Sistema_Financiero/principal.php">Atras</a></li>
