@@ -846,15 +846,10 @@ Agregar
                                 <td>
                                     <div align="center">
                                     <div class="row">
-                                    <div class="col-md-6">
-                                     <i class="fa fa-plus icon-white"></i> <strong>FORMA DE PAGO FACTURA</strong><br>
-                                        <a href="#factura1" role="button" class="btn btn-primary btn-lg" data-toggle="modal">
-                                            <i class="fa fa-list icon-white"></i> <strong>CONTADO</strong>
-                                        </a>
-                                        <a href="#factura2" role="button" class="btn btn-primary btn-lg" data-toggle="modal">
-                                            <i class="fa fa-list icon-white"></i> <strong>CREDITO</strong>
-                                        </a>
-                                    </div>
+                                        <div class="col-md-3">
+                                            
+                                        </div>
+                                    
                                     <div class="col-md-6">
                                       <i class="fa fa-plus icon-white"></i> <strong>FORMA DE PAGO TIKET</strong><br>
                                        <a href="#ticket" role="button" class="btn btn-warning btn-lg" data-toggle="modal">
