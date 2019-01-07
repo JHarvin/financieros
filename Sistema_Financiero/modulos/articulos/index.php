@@ -259,8 +259,8 @@
                                     <td width="50%">
                                         <div align="right">
                                         <form method="post" action="" enctype="multipart/form-data" name="form1" id="form1">
-                                          <div class="col-12 form-group">
-                                                 <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus>
+                                          <div class="col-12 form-group" style="padding-right: 20px;">
+                                                 <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus style="border: 1px solid #2D52CC;">
                                                   <datalist id="browsers1">
                                                   <?php
                                                     $buscar=$_POST['bus'];
@@ -272,15 +272,15 @@
                                               </datalist>
                                             </td>
                                             <td>
-                                                <button class="btn btn-primary" type="submit">
-                                                <li class="fa fa-search-plus fa-2x"></li>
-                                                Buscar</button>
+                                                <button class="btn btn-primary" type="submit" style="padding-right: 20px;">
+                                                
+                                                Listar articulos</button>
                                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agrear Articulo"></i>
                             Agregar articulos
                             </button>
                             <button type="button" class="btn btn-info" onClick="window.location='PDFarticulos.php'"><i class="fa fa-file fa-2x" title="Reporte PDF"></i>
                             Ver reporte de articulos
-                            </button>
+                            </button style="padding-right: 20px;">
 
                                           </div>
 

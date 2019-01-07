@@ -238,7 +238,7 @@
                             <form name="form2" action="" method="post">
                                      <div class="input-group">
                                     <span class="input-group-addon">CLIENTE:</span>
-                                    <input type="text" list="browsers1" name="buscar_cliente" autocomplete="off" class="form-control" required>
+                                    <input type="text" list="browsers1" name="buscar_cliente" autocomplete="off" class="form-control" required >
                                     <datalist id="browsers1">
                                         <?php
                                             $pa=mysql_query("SELECT * FROM clientes
@@ -476,7 +476,7 @@ Agregar
                             <form name="form2" action="" method="post">
                                      <div class="input-group">
                                     <span class="input-group-addon">ARTICULO:</span>
-                                    <input type="text" autofocus list="browsers" name="buscar" autocomplete="off" class="form-control" required>
+                                    <input type="text" autofocus list="browsers" name="buscar" autocomplete="off" class="form-control" required style="border: 1px solid #2D52CC;">
                                     <datalist id="browsers">
 
                                         <?php

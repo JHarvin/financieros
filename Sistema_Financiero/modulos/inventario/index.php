@@ -280,7 +280,7 @@
                                         <div>
                                         <form method="post" action="" enctype="multipart/form-data" name="form1" id="form1">
                                           <div class="input-group" class="col-12">
-                                                 <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus>
+                                                 <input class="form-control" name="bus" type="text" class="span2" size="60" list="browsers1" autocomplete="off" placeholder="Buscar" autofocus style="border: 1px solid #2D52CC;">
 
                                                   <datalist id="browsers1">
                                                   <?php

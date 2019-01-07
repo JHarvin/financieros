@@ -472,7 +472,7 @@
                             <form name="form2" action="" method="post">
                                      <div class="input-group">
                                     <span class="input-group-addon">ARTICULO:</span>
-                                    <input type="text" autofocus list="browsers" name="buscar" autocomplete="off" class="form-control" required>
+                                    <input type="text" autofocus list="browsers" name="buscar" autocomplete="off" class="form-control" required style="border: 1px solid #2D52CC;">
                                     <datalist id="browsers">
                                         <?php
                                             $buscar=$_POST['buscar'];
