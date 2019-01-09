@@ -7,16 +7,16 @@
   <link rel="stylesheet" type="text/css" href="../../css/style.css">
 
   <link rel="stylesheet" type="text/css" href="../../bootstrap/css/bootstrap.css">
-  <link href="../plugins/node-waves/waves.css" rel="stylesheet" />
+  <link href="../../plugins/node-waves/waves.css" rel="stylesheet" />
 
   <!-- Animation Css -->
-  <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
+  <link href="../../plugins/animate-css/animate.css" rel="stylesheet" />
 
 
 
 </script>
 
-<nav class="navbar navbar-light" style="background-color: #03A9F4;">
+<nav class="navbar navbar-light" style="background-color: #03A9F4; color:white;">
   <div class="container-fluid">
     <div class="navbar-header" style="background-color:white;">
 
