@@ -1,46 +1,92 @@
 <!-- Top Bar -->
 
+
+
+
+
+  <style type="text/css">
+
+  .container-fluid span.yo{
+   
+   background: #03A9F4;
+   display: block;
+   color: white;
+   margin: auto;
+   text-align: center;
+  padding-right: 10px;
+
+   
+    }
+
+    .container-fluid span.yo:hover{
+    background-color: #03A9F4;
+    display: block;
+    color: black;
+    text-align: center;
+    font-size:  20px;
+    display: inline;
+
+    }
+
+
+
+  .container-fluid li a span.markos{
+   background: #03A9F4;
+   display: block;
+   color: white;
+   margin: auto;
+   text-align: center;
+  padding-left: 30px;
+
+    }
+  .container-fluid li a span.markos:hover{
+  background-color: #F92659;
+    }
+  </style>
+
+
+
 <nav class="navbar navbar-light" style="background-color: #03A9F4;">
   <div class="container-fluid">
     <div class="navbar-header" style="background-color:white;">
       <img src="../../Sistema_Financiero/img/fina.png" alt="12" width="75" height="75">
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="../../Sistema_Financiero/principal.php">Atras</a></li>
+      <li class="active"><a href="../../Sistema_Financiero/principal.php"><span class="markos">Atras</span></a></li>
       <li>
           <a href="../activo_fijo/registro_activo.php">
-              <i class="material-icons col-red">contacts</i>
-              <span>Registro de Activo</span>
+              
+              <span class="yo">Registro de Activo</span>
           </a>
       </li>
       <li>
           <a href="../activo_fijo/Lista.php">
-              <i class="material-icons col-red">contacts</i>
-              <span>Lista de Activo</span>
+            
+              <span class="yo">Lista de Activo</span>
           </a>
       </li>
       <li>
           <a href="../activo_fijo/registro_tipo_activo.php">
-              <i class="material-icons col-amber">mail</i>
-              <span>Registro de Tipo de Activo</span>
+              
+              <span class="yo">Registro de Tipo de Activo</span>
           </a>
       </li>
       <li>
           <a href="../activo_fijo/registro_encargado.php">
-              <i class="material-icons col-amber">mail</i>
-              <span>Registro de Encargado</span>
+              
+              <span class="yo">Registro de Encargado</span>
           </a>
       </li>
       <li>
           <a href="../activo_fijo/registro_institucion.php">
-              <i class="material-icons col-amber">mail</i>
-              <span>Registro de Institucion</span>
+              
+              <span class="yo">Registro de Institucion</span>
           </a>
       </li>
       <li>
           <a href="../activo_fijo/registro_departamento.php">
-              <i class="material-icons card_travel">mail</i>
-              <span>Registro de Departamento</span>
+             
+              <span class="yo">Registro de Departamento</span>
           </a>
       </li>
     </ul>

@@ -8,7 +8,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Entrada</title>
+		<title>BATANECA</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<!-- BOOTSTRAP STYLES-->
@@ -22,15 +22,116 @@
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 	</head>
+
+	<style type="text/css">
+
+	.container-fluid .mark{
+		
+		    display: block;
+			padding-top: 0px;
+			margin: auto;
+			text-align: center;
+			transition: all 0.2s linear;
+		}
+/* Boton entrar*/
+		.container-fluid .btn{
+		text-decoration: none;
+		background-color: #3DA3EF;
+		display: block;
+		width: 350px;
+		padding: 10px;
+		color: #fff;
+		margin: auto;
+		text-align: center;
+		}
+
+		.container-fluid .btn:hover{
+		background-color: #F92659;
+		}
+
+/* Texto bataneca*/
+		.container-fluid p.tonto{
+		
+		
+		/*display: block;
+		width: 300px;
+		
+		color: black;
+		margin: auto;
+		text-align: center;
+		font-size:  50px;*/
+		text-align: center;
+		font-size: 50px;
+		color: red;
+		
+		}
+
+		/*.container-fluid p:hover{
+		background-color: #F92659;
+		}*/
+
+		
+		/* border de las cajas de texto */
+		.container-fluid .form-control{
+		border: 1px solid #0091ea ;
+		}
+
+		.container-fluid .form-control:hover{
+		background-color: #e1f5fe;
+		}
+		/* FONDO */
+		.container-fluid .modal{
+
+	      background-image: url(img/3.jpg);
+
+		}
+         /* LOGIN MODAL */
+		.container-fluid .modal-dialog .modal-content{
+	      width: 400px;
+	      height: 450px;
+	      background-color: #80deea ;
+	      box-shadow: 8px 8px 10px 0px #f48fb1;
+	      -webkit-border-radius: 8px;
+	      -moz-border-radius: 15px;
+	      border-radius: 15px;
+	      
+	    
+		}
+
+
+
+
+	</style>
 	<body>
-<!--login modal-->
-<div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+
+
+
+
+
+		<div class="container-fluid"> 
+           <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+			<div  class="tab-content">
+				<p class="tonto">BATANECA</p>
+				<div class="tab-pane fade active in" id="datos">
+					<div class="col-md-6">
+
+						<img class="mark" src="img/minerva.png">
+					</div>
+
+					<div class="col-md-6">
+						            	<!--login modal-->
+
+
 
 <form name="form1" method="post" action="" class="form col-md-11 center-block">
+
   <div class="modal-dialog">
+
   <div class="modal-content">
+
       <div class="modal-body">
-      	<center><img src="img/fina.png" width="200" height="200"></center><br>
+
+      	<center><img class="maribel" src="img/login-icon.png"></center><br>
       	<?php
 	  	if(!empty($_POST['usu']) and !empty($_POST['con'])){
 			$usu=limpiar($_POST['usu']);
@@ -46,7 +147,7 @@
 					$_SESSION['tipo_user']=$row['tipo'];
 					$_SESSION['cod_user']=$usu;
 					if($row['tipo']=='Admin'){
-						echo mensajes('Bienvenido/a	'.$row['cargo'].'<br>'.$row['nombre'].' ','verde').'<br>';
+						echo mensajes('Accediendo al sistema <br>ESPERE UN MOMENTO'.' ','azul').'<br>';
 						echo '<center><img src="img/ajax-loader.gif"></center><br>';
 						echo '<meta http-equiv="refresh" content="2;url=principal.php">';
 					}else{
@@ -64,22 +165,40 @@
 		}else{
 			echo '
 			<div class="input-group input-group-lg">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			<span class="input-group-addon" style="border: 1px solid #0091ea ;"><img src="img/Admin-icon.png" style="width: 24px; height: 24px;"></span>
 			<input type="text" name="usu" class="form-control input-lg" placeholder="Usuario" autocomplete="off" required autofocus>
 			</div><br>
+
 			<div class="input-group input-group-lg">
-			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-			<input type="password" name="con" class="form-control input-lg" placeholder="Password" autocomplete="off" required>
+			<span class="input-group-addon" style="border: 1px solid #0091ea ;"><img src="img/secrecy-icon.png" style="width: 24px; height: 24px;"></span>
+			<input type="password" name="con" class="form-control input-lg" placeholder="Contraseña" autocomplete="off" required>
 			</div><br>
+
 			<div class="form-group">
-			<div align="right"><button class="btn btn-info btn-lg btn-block" type="submit"><i class="glyphicon "></i> <strong>Entrar</strong></button></div>
+			<div align="right"><button class="btn btn-info btn-lg btn-block" type="submit"> <strong>Entrar</strong></button></div>
 			</div>';
 		}
 	  ?>
+	  </div>
+	  </div>
+  </div>
       </form>
-      </div>
-  </div><br>
+		
 </div>
+						
+					</div>
+					
+				</div>
+				
+			</div>
+
+
+	
+		</div> <!-- FIn container -->
+
+
+      
+
 	<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
     <script src="assets/js/jquery-1.10.2.js"></script>

@@ -12,7 +12,7 @@
   <!-- Animation Css -->
   <link href="../plugins/animate-css/animate.css" rel="stylesheet" />
 
-<script type="text/javascript" src="../../bootstrap/js/bootstrap.js">
+
 
 </script>
 

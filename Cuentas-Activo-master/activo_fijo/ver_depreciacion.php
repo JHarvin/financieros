@@ -102,7 +102,7 @@ activo.id_activo = '$clienteInfo'
                                     <input type="text" name="ver_valor" value="<?php echo $fila['dep']; ?>"min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
 
                                 </div>
-                            </td><
+                            </td>
                         </tr>
 
                     </tbody>
