@@ -22,6 +22,23 @@ if (isset($_REQUEST['nameEnviar'])) {
 
 ?>
 
+<style type="text/css">
+    .wrapper .container-fluid{
+        padding-top: 30px;
+    }
+
+     .wrapper .container-fluid h2.text-center{
+        color: 0;
+    }
+
+    .wrapper .container-fluid input.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+ 
+</style>
 
 <form action="registro_departamento.php" method="GET" autocomplete="off">
     <section class="wrapper">
@@ -32,14 +49,14 @@ if (isset($_REQUEST['nameEnviar'])) {
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2 class="text-center">REGISTRO DE DEPARTAMENTOs</h2>
+                            <h2 class="text-center">REGISTRO DE DEPARTAMENTOS</h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text"class="form-control text-center" required="" name="nameNombre" placeholder="NOMBRE...">
+                                            <input type="text"class="form-control text-center maria" required="" name="nameNombre" placeholder="Nombre del Departamento">
                                         </div>
                                     </div>
                                 </div>

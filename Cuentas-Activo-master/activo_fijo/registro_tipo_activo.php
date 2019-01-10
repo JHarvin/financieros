@@ -27,6 +27,29 @@ if (isset($_REQUEST['nameEnviar'])) {
 $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::obtener_conexion());
 ?>
 
+<style type="text/css">
+    .wrapper .container-fluid{
+        padding-top: 30px;
+    }
+
+     .wrapper .container-fluid h2.text-center{
+        color: 0;
+    }
+
+    .wrapper .container-fluid input.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+    .wrapper .container-fluid select.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+ 
+</style>
 
 <form action="registro_tipo_activo.php" method="GET" autocomplete="off">
     <section class="wrapper">
@@ -44,7 +67,7 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            <input type="text"class="form-control text-center" required="" name="nameNombre" placeholder="NOMBRE...">
+                                            <input type="text"class="form-control text-center maria" required="" name="nameNombre" placeholder="Nombre del tipo de Activo">
                                         </div>
                                     </div>
                                 </div>
@@ -53,8 +76,8 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                                     <div class="form-group">
                                         <div class="form-line">
                                             <div class="form-line">
-                                                <select class="form-control show-tick" name="NameSelect" required="">
-                                                    <option  value="" disabled="">SELECCIONE LA CLASIFICACION</option>
+                                                <select class="form-control show-tick maria" name="NameSelect" required="">
+                                                    <option value="" disabled="">SELECCIONE LA CLASIFICACION</option>
                                                     <?php foreach ($lista_clasificacion as $lista) { ?>
 
                                                         <option value="<?php echo $lista->getId_clasificacion(); ?>"><?php echo $lista->getNombre(); ?></option>

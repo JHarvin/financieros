@@ -45,7 +45,34 @@ if (isset($_REQUEST['nameEnviar'])) {
     $lista_encargado = correlativos::lista_encargado(Conexion::obtener_conexion());
     ?>
 
-<br>
+<style type="text/css">
+    .wrapper .container-fluid{
+        padding-top: 30px;
+    }
+
+    .wrapper .container-fluid input.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+    .wrapper .container-fluid select.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+    .wrapper .container-fluid div.mary{
+       padding-bottom: 20px;
+    }
+
+
+    .wrapper .container-fluid span.coco{
+       color: #2196f3;
+    }
+
+ 
+</style>
 <form action="registro_activo.php" method="GET" autocomplete="off">
         <section class="wrapper">
             <!--INICIO DE FIADOR-->
@@ -58,13 +85,13 @@ if (isset($_REQUEST['nameEnviar'])) {
                                 <h2 class="text-center">REGISTRO DE ACTIVO</h2>
                             </div>
                             <div class="body">
-                                <div class="row clearfix">
+                                <div class="row clearfix mary">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE LA INSTITUCION</span>
-                                                    <select class="form-control show-tick" name="select_institucion" required="">
+                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE LA INSTITUCION</strong></span>
+                                                    <select class="form-control show-tick maria" name="select_institucion" required="">
 
                                                         <?php foreach ($lista_institucion as $lista) { ?>
 
@@ -84,8 +111,8 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL DEPARTAMENTO</span>
-                                                    <select class="form-control show-tick" name="select_departamento" required="">
+                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL DEPARTAMENTO</strong></span>
+                                                    <select class="form-control show-tick maria" name="select_departamento" required="">
                                                         <?php foreach ($lista_depatamento as $lista) { ?>
 
                                                         <option value="<?php echo $lista->getId_departamento(); ?>"><?php echo $lista->getCorrelativo()."--". $lista->getNombre(); ?></option>
@@ -97,13 +124,13 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row clearfix">
+                                <div class="row clearfix mary">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL TIPO DE ACTIVO</span>
-                                                    <select class="form-control show-tick" name="select_tipo" required="">
+                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL TIPO DE ACTIVO</strong></span>
+                                                    <select class="form-control show-tick maria" name="select_tipo" required="">
                                                         <option  value="" disabled="">SELECCIONE EL TIPO DE ACTIVO</option>
                                                         <?php foreach ($lista_tipo as $lista2) { ?>
 
@@ -120,8 +147,8 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon" id="basic-addon1">SELECCIONE EL ENCARGADO</span>
-                                                    <select class="form-control show-tick" name="select_encargado" required="">
+                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL ENCARGADO</strong></span>
+                                                    <select class="form-control show-tick maria" name="select_encargado" required="">
                                                         <option  value="" disabled="">SELECCIONE ENCARGADO</option>
                                                         <?php foreach ($lista_encargado as $lista3) { ?>
 
@@ -135,12 +162,12 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     </div>
 
                                 </div>
-                                <div class="row clearfix">
+                                <div class="row clearfix mary">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">FECHA ADQUISICION</span>
-                                                <input type="date"  class="form-control text-center" required="" name="fecha" placeholder="FECHA ADQUISICION">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>FECHA ADQUISICION</strong></span>
+                                                <input type="date"  class="form-control text-center maria" required="" name="fecha" placeholder="FECHA ADQUISICION">
                                             </div>
                                         </div>
                                     </div>
@@ -148,18 +175,18 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">TIEMPO DE USO (MESES)</span>
-                                                <input type="number"  min="0" step="any"class="form-control text-center" name="meses" placeholder="TIEMPO DE USO (MESES)" required="">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>TIEMPO DE USO (MESES)</strong></span>
+                                                <input type="number"  min="0" step="any"class="form-control text-center maria" name="meses" placeholder="TIEMPO DE USO (MESES)" required="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row clearfix">
+                                <div class="row clearfix mary">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">OBSERVACIONES</span>
-                                                <input type="text"  class="form-control text-center" required="" name="obsevaciones" placeholder="OBSERVACIONES">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>OBSERVACIONES</strong></span>
+                                                <input type="text"  class="form-control text-center maria" required="" name="obsevaciones" placeholder="OBSERVACIONES">
                                             </div>
                                         </div>
                                     </div>
@@ -167,26 +194,26 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">CANTIDAD</span>
-                                                <input type="number"  min="0" step="any"class="form-control text-center" name="cantidad" placeholder="UNIDADES" required="">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>CANTIDAD</strong></span>
+                                                <input type="number"  min="0" step="any"class="form-control text-center maria" name="cantidad" placeholder="UNIDADES" required="">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                   <div class="row clearfix">
-                                    <div class="col-md-12">
+                                   <div class="row clearfix mary">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">DESCRIPCION</span>
-                                                <input type=""  class="form-control text-center" required="" name="descripcion" placeholder="DESCRIPCION">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>DESCRIPCION</strong></span>
+                                                <input type=""  class="form-control text-center maria" required="" name="descripcion" placeholder="DESCRIPCION">
                                             </div>
                                         </div>
                                     </div>
-                                       <div class="col-md-12">
+                                       <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon" id="basic-addon1">Precio</span>
-                                                <input type=""  class="form-control text-center" required="" name="precio" placeholder="Precio">
+                                                <span class="input-group-addon coco" id="basic-addon1"><strong>PRECIO</strong></span>
+                                                <input type=""  class="form-control text-center maria" required="" name="precio" placeholder="Precio">
                                             </div>
                                         </div>
                                     </div>

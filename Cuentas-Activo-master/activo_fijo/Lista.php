@@ -32,8 +32,8 @@ departamento.nombre AS dep,
 institucion.nombre AS nombreInst,
 tipo_activo.id_clasificacion,
 tipo_activo.nombre AS tipo,
-encargado.nombre AS encargado,
-activo.precio AS precio,
+CONCAT_WS(' ',encargado.nombre, encargado.apellido) AS encargado,
+TRUNCATE((activo.precio),2) AS precio,
 clasificacion.id_clasificacion AS clasi,
 clasificacion.nombre AS ncla,
 activo.correlativo
@@ -77,12 +77,12 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
 
                                     <thead >
                                     <th>Correlativos</th>
-
-
-                                    <th>Departamento</th>
+                                    <th>Clasificacion</th>
                                     <th>Precio</th>
                                     <th>Institucion</th>
                                     <th>Encargado</th>
+                                    <th>Departamento</th>
+
                                     <th>Acciones </th>
                                     </thead>
                                     <tbody class="buscar">
@@ -99,11 +99,12 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
 
                             <td><?php echo $fila['ncla']; ?></td>
 
-                              <td><?php echo $fila['precio'].' $' ; ?></td>
+                              <td><?php echo "$ ";?><?php echo $fila['precio']; ?></td>
 
                                     <td><?php echo $fila['nombreInst']; ?></td>
 
                                   <td><?php echo $fila['encargado']; ?></td>
+                                  <td><?php echo $fila['dep']; ?></td>
                                   <td >
                                    <button class="btn btn-info"
                 onclick="llamarPagina('<?php echo $fila['id']; ?>')">

@@ -23,6 +23,23 @@ if (isset($_REQUEST['nameEnviar'])) {
     ?>
 
 
+<style type="text/css">
+    .wrapper .container-fluid{
+        padding-top: 30px;
+    }
+
+     .wrapper .container-fluid h2.text-center{
+        color: 0;
+    }
+
+    .wrapper .container-fluid input.maria{
+        border: 1px solid #0091ea;
+        border-radius: 6px;
+        float: left;
+    }
+
+ 
+</style>
 <form action="registro_encargado.php" method="GET" autocomplete="off">
         <section class="wrapper">
             <!--INICIO DE FIADOR-->
@@ -35,27 +52,28 @@ if (isset($_REQUEST['nameEnviar'])) {
                                 <h2 class="text-center">REGISTRO DE ENCARGADO</h2>
                             </div>
                             <div class="body">
-                                <div class="row clearfix">
+                                <div class="">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text"class="form-control text-center" required="" name="nameNombre" placeholder="NOMBRE...">
+                                                <input type="text"class="form-control text-center maria" required="" name="nameNombre" placeholder="Nombre del encargado">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text"class="form-control text-center" required="" name="nameApellido" placeholder="APELLIDO...">
+                                                <input type="text"class="form-control text-center maria" required="" name="nameApellido" placeholder="Apellido del encargado">
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input type="text"class="form-control text-center" required="" id="Dui_fia_per" name="dui_natural" placeholder="DUI...">
+                                                <input type="text"class="form-control text-center maria" required="" id="Dui_fia_per" name="dui_natural" placeholder="DUI">
                                             </div>
                                         </div>
                                     </div>
