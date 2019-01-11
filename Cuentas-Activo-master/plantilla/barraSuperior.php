@@ -87,6 +87,7 @@
           <a href="../activo_fijo/registro_departamento.php">
              
               <span class="yo">Registro de Departamento</span>
+              
           </a>
       </li>
     </ul>
