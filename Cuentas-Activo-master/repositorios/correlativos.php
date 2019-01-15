@@ -37,6 +37,7 @@ class correlativos {
         return $total_usuario;
     }
 
+
     public static function lista_tipo($conexion) {
         $lista = array();
 
@@ -57,6 +58,7 @@ class correlativos {
                         $lista[] = $tipo;
                     }
                 }
+                
             } catch (PDOException $exc) {
                 print('ERROR' . $exc->getMessage());
             }
