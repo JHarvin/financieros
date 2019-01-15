@@ -10,7 +10,7 @@ departamento.nombre AS dep,
 institucion.nombre AS nombreInst,
 tipo_activo.id_clasificacion,
 tipo_activo.nombre AS tipo,
-encargado.nombre AS encargado,
+CONCAT_WS(' ',encargado.nombre, encargado.apellido) AS encargado,
 TRUNCATE((activo.precio),2) AS precio,
 clasificacion.id_clasificacion as clasi,
 clasificacion.nombre as ncla
@@ -26,7 +26,6 @@ WHERE
 activo.id_activo = '$clienteInfo'
 ");
 ?>
-
 <style type="text/css">
     .row table caption.genesis{
         padding-top: 50px;
@@ -61,8 +60,8 @@ activo.id_activo = '$clienteInfo'
                             <td  style="height:15px;">
                                 <div class="cosita" >
                                     <i class="fa fa-pencil-square-o"></i>
-                                    <label for="codigo" style="font-size:15px">C&oacutedigo</label><br>
-                                    <input class="text-center" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['id']; ?>"  minlength="8"  readonly=""   >
+                                    <label for="codigo" style="font-size:15px;">C&oacutedigo</label><br>
+                                    <input class="input-group text-center" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['id']; ?>"  minlength="8"  readonly=""   >
 
                                 </div>
                             </td>
@@ -70,8 +69,8 @@ activo.id_activo = '$clienteInfo'
                             <td colspan="4" style="height:15px;" >
                                 <div class="cosita">
                                     <i class="fa fa-pencil-square-o"></i>
-                                    <label for="textarea1" style="font-size:15px">Clasificacion</label><br>
-                                    <input class="text-center" type="text" id="ver_clasif" name="ver_clasif" value="<?php echo $fila['ncla']; ?>"  minlength="8"  readonly=""   >
+                                    <label for="textarea1" style="font-size:15px;">Clasificacion</label><br>
+                                    <input class="input-group text-center" type="text" id="ver_clasif" name="ver_clasif" value="<?php echo $fila['ncla']; ?>"  minlength="8"  readonly=""   >
 
                                 </div>
                             </td>
@@ -82,16 +81,16 @@ activo.id_activo = '$clienteInfo'
                             <td style="height:10px;"><div class="col m12">
                                     <div class="input-field col m12 cosita">
                                         <i class="fa fa-calendar prefix" aria-hidden="true"></i>
-                                        <label for="fecha_pub"  class="active" style="font-size:16px">Fecha Adquisición</label><br>
-                                        <input class="text-center" type="text" name="ver_fecha_depre" value="<?php echo $fila['fecha']; ?>"  id="ver_fecha_depre" readonly=""   >
+                                        <label for="fecha_pub"  class="active" style="font-size:16px;">Fecha Adquisición</label><br>
+                                        <input class="input-group text-center" type="text" name="ver_fecha_depre" value="<?php echo $fila['fecha']; ?>"  id="ver_fecha_depre" readonly=""   >
                                     </div>
                                 </div></td>
 
                             <td style="height:10px;">
                                 <div class="input-field col m12 cosita">
                                     <i class="fa fa-usd prefix"></i> 
-                                    <label for="precioUnitario" style="font-size:16px">Valor del Activo<small></small> </label><br>
-                                    <input type="text" name="ver_valor" value="<?php echo $fila['precio']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
+                                    <label for="precioUnitario" style="font-size:16px;">Valor del Activo<small></small> </label><br>
+                                    <input type="input-group text" name="ver_valor" value="<?php echo $fila['precio']; ?>" min="0" step="any" id="ver_valor"  class="input-group text-center validate" readonly="">
                                 </div>
                             </td>
                         </tr>
@@ -103,8 +102,8 @@ activo.id_activo = '$clienteInfo'
                             <td style="height:10px;">
                                 <div class="input-field col m12 cosita">
                                     <i class="fa fa-usd prefix"></i> 
-                                    <label for="precioUnitario" style="font-size:16px">Tipo<small></small> </label><br>
-                                    <input type="text" name="ver_valor" value="<?php echo $fila['tipo']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
+                                    <label for="precioUnitario" style="font-size:16px;">Tipo<small></small> </label><br>
+                                    <input type="text" name="ver_valor" value="<?php echo $fila['tipo']; ?>" min="0" step="any" id="ver_valor"  class="input-group text-center validate" readonly="">
                                 </div>
                             </td>
 
@@ -112,8 +111,8 @@ activo.id_activo = '$clienteInfo'
 
                             <td style="height:10px;">
                                 <div class="input-field col m12 cosita">
-                                    <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px">Encargado<small></small> </label><br>
-                                    <input type="text" name="ver_valor" value="<?php echo $fila['encargado']; ?>" min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
+                                    <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px;">Encargado<small></small> </label><br>
+                                    <input type="text" name="ver_valor" value="<?php echo $fila['encargado']; ?>" min="0" step="any" id="ver_valor"  class="input-group text-center validate" readonly="">
 
                                 </div>
                             </td>
@@ -122,18 +121,19 @@ activo.id_activo = '$clienteInfo'
                             <td ><div class="col m12 cosita">
                                     <div class="input-field">
                                         <i class="fa fa-calendar prefix" aria-hidden="true"></i>
-                                        <label for="fecha_pub"  class="active" style="font-size:16px">Institucion</label><br>
-                                        <input type="text" class="text-center" name="ver_fecha_depre" value="<?php echo $fila['nombreInst']; ?>" id="ver_fecha_depre" readonly=""   >
+                                        <label for="fecha_pub"  class="active" style="font-size:16px;">Institucion</label><br>
+                                        <input type="text" class="input-group text-center" name="ver_fecha_depre" value="<?php echo $fila['nombreInst']; ?>" id="ver_fecha_depre" readonly=""   >
                                     </div>
                                 </div></td>
                             <td >
                                 <div class="input-field col m12 cosita">
-                                    <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px">Departamento<small></small> </label><br>
-                                    <input type="text" name="ver_valor" value="<?php echo $fila['dep']; ?>"min="0" step="any" id="ver_valor"  class="text-center validate" readonly="">
+                                    <i class="fa fa-usd prefix"></i> <label for="precioUnitario" style="font-size:16px;">Departamento<small></small> </label><br>
+                                    <input type="text" name="ver_valor" value="<?php echo $fila['dep']; ?>"min="0" step="any" id="ver_valor"  class="input-group text-center validate" readonly="">
 
                                 </div>
                             </td>
                         </tr>
+
 
                     </tbody>
                 </table>
@@ -185,10 +185,9 @@ activo.id_activo = '$clienteInfo'
     </div>
     <a href="javascript:history.back(1)">
 
-        <a href="javascript:history.back()">
+        <a href="../activo_fijo/Lista.php">
             <button class="btn btn-info" type="button" > 
-                <i class="fa fa-eye"></i>Volver
-            </button>
+                <i class="fa fa-eye"></i>Volver</button>
         </a>
         <?php
     }
