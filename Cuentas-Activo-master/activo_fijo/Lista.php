@@ -71,8 +71,8 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
 
 
 
-
-                                <table class="table table-striped table-bordered" id="tabla_cliente_cpersonal">
+<div class="box-body">
+                                <table id="example1" class="table table-bordered table-striped">
                                     <caption></caption>
 
                                     <thead >
@@ -144,4 +144,36 @@ function llamarPagina(id){
 //	window.open("../activo_fijo/ver_depreciacion.php?datos="+id, '_parent');
 	}
 
+</script>
+<script>
+$(document).ready(function() {
+    
+if ( $.fn.dataTable.isDataTable( '#example1' ) ) {
+table = $('#example1').DataTable( );
+ paging: true
+ responsive: true
+}
+else {
+table =  $('#example1').DataTable({
+  "language":{
+   "lengthMenu":"Mostrar _MENU_ registros por página.",
+   "zeroRecords": "Lo sentimos. No se encontraron registros.",
+         "info": "Mostrando página _PAGE_ de _PAGES_",
+         "infoEmpty": "No hay registros aún.",
+         "infoFiltered": "(filtrados de un total de _MAX_ registros)",
+         "search" : "Búsqueda",
+         "LoadingRecords": "Cargando ...",
+         "Processing": "Procesando...",
+         "SearchPlaceholder": "Comience a teclear...",
+         "paginate": {
+ "previous": "Anterior",
+ "next": "Siguiente",
+ }
+  }
+
+
+ });
+}
+
+});
 </script>
