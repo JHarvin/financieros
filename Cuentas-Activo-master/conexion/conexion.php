@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 $conexion = mysqli_connect("localhost", "root", "", "financiero");
 
 //$conexion=mysql_connect('localhost','root','');
@@ -19,3 +20,12 @@ $conexion = mysqli_connect("localhost", "root", "", "financiero");
 ////    echo"buena conexion";
 ////}
 ?>
+=======
+
+
+$conexion = new mysqli('localhost', 'root', '', 'financiero');
+if ($conexion->connect_errno) {
+    echo "Error de conexion";
+}
+?>
+>>>>>>> e72cd8108baee59c6b24a4ef9fc2a73acdb4e6b0
