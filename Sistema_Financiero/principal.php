@@ -55,7 +55,7 @@
 
         <!--/. NAV TOP  -->
 
-           <?php include_once "menu/menu.php"; ?>
+           <?php include_once "menu/m_principal.php"; ?>
 
         <!-- /. NAV SIDE  -->
         <div id="wrapper" style="background-color:#4161CF;">

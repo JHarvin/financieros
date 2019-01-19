@@ -54,53 +54,20 @@
     <link href="../../assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper">
-         <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
-            </div>
- 
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> My Perfil</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="../../php_cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
-</div>
-        </nav>
+    <div id="wrapper" style="background-color:#4161CF;">
+        
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
+        
             <?php include_once "../../menu/m_categoria.php"; ?>
-        </nav>
+        
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" >
+       
             <div id="page-inner">
             <?php if(permiso($_SESSION['cod_user'],'4')==TRUE){ ?> 
 			 <div class="row">
                     <div class="col-md-12">                        
-                          <div class="panel-body" align="center">                                                                                 
-                            <button type="button" class="btn btn-success btn-circle" data-toggle="modal" data-target="#myModal" title="Agregar Unidad"><i class="fa fa-plus fa-2x"></i>
+                          <div class="panel-body" align="right">                                                                                 
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal" title="Agregar Unidad"><i class="fa fa-plus fa-2x"></i>Agregar unidad
                             </button>                                                                             
                   </div>
                     </div>
@@ -187,8 +154,8 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                             <td><?php echo $row['nombre']; ?></td>
                                             <td class="center"><?php echo estado($row['estado']); ?></td>
                                             <td class="center"><div class="btn-group">
-                                              <button data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
-                                              <ul class="dropdown-menu">
+                                              <button data-toggle="dropdown" class="btn btn-info btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
+                                              <ul class="dropdown-menu pull-right">
                                                 <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>                                                                                                                                             
@@ -280,7 +247,7 @@ font-size: 16px;">Almacen: <?php echo $nombre_Almacen; ?> :: Fecha de Acceso : <
                                 
         </div>
                <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
-    </div>
+    
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->

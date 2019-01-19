@@ -270,17 +270,20 @@
                                                     }
                                                   ?>
                                               </datalist>
-                                            </td>
+                                            
                                             <td>
+                                                <div class="panel-body" align="right">
                                                 <button class="btn btn-primary" type="submit" style="padding-right: 20px;">
                                                 
                                                 Listar articulos</button>
                                                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agrear Articulo"></i>
-                            Agregar articulos
-                            </button>
-                            <button type="button" class="btn btn-info" onClick="window.location='PDFarticulos.php'"><i class="fa fa-file fa-2x" title="Reporte PDF"></i>
-                            Ver reporte de articulos
-                            </button style="padding-right: 20px;">
+                                              Agregar articulos
+                                                </button>
+                                                <button type="button" class="btn btn-info" onClick="window.location='PDFarticulos.php'"><i class="fa fa-file fa-2x"                     title="Reporte PDF"></i>
+                                                Ver reporte de articulos
+                                                </button style="padding-right: 20px;">
+                                            </div>
+                                                </td>
 
                                           </div>
 

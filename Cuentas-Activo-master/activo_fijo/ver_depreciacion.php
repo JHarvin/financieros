@@ -13,6 +13,8 @@ tipo_activo.nombre AS tipo,
 CONCAT_WS(' ',encargado.nombre, encargado.apellido) AS encargado,
 TRUNCATE((activo.precio),2) AS precio,
 clasificacion.id_clasificacion as clasi,
+CONCAT_WS('-',institucion.correlativo, departamento.correlativo, tipo_activo.correlativo, activo.correlativo) AS codiguito,
+
 clasificacion.nombre as ncla
 FROM
 activo
@@ -25,6 +27,24 @@ INNER JOIN clasificacion ON tipo_activo.id_clasificacion = clasificacion.id_clas
 WHERE
 activo.id_activo = '$clienteInfo'
 ");
+?>
+
+
+<?php
+include_once '../conexion/conexion.php';
+
+$correlativoAct = mysqli_query($conexion, "SELECT
+institucion.correlativo AS nombreInst,
+departamento.correlativo AS dep,
+tipo_activo.correlativo AS tipoacti,
+activo.id_activo,
+activo.correlativo AS activ
+FROM
+activo
+INNER JOIN departamento ON activo.id_departamento = departamento.id_departamento
+INNER JOIN institucion ON activo.id_institucion = institucion.id_institucion
+INNER JOIN tipo_activo ON activo.id_tipo = tipo_activo.id_tipo
+WHERE activo.id_activo=11")
 ?>
 <style type="text/css">
     .row table caption.genesis{
@@ -61,7 +81,7 @@ activo.id_activo = '$clienteInfo'
                                 <div class="cosita" >
                                     <i class="fa fa-pencil-square-o"></i>
                                     <label for="codigo" style="font-size:15px;">C&oacutedigo</label><br>
-                                    <input class="input-group text-center" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['id']; ?>"  minlength="8"  readonly=""   >
+                                    <input class="input-group text-center" id="ver_cod_depre" name="ver_cod_depre" value="<?php echo $fila['codiguito']; ?>"  minlength="8"  readonly=""   >
 
                                 </div>
                             </td>
@@ -142,7 +162,7 @@ activo.id_activo = '$clienteInfo'
 
 
             <table id="ver_depre_tab" class="table table-striped table-bordered maribel">
-                <caption class="genesis">Depreciación </caption>
+                <caption class="genesis"><strong>Depreciación</strong></caption>
                 <thead>
                 <th class="text-center" >Año</th>
                 <th class="text-center">Valor del Activo</th>

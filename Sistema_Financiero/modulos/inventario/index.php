@@ -291,18 +291,18 @@
                                                     }
                                                   ?>
                                               </datalist>
-                                            </td>
+                                            
                                             <td>
-                                                <button class="btn" type="submit">
-                                                  <li class="fa fa-search"></li>
-                                                  Buscar</button>
-
+                                                
+                                                  <div class="panel-body" align="right">
                                                   <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x" title="Agregar Articulo"></i>
                                                     Agregr al inventario
                                                   </button>
                                                   <button type="button" class="btn btn-info" onClick="window.location='PDFinventario.php'"><i class="fa fa-list-alt fa-2x" title="Reporte PDF"></i>
-Mostrar reporte
+                                                            Mostrar reporte
                                                   </button>
+                                                </div>
+                                                </td>
 
                                           </div>
                                         </form>
@@ -317,7 +317,7 @@ Mostrar reporte
                                             <th>ARTICULO</th>
                                             <th>P.V</th>
                                             <th>STOCK</th>
-                                            <th></th>
+                                            <th>ACCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,7 +350,7 @@ Mostrar reporte
                                                 <a href="#edit<?php echo $row['id']; ?>" role="button" class="btn btn-warning btn-sm" data-toggle="modal">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <a href="../detalle/kardex.php?detalle=<?php echo $row['id']; ?>" role="button" class="btn btn-info btn-sm" title="TARJETA KARDEX" data-toggle="modal">
+                                                <a href="../detalle/kardex.php?detalle=<?php echo $row['id']; ?>" role="button" class="btn btn-success btn-sm" title="TARJETA KARDEX" data-toggle="modal">
                                                     <i class="fa fa-search"></i>
                                                 </a>
                                             </td>

@@ -166,8 +166,8 @@ if (!empty($_REQUEST['duisito'])) {
     <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                           <tr>
-                            <th class="nombre" width="500"><font color="black">Nombre de la Institucion</font></th>
-                             
+                            <th class="nombre" width="500"><font color="black">Correlativo de la Institucion</font></th>
+                            <th class="nombre" width="500"><font color="black">Nombre de la Institucion</font></th>                             
                             <th class="acciones" width="10"><font font font font font color="black">Acciones</font></th>
                           </tr>
 
@@ -182,9 +182,9 @@ if (!empty($_REQUEST['duisito'])) {
                         <?php
 
                         include_once '../conexion/conexion.php';
-                        $pame = mysqli_query($conexion, "SELECT id_institucion, nombre from institucion");
+                        $pame = mysqli_query($conexion, "SELECT id_institucion, correlativo, nombre from institucion");
                         while ($row = mysqli_fetch_array($pame)) {                            
-                             
+                             //sacamos estas variables para extraer informacion que se va a editar
                              $nombre = $row['nombre'];                       
                              $idInst=$row['id_institucion'];  
                         
@@ -194,9 +194,8 @@ if (!empty($_REQUEST['duisito'])) {
 
 
                       <tr>
-                                
-                            <td class="name"><?php echo $row['nombre']; ?></td>
-                                  
+                         <td class="name"><?php echo $row['correlativo']; ?></td>                                
+                            <td class="name"><?php echo $row['nombre']; ?></td>                                  
                             
                             <td>
                                     <a class="editar" href="#" data-toggle="modal" data-target="#editarInstitucion" onclick="Editar_instituc('<?php echo $nombre; ?>','<?php echo $idInst;?>')" >Editar</a>

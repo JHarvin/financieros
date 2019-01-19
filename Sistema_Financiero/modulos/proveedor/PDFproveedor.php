@@ -81,7 +81,7 @@ $codigoHTML='
         <td><strong>DIRECCION</strong></td>
         <td><strong>TELEFONO</strong></td>                        
         <td><strong>NIT</strong></td>
-        <td><strong>CONTACTO</strong></td>
+        
         
       </tr>';
 

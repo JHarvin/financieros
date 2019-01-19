@@ -47,6 +47,20 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
         border-radius: 6px;
         float: left;
     }
+     table td a.editar{
+        text-decoration: none;
+        background-color: #3DA3EF;
+        display: block;
+        width: 60px;
+        padding-right: 5px;
+        color: #fff;
+        margin: auto;
+        text-align: center;
+    }
+
+    table td a.editar:hover{
+       background-color: #F92659
+    }
 
  
 </style>
@@ -191,6 +205,7 @@ if (!empty($_REQUEST['duisito'])) {
     <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                           <tr>
+                            <th class="nombre" width="500"><font color="black">Correlativo</font></th>
                             <th class="nombre" width="500"><font color="black">Nombre del tipo de Activo</font></th>
                              <th class="nombre" width="500"><font color="black">Clasificacion</font></th>
                             <th class="acciones" width="10"><font font font font font color="black">Acciones</font></th>
@@ -207,6 +222,7 @@ if (!empty($_REQUEST['duisito'])) {
                         include_once '../conexion/conexion.php';
                         $pame = mysqli_query($conexion, "SELECT
                              id_tipo,
+                             tipo_activo.correlativo AS correlat,
                              tipo_activo.id_clasificacion as idclasi,
                              tipo_activo.nombre AS tipoActi,
                              clasificacion.id_clasificacion as idclasi,
@@ -227,9 +243,8 @@ if (!empty($_REQUEST['duisito'])) {
 
 
                      <tr>
-                                
-                            <td class="name"><?php echo $row['tipoActi']; ?></td>
-                                  
+                             <td class="name"><?php echo $row['correlat']; ?></td>   
+                            <td class="name"><?php echo $row['tipoActi']; ?></td>                                  
                             <td class="clasifica"><?php echo $row['clasif']; ;?></td>
                             <td>
                                     <a class="editar" href="#" data-toggle="modal" data-target="#editarTipoActivo" onclick="Editar_visita('<?php echo $nombre; ?>','<?php echo $clasificacion ;?>','<?php echo $idActivo;?>')" >Editar</a>

@@ -227,8 +227,8 @@
                                             <td><?php echo $row['dir']; ?></td>
                                             <td class="center">
                                             <div class="btn-group">
-    <button data-toggle="dropdown" class="btn btn-secondary btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
-                                              <ul class="dropdown-menu">
+     <button data-toggle="dropdown" class="btn btn-info btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
+                                              <ul class="dropdown-menu pull-right">
         <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                      <li class="divider"></li>
         <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>

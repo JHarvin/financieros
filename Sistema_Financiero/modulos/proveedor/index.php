@@ -79,7 +79,7 @@
         <!-- /. NAV SIDE  -->
         <div id="wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
-<?php if(permiso($_SESSION['cod_user'],'10')==TRUE){ ?>
+               <?php if(permiso($_SESSION['cod_user'],'10')==TRUE){ ?>
 
                  <!-- /. ROW  -->
                      <!--  Modals-->
@@ -92,7 +92,8 @@
                                         <div class="row">
                                             <ul class="nav nav-tabs nav-justified">
                                             <li class="active"><a href="#proveedor" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> DATOS PROVEEDOR</a></li>
-                                            <li class="" ><a href="#contac" data-toggle="tab"><i class="glyphicon glyphicon-user" ></i> CONTACTO</a></li>
+                                            <li class="" ><a href="#contac" data-toggle="tab"><i class="glyphicon glyphicon-user" >
+                                            </i> CONTACTO</a></li>
                                             </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade active in" id="proveedor">
@@ -160,10 +161,10 @@
                         <div class="panel-body">
                           <div class="panel-body" align="right">
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus fa-2x"></i>
-                              Agregar
+                              Agregar proveedor
                             </button>
                             <button type="button" class="btn btn-info" onClick="window.location='PDFproveedor.php'" title="Reporte PDF"><i class="fa fa-file fa-2x"></i>
-                              Reporte
+                              Reporte de proveedores
                             </button>
                   </div>
                             <div class="table-responsive">
@@ -200,7 +201,7 @@
                                             <th>NOMBRE</th>
                                             <th>TELEFONO</th>
                                             <th>DIRECCIÓN</th>
-                                            <th>CONTACTO</th>
+                                            
                                             <th>ACCIONES</th>
                                         </tr>
                                     </thead>
@@ -216,21 +217,16 @@
                                             <td><?php echo $row['nombre']; ?></td>
                                             <td><?php echo $row['tel']; ?></td>
                                             <td><?php echo $row['dir']; ?></td>
-                                            <td>
-                                            <i class="fa fa-user"></i>
-                                                <a href="#" data-toggle="modal" data-target="#info<?php echo $row['id']; ?>" title="Ver Información">
-                                                    <?php echo $row['contacto']; ?>
-                                                </a>
-                                            </td>
+                                            
                                             <td class="center"><div class="btn-group">
-                                              <button data-toggle="dropdown" class="btn btn-warning btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
-                                              <ul class="dropdown-menu">
+                                              <button data-toggle="dropdown" class="btn btn-info btn-sm dropdown-toggle"><i class="fa fa-cog"></i> <span class="caret"></span></button>
+                                              <ul class="dropdown-menu pull-right">
                                                 <li><a href="#" data-toggle="modal" data-target="#actualizar<?php echo $row['id']; ?>"><i class="fa fa-edit"></i> Editar</a></li>
                                                 <li class="divider"></li>
                                                 <li><a href="#" data-toggle="modal" data-target="#eliminar<?php echo $row['id']; ?>"><i class="fa fa-pencil"></i> Eliminar</a></li>
                                               </ul>
                                             </div>
-                                            <a href="prov_pro.php?detalle=<?php echo $url; ?>" role="button" title="VER ARTICULOS DEL PROVEERDOR" class="btn btn-info btn-sm" data-toggle="modal">
+                                            <a href="prov_pro.php?detalle=<?php echo $url; ?>" role="button" title="VER ARTICULOS DEL PROVEERDOR" class="btn btn-success btn-sm" data-toggle="modal">
                                                     <i class="fa fa-search"></i>
                                             </a>
                                             </td>

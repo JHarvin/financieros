@@ -206,7 +206,7 @@
                         </div>
                         <div class="panel-body">
                           <right>
-                           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#venta" title="Ver Caja"><i class="fa fa-search fa-2x"></i>
+                           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#venta" title="Ver Caja"><i class="fa fa-search fa-2x"></i>
                              Buscar
                            </button>
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#add" title="Agregar Gasto"><i class="fa fa-plus fa-2x"></i>
@@ -277,7 +277,7 @@
                                         <option value="CXC" <?php if($trans=='CXC'){ echo 'selected'; } ?>>Cuentas por Cobrar</option>
                                         <option value="CXP" <?php if($trans=='CXP'){ echo 'selected'; } ?>>Cuentas por Pagar</option>
                                     </select>
-                                     <button type="submit"  class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                     <button type="submit"  class="btn btn-success btn-sm"><i class="fa fa-search"></i></button>
                                 </div>
                             </div>
                            </div>

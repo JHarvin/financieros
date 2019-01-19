@@ -54,32 +54,6 @@ if (isset($_REQUEST['nameEnviar'])) {
        background-color: #F92659
     }
 
-      table td.name{
-       
-        width: 60px;
-        padding-right: 5px;
-        text-align: center;
-       
-    }
-
-    table th.acciones{
-        text-decoration: none;
-        width: 100px;
-        padding: 8px;
-        color: #fff;
-        margin: auto;
-        text-align: center;
-    }
-
-     table th.nombre{
-         text-decoration: none;
-       
-        width: 100px;
-        padding: 8px;
-        margin: auto;
-        text-align: center;
-    }
-
 
     
 
@@ -200,9 +174,9 @@ if (!empty($_REQUEST['duisito'])) {
     <table id="datatable" class="table table-striped table-bordered">
                             <thead>
                           <tr>
-                            <th class="nombre" width="500"><font color="black">Nombre del edpartamento</font></th>
-                             
-                            <th class="acciones" width="10"><font font font font font color="black">Acciones</font></th>
+                            <th class="nombre" width="500"><font color="black">Correlativo</font></th>
+                            <th class="nombre" width="500"><font color="black">Nombre del edpartamento</font></th>                             
+                            <th class="acciones" width="10"><font">Acciones</font></th>
                           </tr>
 
                            
@@ -216,9 +190,9 @@ if (!empty($_REQUEST['duisito'])) {
                         <?php
 
                         include_once '../conexion/conexion.php';
-                        $pame = mysqli_query($conexion, "SELECT id_departamento,nombre FROM departamento");
+                        $pame = mysqli_query($conexion, "SELECT id_departamento,nombre,correlativo FROM departamento");
                         while ($row = mysqli_fetch_array($pame)) {                            
-                             
+                             //sacamos estas variables para extraer informacion que se va a editar
                              $nombre = $row['nombre'];                       
                              $iddep=$row['id_departamento'];  
                         
@@ -228,7 +202,7 @@ if (!empty($_REQUEST['duisito'])) {
 
 
                      <tr>
-                                
+                            <td class="name"><?php echo $row['correlativo']; ?></td>  
                             <td class="name"><?php echo $row['nombre']; ?></td>
                                   
                             <!-- <td><?php  $asignar; ?></td> -->
@@ -277,53 +251,4 @@ function Editar_depar(nombre,pass){
 }
 </script>
 
-
-<?php
-
-
-if (!empty($_REQUEST['id_encargado'])) {
-    try {        
-    
-    $dui =  $_REQUEST['nombre'];
-    $nombre = $_REQUEST['apellido'];
-    $dui = $_REQUEST['dui'];
-    
-
-    $idActualizacion = $_REQUEST['idDeActualizacion'];
-
-    mysqli_query($conexion, "UPDATE encargado SET nombre='$nombre',apellido='$apellido',dui='$dui' WHERE id_encargado ='$idActualizacion'");
- echo' 
-             
-            <script type="text/javascript">
-              
-
-          alertify.success("Datos Actualizados   ✔");
-    alertify.set("notifier","position", "top");
-            </script>
-            ';
-  
-    } catch (Exception $ex) {
-        
-    }
-}
-?>
-
-
-<script src="../LibreriasJS/jquery.mask.min.js"></script>
-
-<script type="text/javascript">
-    $('.mask-dui').mask('00000000-0');
-    $('.mask-celular').mask('0000-0000');
-
-</script>
-<script>
-function Editar_visita(nombre,apellido,dui){
-    
-    $("#nombre").val(nombre);
-    $("#apellido").val(apellido);
-    $("#dui").val(dui);
-    
-
-}
-</script>
 
