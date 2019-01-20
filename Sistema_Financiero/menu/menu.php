@@ -92,7 +92,7 @@
 
 
                <li>
-                <a href="../../../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
+                <a href="../../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
 
                </li>
     </ul>  <!-- FIN UL  -->

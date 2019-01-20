@@ -32,10 +32,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Articulos
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-        	    <li>
-              <a href="modulos/inventario/index.php">Inventario</a>
-          </li>
-
+        	 
 
           <li>
               <a href="modulos/articulos/index.php">Articulos</a>
@@ -97,7 +94,7 @@
 
 
                <li>
-                <a href="../../../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
+                <a href="../Cuentas-Activo-master/home/home_usuario.php" class="btn btn-danger">Ir a activo fijo</a>
 
                </li>
     </ul>  <!-- FIN UL  -->
