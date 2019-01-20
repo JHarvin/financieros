@@ -169,7 +169,7 @@
         <!--/. NAV TOP  -->
         
             <?php include_once "../../menu/m_venta.php"; ?>
-        <
+        
         <!-- /. NAV SIDE  -->
        
             <div id="page-inner">                

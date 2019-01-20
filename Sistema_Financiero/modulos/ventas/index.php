@@ -84,7 +84,7 @@
         <!-- /. NAV SIDE  -->
         <div id="wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
-<?php if(permiso($_SESSION['cod_user'],'7')==TRUE){ ?>
+                      <?php if(permiso($_SESSION['cod_user'],'7')==TRUE){ ?>
             <!--  Modals-->
                                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <form name="form1" method="post" action="">
