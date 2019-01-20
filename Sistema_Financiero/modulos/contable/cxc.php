@@ -58,47 +58,86 @@
         }
         //*********************
         //**************mora**************
-        if(!empty($_POST['valor'])){
-        $valor=limpiar($_POST['valor']);
-        }
-        $diax=date("m");
-        $retraso=date("d");
-        $validar_otra=mysql_query("SELECT * FROM abono WHERE cuenta='$id'");
-        if (mysql_num_rows($validar_otra)>0) {
-            if ($diax==$xy) {
-                # code...
-                $son=$retraso-$a;
-                if ($son>0) {
-                    $x=$son;
-                    //**********ayuda mora*****
-                     //calculo de interes por mes y abono a capital
-                    $ver= mysql_query("SELECT valor, interes, cuota FROM contable WHERE id='$id'");
-                    while ($filita=mysql_fetch_array($ver)) {
-                        # code...
-                        $intCalculo=$filita['interes'];
-                        $monto=$filita['valor'];
-                        $cuota=$filita['cuota'];
-                    }
-                    //calculo de intereses por mes y abono a capital
-                    $validar=mysql_query("SELECT * FROM abono WHERE cuenta='$id'");
-                    if (mysql_num_rows($validar)>0) {
-                        # code...
+           //QUE COMIENCE EL JUEGO PRIMERA VALIDACION
+// VALIDAR QUE NO AYAN ABONOS 
+ $val_abonos=mysql_query("SELECT*FROM abono WHERE cuenta='$id'");
+ if (mysql_num_rows($val_abonos)>0) {
+     
+      $mora_ultima=mysql_query("SELECT*FROM abono WHERE cuenta='$id' ORDER BY id_abono DESC LIMIT 1");
+     while ($m= mysql_fetch_array($mora_ultima)){
+         $fechaProximoPago=$m['proximo_pago'];
+         $Pago=$m['fecha'];
+     }
+  $fecha = date('Y-m-d');
+    $x = explode("-", $fecha);
+    $añox = $x[0];
+    $mesx = $x[1];
+    $diax = $x[2];
+    
+     $y = explode("-", $fechaProximoPago);
+    $añoy = $y[0];
+    $mesy = $y[1];
+    $diay = $y[2];
 
-        $verdaderaMora=round(((($intCalculo/100)/12)*((($cuota-(($monto-abonos_saldo($id))*(($intCalculo/100)/12)))/360)*$x)),4);
-                    }else{
-                        
-                        $verdaderaMora="Primer mes";
-                    }
-                     //*************
-                }else{
-                     $x="No estas en mora";
-                }
-            }else{
-                $verdaderaMora="Esperando pago";
-            }
+    $fecha1 = mktime(0, 0, 0, "$mesy", "$diay", "$añoy");
+    $fecha2 = mktime(0, 0, 0, "$mesx", "$diax", "$añox");
+
+    $diferencia = $fecha2 - $fecha1;
+    $diasSinMora = $diferencia / (60 * 60 * 24);
+    if ($diasSinMora<0) {
+        $PagoMora='SIN MORA';
+    } else {
+        $uno=$cuota*0.05;
+        $valor= round($uno*$diasSinMora,2);
+        if ($valor==0) {
+            $PagoMora=0;
         }else{
-            $verdaderaMora="Primer pago de mes";
+           $PagoMora=$valor;
         }
+        
+        
+    }
+}else{
+    
+    $mora_ultima=mysql_query("SELECT*FROM contable WHERE id='$id'");
+     while ($m= mysql_fetch_array($mora_ultima)){
+         $fechaCompro=$m['fecha'];
+     }
+     
+ $nuevafecha = strtotime('+1 month', strtotime($fechaCompro));
+ $nuevafecha = date('Y-m-d', $nuevafecha);
+ 
+  $fecha = date('Y-m-d');
+    $x = explode("-", $fecha);
+    $añox = $x[0];
+    $mesx = $x[1];
+    $diax = $x[2];
+    
+     $y = explode("-", $nuevafecha);
+    $añoy = $y[0];
+    $mesy = $y[1];
+    $diay = $y[2];
+
+    $fecha1 = mktime(0, 0, 0, "$mesy", "$diay", "$añoy");
+    $fecha2 = mktime(0, 0, 0, "$mesx", "$diax", "$añox");
+
+    $diferencia = $fecha2 - $fecha1;
+    $diasSinMora = $diferencia / (60 * 60 * 24);
+    if ($diasSinMora<0) {
+        $PagoMora='SIN MORA';
+    } else {
+        $uno=$cuota*0.05;
+        $valor= round($uno*$diasSinMora,2);
+        if ($valor==0) {
+            $PagoMora=0;
+        }else{
+           $PagoMora=$valor;
+        }
+ 
+    
+    
+}
+}
                     //******************fin mora*********
         //****************
     }else{
@@ -231,7 +270,7 @@
             <div class="col-md-3">                                                                                          
                      <label>Mora</label>
 
-                    <input type="text" name="moraVer" value="<?php echo $verdaderaMora;?>" autocomplete="off" class="form-control">
+                    <input type="text" name="moraVer" value="<?php echo $PagoMora;?>" autocomplete="off" class="form-control">
                     </div>  
             <div class="col-md-4"></div>
             <div class="col-md-4">
