@@ -472,7 +472,7 @@ Agregar
                             <?php } ?>
           <div class="col-md-12">
 <!--######################################## ARTICULOS ############################################################################################## -->
-                    <div class="alert alert-success" align="center">
+                    <div class="alert alert-info" align="center">
                             <form name="form2" action="" method="post">
                                      <div class="input-group">
                                     <span class="input-group-addon">ARTICULO:</span>
@@ -847,9 +847,9 @@ Agregar
                                     <div align="center">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            
+
                                         </div>
-                                    
+
                                     <div class="col-md-6">
                                       <i class="fa fa-plus icon-white"></i> <strong>FORMA DE PAGO TIKET</strong><br>
                                        <a href="#ticket" role="button" class="btn btn-warning btn-lg" data-toggle="modal">
