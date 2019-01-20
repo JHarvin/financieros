@@ -208,7 +208,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
-                                            <th><?php echo $doco; ?></th>
+                                            <th><?php echo "DUI"; ?></th>
                                             <th>NOMBRE</th>
                                             <th>TELEFONO</th>
                                             <th>DIRECCIÓN</th>
