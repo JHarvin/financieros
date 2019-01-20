@@ -114,8 +114,42 @@
     </script>
 </head>
 <body>
-    <div id="wrapper" style="background-color:#4161CF;">
-
+    <div id="wrapper" style="background-color:#1A7B85;">
+         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
+            <div class="navbar-header"  style="background-color:#FF8B41;">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
+            </div>
+ 
+            <ul class="nav navbar-top-links navbar-right">
+              
+                <!-- /.dropdown -->             
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> My Perfil</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="../../php_cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
+</div>
+        </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
              <div class="sidebar-collapse">
@@ -150,7 +184,7 @@
              <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-green">
                             <div class="panel-footer back-footer-green">
-                                Vuelto
+                                Cantidad Restante de Pagar
                             </div>
                             <div class="panel-body">
                                 <div style=" bg-color: green;font-size:35px"><?php echo $s.' '.formato($valor_recibido-$neto); ?> </div>
@@ -161,17 +195,14 @@
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" style="background-color:#4161CF;">
-            <div id="page-inner">
+            <div id="page-inner" >
              <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-primary text-center no-boder bg-color-blue">
             <div class="panel-footer back-footer-red">
              DETALLE DE TICKET
             </div>
             <div class="panel-body center">
-                                   
-
-
-                                    <?php 
+                <?php 
                                                 $item=0;
                                                 $pa=mysql_query("SELECT * FROM cliente_tmp, clientes 
                                                 WHERE cliente_tmp.usu='$usu' and cliente_tmp.cliente=clientes.id");             
@@ -229,22 +260,18 @@
                             ?>
                                                                                                                                                                                 
                                             <?php } ?>
-
-
-
            <center><button onclick="imprimir();" class="btn btn-default"><i class=" fa fa-print "></i> Imprimir</button></center>
                  <div id="imprimeme">
                 <table width="175px" style="font-size:12px; font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif" border="0" >
                     <tr>
                     <td colspan="4">                                                
                     <div align="center" style="font-size:20px"><strong><?php echo $nombre_empresa; ?></strong><br></div>
-                    <div align="center" style="font-size:14px"><strong>Siguenos en: <?php echo $web; ?></strong><br></div>
-                    
+                   
                     <div align="left"><strong>Tel: </strong><?php echo $tel_empresa; ?><br></div>
                     <div align="left"><strong>NIT: </strong><?php echo $nit_empresa; ?><br></div>                                                 
                     <div align="left"></strong><?php echo $dir_empresa; ?><br></strong></div>
                     <div align="left"><strong>Ticket: </strong><?php echo formato_factura($factura); ?></div>
-                    <div align="left"><strong>Cajero juan: </strong><?php echo $cajero_nombre; ?><br></div>
+                    <div align="left"><strong>Cajero Tigre: </strong><?php echo $cajero_nombre; ?><br></div>
                     <div align="left"><strong>Fecha: </strong><?php echo $fecha; ?> <?php echo $hora; ?><br></div>    
                     </td>
                     </tr>
@@ -343,7 +370,7 @@
                                                 <td colspan="4"><center><strong> PAGO: $ <?php echo formato($valor_recibido); ?></strong></center></td>                                             
                                               </tr>
                                                 <tr>                                                
-                                                <td colspan="4"><center><strong> CAMBIO: $ <?php echo formato($valor_recibido-$netoO); ?></strong></center></td>
+                                                <td colspan="4"><center><strong> Saldo: $ <?php echo formato($valor_recibido-$netoO); ?></strong></center></td>
                                               </tr>     
                                               <tr>
                                                 <td colspan="4">&nbsp;</td>

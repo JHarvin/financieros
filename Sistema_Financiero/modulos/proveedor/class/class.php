@@ -4,7 +4,7 @@ class Proceso_Proveedor{
 	var $nombre;
 	var $dir;
 	var $nit;
-	var $nrc;
+	//var $nrc;
 	var $tel;
 	var $fax;
 	var $contacto;
@@ -13,12 +13,12 @@ class Proceso_Proveedor{
 	var $cel;	
 	var $estado;
 	
-	function __construct($id,$nombre,$dir,$nit,$nrc,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado){
+	function __construct($id,$nombre,$dir,$nit,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado){
 		$this->id=$id;						
 		$this->nombre=$nombre;
 		$this->dir=$dir;	
 		$this->nit=$nit;
-		$this->nrc=$nrc;
+		//$this->nrc=$nrc;
 		$this->tel=$tel;
 		$this->fax=$fax;
 		$this->contacto=$contacto;
@@ -33,7 +33,7 @@ class Proceso_Proveedor{
 		$nombre=$this->nombre;
 		$dir=$this->dir;
 		$nit=$this->nit;
-		$nrc=$this->nrc;
+		//$nrc=$this->nrc;
 		$tel=$this->tel;
 		$fax=$this->fax;
 		$contacto=$this->contacto;
@@ -42,8 +42,8 @@ class Proceso_Proveedor{
 		$cel=$this->cel;					
 		$estado=$this->estado;	
 							
-		mysql_query("INSERT INTO  proveedor (nombre,dir,nit,nrc,tel,fax,contacto,email,tel_fijo,cel,estado)	
-			                        VALUES ('$nombre','$dir','$nit','$nrc','$tel','$fax','$contacto','$email','$tel_fijo','$cel','$estado')");
+		mysql_query("INSERT INTO  proveedor (nombre,dir,nit,tel,fax,contacto,email,tel_fijo,cel,estado)	
+			                        VALUES ('$nombre','$dir','$nit','$tel','$fax','$contacto','$email','$tel_fijo','$cel','$estado')");
 	}
 	
 	function actualizar(){
@@ -51,7 +51,7 @@ class Proceso_Proveedor{
 		$nombre=$this->nombre;					
 		$dir=$this->dir;
 		$nit=$this->nit;
-		$nrc=$this->nrc;
+		//$nrc=$this->nrc;
 		$tel=$this->tel;
 		$fax=$this->fax;
 		$contacto=$this->contacto;
@@ -63,7 +63,7 @@ class Proceso_Proveedor{
 		mysql_query("UPDATE proveedor SET nombre='$nombre',
 										  dir='$dir',
 										  nit='$nit',
-										  nrc='$nrc',
+										 
 										  tel='$tel',
 										  fax='$fax',
 										  contacto='$contacto',

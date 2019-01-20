@@ -103,17 +103,19 @@
                                                          <div class="col-md-12">
                                                         <br>
         <input class="form-control" title="Se necesita un nombre"  name="nombre" placeholder="Nombre Completo" autocomplete="off" required><br>
-        <input class="form-control" title="Se necesita una Direccion" name="dir" placeholder="Procedencia"  autocomplete="off"><br>
+        <input class="form-control" title="Se necesita una Direccion" name="dir" placeholder="Direccion"  autocomplete="off"><br>
                                                         </div>
                             <div class="col-md-6">
          <input class="form-control" name="tel" title="Se necesita un Telefono" placeholder="Telefono" data-mask="<?php echo $ftel; ?>" autocomplete="off"><br>
                                                              </div>
+<!--
                                                              <div class="col-md-6">
                                                         <div class="input-group">
                                                                 <span class="input-group-addon"><?php echo $docc; ?></span>
         <input class="form-control" name="nrc"   placeholder="<?php echo $docc; ?>" data-mask="<?php echo $vdocc; ?>" autocomplete="off"><br>
                                                             </div><br>
                                                             </div>
+-->
                                                             <div class="col-md-6">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon"><?php echo $doco; ?></span>
@@ -128,7 +130,7 @@
                                                                    <option value="" selected disabled>---SELECCIONE---</option>
                                                                     <option value="m">MASCULINO</option>
                                                                     <option value="f">FEMENINO</option>
-                                                                    <option value="i">INSTITUCION</option>
+                                                                   
                                                                 </select>
                                                                 </div><br>
                                                             </div>
@@ -189,17 +191,17 @@
                                         $dui=limpiar($_POST['dui']);
                                         $sexo=limpiar($_POST['sexo']);
                                         $tel=limpiar($_POST['tel']);
-                                        $nrc=limpiar($_POST['nrc']);
+                                        //$nrc=limpiar($_POST['nrc']);
                                         $estado=limpiar($_POST['estado']);
                                         $tipo=limpiar($_POST['tipo']);
 
                                         if(empty($_POST['id'])){
-                                            $oCliente=new Proceso_Cliente('',$nombre,$dir,$dui,$sexo,$tel,$nrc,$estado,$tipo);
+                                            $oCliente=new Proceso_Cliente('',$nombre,$dir,$dui,$sexo,$tel,$estado,$tipo);
                                             $oCliente->crear();
                                             echo mensajes('Cliente "'.$nombre.'" Creado con Exito','verde');
                                         }else{
                                             $id=limpiar($_POST['id']);
-                                            $oCliente=new Proceso_Cliente($id,$nombre,$dir,$dui,$sexo,$tel,$nrc,$estado,$tipo);
+                                            $oCliente=new Proceso_Cliente($id,$nombre,$dir,$dui,$sexo,$tel,$estado,$tipo);
                                             $oCliente->actualizar();
                                             echo mensajes('Cliente "'.$nombre.'" Actualizado con Exito','verde');
                                         }
@@ -257,7 +259,7 @@
     </div>
     <div class="col-md-12">
     <div class="input-group">
-     <span class="input-group-addon">Procedencia</span>
+     <span class="input-group-addon">Direccion</span>
     <input class="form-control" title="Se necesita una Procedencia"  name="dir" value="<?php echo $row['dir']; ?>" autocomplete="off"><br>
         </div><br>
     </div>
@@ -267,12 +269,14 @@
     <input class="form-control" title="Se necesita un nombre"  name="tel" data-mask="<?php echo $ftel; ?>" value="<?php echo $row['tel']; ?>" autocomplete="off"><br>
      </div><br>
      </div>
+<!--
     <div class="col-md-6">
      <div class="input-group">
      <span class="input-group-addon"><?php echo $docc; ?></span>
     <input class="form-control"  name="nrc" data-mask="<?php echo $vdocc; ?>" value="<?php echo $row['nrc']; ?>" autocomplete="off"><br>
     </div><br>
     </div>
+-->
     <div class="col-md-6">
     <div class="input-group">
     <span class="input-group-addon"><?php echo $doco; ?></span>
@@ -285,7 +289,7 @@
                                                                       <select class="form-control" name="sexo" autocomplete="off" required>
                                                                         <option value="m" <?php if($row['sexo']=='m'){ echo 'selected'; } ?>>MASCULINO</option>
                                                                         <option value="f" <?php if($row['sexo']=='f'){ echo 'selected'; } ?>>FEMENINO</option>
-                                                                        <option value="i" <?php if($row['sexo']=='i'){ echo 'selected'; } ?>>INSTITUCION</option>
+                                                                        
                                                                     </select>
                                                                     </div><br>
                                                                 </div>

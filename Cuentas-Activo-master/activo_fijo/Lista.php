@@ -35,8 +35,9 @@ tipo_activo.nombre AS tipo,
 CONCAT_WS(' ',encargado.nombre, encargado.apellido) AS encargado,
 TRUNCATE((activo.precio),2) AS precio,
 clasificacion.id_clasificacion AS clasi,
-clasificacion.nombre AS ncla,
-activo.correlativo
+CONCAT_WS('-',institucion.correlativo, departamento.correlativo, tipo_activo.correlativo, activo.correlativo) AS codiguito,
+clasificacion.nombre AS ncla
+
 FROM
 activo
 INNER JOIN usuario ON activo.id_usuario = usuario.id_usuario
@@ -95,7 +96,7 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
                         <tr>
 
 
-                           <td><?php echo $fila['correlativo']; ?></td>
+                           <td><?php echo $fila['codiguito']; ?></td>
 
                             <td><?php echo $fila['ncla']; ?></td>
 

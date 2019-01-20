@@ -6,18 +6,18 @@ class Proceso_Cliente{
 	var $dui;
 	var $sexo;
 	var $tel;
-	var $nrc;
+	//var $nrc;
 	var $estado;
 	var $tipo;
 	
-	function __construct($id,$nombre,$dir,$dui,$sexo,$tel,$nrc,$estado,$tipo){
+	function __construct($id,$nombre,$dir,$dui,$sexo,$tel,$estado,$tipo){
 		$this->id=$id;						
 		$this->nombre=$nombre;
 		$this->dir=$dir;	
 		$this->dui=$dui;
 		$this->sexo=$sexo;
 		$this->tel=$tel;
-		$this->nrc=$nrc;												
+		//$this->nrc=$nrc;												
 		$this->estado=$estado;	
 		$this->tipo=$tipo;	
 	}
@@ -29,12 +29,12 @@ class Proceso_Cliente{
 		$dui=$this->dui;
 		$sexo=$this->sexo;
 		$tel=$this->tel;
-		$nrc=$this->nrc;				
+		//$nrc=$this->nrc;				
 		$estado=$this->estado;	
 		$tipo=$this->tipo;	
 							
-		mysql_query("INSERT INTO  clientes (nombre,dir,dui,sexo,tel,nrc,estado, tipo)	
-			                        VALUES ('$nombre','$dir','$dui','$sexo','$tel','$nrc','$estado','$tipo')");
+		mysql_query("INSERT INTO  clientes (nombre,dir,dui,sexo,tel,estado, tipo)	
+			                        VALUES ('$nombre','$dir','$dui','$sexo','$tel','$estado','$tipo')");
 	}
 	
 	function actualizar(){
@@ -44,7 +44,7 @@ class Proceso_Cliente{
 		$dui=$this->dui;
 		$sexo=$this->sexo;
 		$tel=$this->tel;
-		$nrc=$this->nrc;				
+		//$nrc=$this->nrc;				
 		$estado=$this->estado;			
 		$tipo=$this->tipo;			
 				
@@ -53,7 +53,7 @@ class Proceso_Cliente{
 										  dui='$dui',
 										  sexo='$sexo',
 										  tel='$tel',
-										  nrc='$nrc',										   
+										  									   
 										  estado='$estado',
 										  tipo='$tipo'
 										  WHERE id='$id'");

@@ -104,13 +104,15 @@
                                                         <input class="form-control" title="Se necesita una Direccion" name="dir" placeholder="Procedencia"  autocomplete="off" required><br>
                                                         </div>
                                                            <div class="col-md-6">
+<!--
                                                             <div class="input-group">
                                                             <span class="input-group-addon"><?php echo $docc; ?></span>
                                                              <input class="form-control" name="nrc"  placeholder="NRC" data-mask="<?php echo $vdocc; ?>" autocomplete="off"><br>
                                                             </div><br>
+-->
                                                             <div class="input-group">
                                                             <span class="input-group-addon"><?php echo $doco; ?></span>
-                                                             <input class="form-control" name="nit" placeholder="RUT" data-mask="<?php echo $vdoco; ?>" autocomplete="off"><br>
+                                                             <input class="form-control" name="nit" placeholder="dui" data-mask="<?php echo $vdoco; ?>" autocomplete="off"><br>
                                                             </div><br>
                                                             </div>
                                                             <div class="col-md-6">
@@ -173,7 +175,7 @@
                                         $nombre=limpiar($_POST['nombre']);
                                         $dir=limpiar($_POST['dir']);
                                         $nit=limpiar($_POST['nit']);
-                                        $nrc=limpiar($_POST['nrc']);
+                                        //$nrc=limpiar($_POST['nrc']);
                                         $tel=limpiar($_POST['tel']);
                                         $fax=limpiar($_POST['fax']);
                                         $contacto=limpiar($_POST['contacto']);
@@ -183,12 +185,12 @@
                                         $estado=limpiar($_POST['estado']);
 
                                         if(empty($_POST['id'])){
-                                            $oProveedor=new Proceso_Proveedor('',$nombre,$dir,$nit,$nrc,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado);
+                                            $oProveedor=new Proceso_Proveedor('',$nombre,$dir,$nit,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado);
                                             $oProveedor->crear();
                                             echo mensajes('Proveedor "'.$nombre.'" Creado con Exito','verde');
                                         }else{
                                             $id=limpiar($_POST['id']);
-                                            $oProveedor=new Proceso_Proveedor($id,$nombre,$dir,$nit,$nrc,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado);
+                                            $oProveedor=new Proceso_Proveedor($id,$nombre,$dir,$nit,$tel,$fax,$contacto,$email,$tel_fijo,$cel,$estado);
                                             $oProveedor->actualizar();
                                             echo mensajes('Proveedor "'.$nombre.'" Actualizado con Exito','verde');
                                         }
@@ -244,10 +246,12 @@
                                                             </div>
                                                             <div class="panel-body">
                                                             <div class="row">
+<!--
                                                              <ul class="nav nav-tabs nav-justified">
                                                                 <li class="active"><a href="#proveedorx" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> DATOS PROVEEDOR</a></li>
                                                                 <li class="" ><a href="#contacx" data-toggle="tab"><i class="glyphicon glyphicon-user" ></i> CONTACTO</a></li>
                                                                 </ul>
+-->
                                                                     <div class="tab-content">
                                                                         <div class="tab-pane fade active in" id="proveedorx">
                                                                             <br>
@@ -263,10 +267,12 @@
                                                                             </div><br>
                                                                             </div>
                                                                             <div class="col-md-6">
+<!--
                                                                             <div class="input-group">
                                                                              <span class="input-group-addon"><?php echo $docc; ?></span>
                                                                                  <input class="form-control" name="nrc"  value="<?php echo $row['nrc']; ?>" data-mask="<?php echo $vdocc; ?>" autocomplete="off" ><br>
                                                                              </div><br>
+-->
                                                                             <div class="input-group">
                                                                              <span class="input-group-addon"><?php echo $doco; ?></span>
                                                                                  <input class="form-control" name="nit" value="<?php echo $row['nit']; ?>" data-mask="<?php echo $vdoco; ?>" autocomplete="off"><br>

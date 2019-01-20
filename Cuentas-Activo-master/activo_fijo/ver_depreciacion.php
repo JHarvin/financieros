@@ -162,7 +162,7 @@ WHERE activo.id_activo=11")
 
 
             <table id="ver_depre_tab" class="table table-striped table-bordered maribel">
-                <caption class="genesis"><strong>Depreciación</strong></caption>
+                <caption class="genesis"><strong>Depreciación por año</strong></caption>
                 <thead>
                 <th class="text-center" >Año</th>
                 <th class="text-center">Valor del Activo</th>
