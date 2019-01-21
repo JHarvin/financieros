@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "../clientes/class/class.php";
@@ -8,22 +8,22 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
+
     ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
             $nit_empresa=$row['nit'];
@@ -43,7 +43,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -63,47 +63,13 @@
 </head>
 <body>
     <div id="wrapper" style="background-color:#1A7B85;">
-         <nav class="navbar navbar-default top-navbar" role="navigation" style="background-color:#FF8B41;">
-            <div class="navbar-header" style="background-color:#FF8B41;">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-               <a class="navbar-brand" href="#" style="font-size:20px;">EMPRESA BATANECA</a>
-            </div>
- 
-            <ul class="nav navbar-top-links navbar-right">
-              
-                <!-- /.dropdown -->             
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> My Perfil</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="../../php_cerrar.php"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-                        </li>
-                    </ul>
-                    <!-- /.dropdown-user -->
-                </li>
-                <!-- /.dropdown -->
-            </ul>
-            <div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
-</div>
-        </nav>
+
         <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-             <?php include_once "../../menu/m_reporte.php"; ?>                        
-        </nav>
+
+             <?php include_once "../../menu/menu.php"; ?>
+
         <!-- /. NAV SIDE  -->
-        <div id="page-wrapper" style="background-color:#4161CF;">
+        <div id="wrapper" style="background-color:#4161CF;">
             <div id="page-inner">
             <?php if(permiso($_SESSION['cod_user'],'12')==TRUE){ ?>
              <div class="col-md-12 col-sm-12 col-xs-12">
@@ -112,7 +78,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
              VENTA DE ARTICULOS GENERAL
             </div>
             <div class="panel-body">
-               				<?php 
+               				<?php
                                 if(!empty($_GET['fechaf']) and !empty($_GET['fechai']) and !empty($_GET['tip'])){
                                     $fechai=limpiar($_GET['fechai']);
                                     $fechaf=limpiar($_GET['fechaf']);
@@ -135,13 +101,13 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                 </div>
                                 <div class="col-md-4" align="center">
                                     <strong>Seleccionar</strong><br>
-                                    <select class="form-control" name="tip">                                                                       
-                                        <option value="COMPRA" <?php if($tip=='COMPRA'){ echo 'selected'; } ?>>COMPRA</option>                                                                            
+                                    <select class="form-control" name="tip">
+                                        <option value="COMPRA" <?php if($tip=='COMPRA'){ echo 'selected'; } ?>>COMPRA</option>
                                     </select>
                                     <button type="submit" class="btn btn-icon waves-effect waves-light btn-primary m-b-5"><strong>Consultar</strong></button>
                                 </div>
-                            </div><br>  
-                            </form><br><br>         
+                            </div><br>
+                            </form><br><br>
            <center><button onclick="imprimir();" class="btn btn-success"><i class=" fa fa-print "></i> Imprimir</button></center>
                                     <div style="width:100%; height:700px; overflow: auto;">
                                      <div id="imprimeme">
@@ -153,13 +119,13 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                             <center>
                                             <img src="../../img/logo.jpg" width="75px" height="75px"><br>
                                             <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->
-                                            </center>                                                    
+                                            </center>
                                         </td>
-                                        <td align="center">                     
+                                        <td align="center">
                                             <div style="font-size: 25px;"><strong><em><?php echo $nombre_empresa; ?></em></strong></div>
                                                    Usuario: <?php echo $cajero_nombre; ?>
                                                         Fecha y Hora: <?php echo fecha($fecha); ?> <?php echo date($hora); ?><br>
-                                            <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->                                                 
+                                            <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->
                                         </td>
                                         <td>
                                             <center>
@@ -170,34 +136,34 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                       echo '<img src="../../img/usuario/default.png" width="80" height="80">';
                                                     }
                                                   ?>
-                                            </center> 
+                                            </center>
                                         </td>
-                                     </tr>                          
+                                     </tr>
                                     </table><br>
                                       <hr/>
                                           <div style="font-size: 14px;"align="center">
-                                             <strong>COMPRA DE ARTICULOS GENERAL</strong><br>                              
-                                        </div> 
+                                             <strong>COMPRA DE ARTICULOS GENERAL</strong><br>
+                                        </div>
                                         <hr/>
                                     </div>
-                                        <div class="table-responsive">                                
-                                        
-                                                    <table class="table table-striped table-bordered table-hover"  width="100%" style="font-size: 12px;"  border="0">                                    
+                                        <div class="table-responsive">
+
+                                                    <table class="table table-striped table-bordered table-hover"  width="100%" style="font-size: 12px;"  border="0">
                                                     <thead>
                                                         <tr>
-                                                            <th>CODIGO</th>                                                                                                                                                                           
-                                                            <!--<th>FACTURA</th>-->                                                                                                                                                                           
-                                                            <th>ARTICULO</th>                                                                                                                                                                                                                                                                                                                                                       
-                                                            <th>CANTIDAD</th>                                                                                                                                                                                                                                                                                                                                                       
+                                                            <th>CODIGO</th>
+                                                            <!--<th>FACTURA</th>-->
+                                                            <th>ARTICULO</th>
+                                                            <th>CANTIDAD</th>
                                                             <th>TOTAL</th>
-                                                                                                    
+
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                          <?php
                                                             $neto=0;
                                                             $total=0;
-                                                            $pax=mysql_query("SELECT sum(cantidad) as cant, sum(importe) as imp, codigo,cantidad,valor, nombre FROM detalle_comp WHERE almacen='$id_almacen' and tipo='$tip' and fecha between '$fechai' AND '$fechaf' group by codigo");              
+                                                            $pax=mysql_query("SELECT sum(cantidad) as cant, sum(importe) as imp, codigo,cantidad,valor, nombre FROM detalle_comp WHERE almacen='$id_almacen' and tipo='$tip' and fecha between '$fechai' AND '$fechaf' group by codigo");
                                                             while($row=mysql_fetch_array($pax)){
                                                               $oProducto=new Consultar_Articulos($row['codigo']);
                                                                 $cod_alumno=$row['codigo'];#5
@@ -205,34 +171,34 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                                 $importe=$row['valor'];
                                                                 $ref=$row['cantidad'];
                                                                 $total=$cant*$importe;
-                                                                $neto=$neto+$row['imp'];                                                                                               
+                                                                $neto=$neto+$row['imp'];
                                                           ?>
-                                                        <tr>                                                   
-                                                            <td><?php echo $row['nombre']; ?></td>                                                    
-                                                            <!--<td><?php echo $row['factura']; ?></td>-->                                                    
-                                                            <td> <?php echo $oProducto->consultar('nombre'); ?></td>                                                                                                                                                                                                                                                                                   
-                                                            <td> <?php echo $row['cant']; ?></td>                                                                                                                                                                                                                                                                                   
-                                                            <td><div align="right"><strong><?php echo $s.' '.formato($row['imp']); ?></strong></div></td>                   
-                                                          </tr>                                                                                                                 
+                                                        <tr>
+                                                            <td><?php echo $row['nombre']; ?></td>
+                                                            <!--<td><?php echo $row['factura']; ?></td>-->
+                                                            <td> <?php echo $oProducto->consultar('nombre'); ?></td>
+                                                            <td> <?php echo $row['cant']; ?></td>
+                                                            <td><div align="right"><strong><?php echo $s.' '.formato($row['imp']); ?></strong></div></td>
+                                                          </tr>
                                                         <?php } ?>
                                                         <tr>
                                                              <td colspan="3"><div align="right"><strong><h4>Total General</h4></strong></div></td>
                                                              <td><div align="right"><strong><h4>$ <?php echo formato($neto); ?></h4></strong></div></td>
                                                         </tr>
-                                                    </tbody>                                 
+                                                    </tbody>
                                                 </table>
                             </div>
-                             </div>    
-                            </div>    
-            
+                             </div>
+                            </div>
+
              <!-- /. PAGE INNER  -->
-             <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>             
-       
-               
+             <?php }else{ echo mensajes("NO TIENES PERMISO PARA ENTRAR A ESTE MODULO","rojo"); }?>
+
+
     </div>
-     </div>                           
+     </div>
                                             </div>
-                                        </div>  
+                                        </div>
              <!-- /. PAGE INNER  -->
             </div>
          <!-- /. PAGE WRAPPER  -->
