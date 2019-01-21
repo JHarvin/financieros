@@ -4,6 +4,7 @@
     include_once "class/class.php";
     include_once "../funciones.php";
     include_once "../class_buscar.php";
+    $id_almacen="";
     if($_SESSION['cod_user']){
     }else{
         header('Location: ../../php_cerrar.php');
@@ -130,7 +131,7 @@
                                                                    <option value="" selected disabled>---SELECCIONE---</option>
                                                                     <option value="m">MASCULINO</option>
                                                                     <option value="f">FEMENINO</option>
-                                                                   
+
                                                                 </select>
                                                                 </div><br>
                                                             </div>
@@ -289,7 +290,7 @@
                                                                       <select class="form-control" name="sexo" autocomplete="off" required>
                                                                         <option value="m" <?php if($row['sexo']=='m'){ echo 'selected'; } ?>>MASCULINO</option>
                                                                         <option value="f" <?php if($row['sexo']=='f'){ echo 'selected'; } ?>>FEMENINO</option>
-                                                                        
+
                                                                     </select>
                                                                     </div><br>
                                                                 </div>

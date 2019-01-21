@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     include_once "../php_conexion.php";
     include_once "../clientes/class/class.php";
@@ -8,21 +8,21 @@
     }else{
         header('Location: ../../php_cerrar.php');
     }
-    
+
     $usu=$_SESSION['cod_user'];
-    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");               
+    $pa=mysql_query("SELECT * FROM cajero WHERE usu='$usu'");
     while($row=mysql_fetch_array($pa)){
         $id_almacen=$row['almacen'];
         $oAlamacen=new Consultar_Deposito($id_almacen);
         $nombre_Almacen=$oAlamacen->consultar('nombre');
     }
-    
+
     $oPersona=new Consultar_Cajero($usu);
     $cajero_nombre=$oPersona->consultar('nom');
     $fecha=date('Y-m-d');
     $hora=date('H:i:s');
-    
-  if(!empty($_GET['valor_recibido']) and !empty($_GET['neto'])){
+$prima="";
+  if( !empty($_GET['neto'])){
         $valor_recibido=limpiar($_GET['valor_recibido']);
         $netoO=limpiar($_GET['neto']);
         $pago=limpiar($_GET['pago']);
@@ -34,15 +34,16 @@
         $mesR=limpiar($_GET['mes']);
          }
 
+
         $fecha=date('Y-m-d');
         $hora=date('H:i:s');
-        
-        $pa=mysql_query("SELECT * FROM caja_tmp WHERE usu='$usu'");             
-        if(!$row=mysql_fetch_array($pa)){   
+
+        $pa=mysql_query("SELECT * FROM caja_tmp WHERE usu='$usu'");
+        if(!$row=mysql_fetch_array($pa)){
             header('Location: index.php');
         }
         ######### TRAEMOS LOS DATOS DE LA EMPRESA #############
-        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");                
+        $pa=mysql_query("SELECT * FROM empresa WHERE id=1");
         if($row=mysql_fetch_array($pa)){
             $nombre_empresa=$row['empresa'];
             $nit_empresa=$row['nit'];
@@ -50,10 +51,10 @@
             $tel_empresa=$row['tel'].'-'.$row['fax'];
             $pais_empresa=$row['pais'].' - '.$row['ciudad'];
         }
-        
-        
+
+
         ######### SACAMOS EL VALOR MAXIMO DE LA FACTURA Y LE SUMAMOS UNO ##########
-        $pa=mysql_query("SELECT MAX(factura)as maximo FROM factura");               
+        $pa=mysql_query("SELECT MAX(factura)as maximo FROM factura");
         if($row=mysql_fetch_array($pa)){
             if($row['maximo']==NULL){
                 $factura='100000001';
@@ -74,7 +75,7 @@
      <!-- FontAwesome Styles-->
     <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
      <!-- Morris Chart Styles-->
-   
+
         <!-- Custom Styles-->
     <link href="../../assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
@@ -104,10 +105,10 @@
                 </button>
                 <a class="navbar-brand" href="#"><?php echo $_SESSION['user_name']; ?></a>
             </div>
- 
+
             <ul class="nav navbar-top-links navbar-right">
-              
-                <!-- /.dropdown -->             
+
+                <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -137,7 +138,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                              <button type="button" class="btn btn-success btn-circle"><i class="fa fa-plus fa-2x" title="Nueva Venta"></i>
                             </button>
                             </a><br><br>
-                         
+
             </div>
             <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-blue">
@@ -146,7 +147,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                             </div>
                             <div class="panel-body">
                                 <div style=" bg-color: blue;font-size:35px"><?php echo $s.' '.formato($valor_recibido); ?> </div>
-                            </div>                           
+                            </div>
                         </div>
             </div>
              <div class="col-md-12 col-sm-12 col-xs-12">
@@ -156,7 +157,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                             </div>
                             <div class="panel-body">
                                 <div style=" bg-color: red;font-size:35px"><?php echo $s.' '.formato($neto); ?> </div>
-                            </div>                           
+                            </div>
                         </div>
             </div>
              <div class="col-md-12 col-sm-12 col-xs-12">
@@ -166,73 +167,73 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                             </div>
                             <div class="panel-body">
                                 <div style=" bg-color: green;font-size:35px"><?php echo $s.' '.formato($valor_recibido-$neto); ?> </div>
-                            </div>                           
+                            </div>
                         </div>
             </div>
-            </div>                        
+            </div>
         </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                  <!-- /. ROW  -->
               <table width="95%" rules="all" border="1">
-                            <?php 
+                            <?php
                                                 $item=0;
-                                                $pa=mysql_query("SELECT * FROM cliente_tmp, clientes 
-                                                WHERE cliente_tmp.usu='$usu' and cliente_tmp.cliente=clientes.id");             
-                                                while($row=mysql_fetch_array($pa)){                                                                                                                                                 
+                                                $pa=mysql_query("SELECT * FROM cliente_tmp, clientes
+                                                WHERE cliente_tmp.usu='$usu' and cliente_tmp.cliente=clientes.id");
+                                                while($row=mysql_fetch_array($pa)){
                                                     $c_nombre=$row['nombre'];
                                                     $id_cliente=$row['id'];
                                                     $direccion=$row['dir'];
                                                     $status=$row['status'];
                                                      $fecha_hoy=date("Y-m-d");
-                                                    
+
                                                     ############# FECHA ######################
                                                     if($row['fecha']==NULL){
-                                                        
+
                                                         #$oRuta->consultar('nombre');
                                                         $fechax=$fecha;
                                                     }else{
                                                         $fechax=$row['fecha'];
-                                                        
+
                                                     }
                                                     ############# DIR ######################
                                                     if($row['dir']==NULL){
-                                                        
+
                                                          $dir=$row['direcciona'];
                                                     }else{
                                                         $dir=$row['dir'];
-                                                        
+
                                                     }
                                                     ############# STATUS BASIC ######################
                                                     if($row['status']==NULL){
-                                                        
+
                                                          $statusx='CONTADO';
                                                     }else{
                                                         $statusx=$row['status'];
-                                                        
+
                                                     }
-                                                    
+
                                                     ############# STATUS FULL ######################
                                                     if($row['status']==NULL){
-                                                        
+
                                                          $status='CONTADO';
                                                     }else{
                                                         $status=$row['status'];
-                                                        
+
                                                     }
-                                                    $pame=strftime( "%Y-%m-%d-%H-%M-%S", time() );      
-                                
+                                                    $pame=strftime( "%Y-%m-%d-%H-%M-%S", time() );
+
                                     if($row['fecha']==$pame){
                                                     $status='si';
-                                                }                                                                                               
+                                                }
                                                 elseif($row['fecha']>$pame){
                                                     $status='CREDITO';
                                                 }
                             ?>
-                                                                                                                                                                                
+
                                             <?php } ?>
-                                           
+
                      </table>
             <div class="row">
                 <div class="col-md-8">
@@ -243,36 +244,36 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                         </div>
                         <div class="panel-body">
                         <center><button onclick="imprimir();" class="btn btn-default"><i class=" fa fa-print "></i> Imprimir</button></center><br>
-                        
-                            <div class="table-responsive">  
+
+                            <div class="table-responsive">
                                     <table  width="100%" style="border: 1px solid #660000; -moz-border-radius: 12px;-webkit-border-radius: 12px;padding: 10px;">
                                      <tr>
                                         <td>
                                             <center>
                                             <img src="../../img/logo.jpg" width="75px" height="75px"><br>
                                             <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->
-                                            </center>                                                    
+                                            </center>
                                         </td>
                                         <td>
-                                        <td align="center">                     
+                                        <td align="center">
                                             <div style="font-size: 25px;"><strong><em><?php echo $nombre_empresa; ?></em></strong></div>
                                             <div style="font-size: 14px;"><strong>Almacen: <?php echo $nombre_Almacen; ?></strong></div>
-                                            <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->                                                 
-                                        </td>                                                  
+                                            <!--<strong><?php echo $nombre_empresa; ?></strong><br>-->
+                                        </td>
                                         </td>
                                         <td>
                                              <div style="font-size: 12px;" align="right">
                                                     <strong>DOCUMENTO: </strong><?php echo $factura; ?><br>
-                                                    <strong>FECHA: </strong><?php echo fecha($fecha); ?> | 
+                                                    <strong>FECHA: </strong><?php echo fecha($fecha); ?> |
                                                     <strong>HORA: </strong><?php echo date($hora); ?><br>
                                                     <strong>USUARIO/A: </strong><?php echo $cajero_nombre; ?>
                                             </div>
                                         </td>
-                                     </tr>                          
+                                     </tr>
                                     </table>
                             </div>
-                            <?php 
-                                    $n=mysql_query("SELECT * FROM cliente_tmp");               
+                            <?php
+                                    $n=mysql_query("SELECT * FROM cliente_tmp");
                                         if(!$rowx=mysql_fetch_array($n)){
                                             $activar='hidden';
                                             $c_nombre='CONSUMIDOR FINAL';
@@ -288,43 +289,43 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                             <table class="table" width="425px" style="border: 1px dotted #FFFFFF; -moz-border-radius: 12px;-webkit-border-radius: 12px;padding: 10px;">
                                         <tr>
                                             <td colspan="4">
-                                            <div style="font-size: 14px;" align="right"><?php echo fecha($fecha); ?></div><br>                                             
+                                            <div style="font-size: 14px;" align="right"><?php echo fecha($fecha); ?></div><br>
                                             </td>
                                         </tr>
                                          <tr>
-                                            <td align="center">                                             
+                                            <td align="center">
                                             </td>
                                             <td class="text-default">
-                                                <div class="<?php echo $activar; ?>">     
+                                                <div class="<?php echo $activar; ?>">
                                                 <strong> &nbsp;&nbsp;<?php echo $c_nombre; ?></strong><br>
-                                                <strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $dir; ?> | <?php echo $row['dir']; ?></strong><br>                                                                          
+                                                <strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $dir; ?> | <?php echo $row['dir']; ?></strong><br>
                                                 <strong></strong><br>
                                                 <strong></strong><br>
-                                                </div>                                                                                                                                     
+                                                </div>
                                             </td>
                                          </tr>
-                                                                      
+
                             </table>
                             <br>
-                            <div style="width:100%; height:275px; overflow: auto;">      
+                            <div style="width:100%; height:275px; overflow: auto;">
                             <table class="table" width="425px" style="border: 1px dotted #FFFFFF; -moz-border-radius: 12px;-webkit-border-radius: 12px;padding: 10px;">
-                                            <?php 
+                                            <?php
                                                 $item=0;
                                                 $neto=0;
                                                 $neto_full=0;
-                                                $pa=mysql_query("SELECT * FROM caja_tmp, inventario 
-                                                WHERE caja_tmp.usu='$usu' and caja_tmp.articulo=inventario.articulo");             
-                                                while($row=mysql_fetch_array($pa)){                                             
-                                                    $cat=$row['cat'];   
-                                                    $item=$item+$row['cant'];   
+                                                $pa=mysql_query("SELECT * FROM caja_tmp, inventario
+                                                WHERE caja_tmp.usu='$usu' and caja_tmp.articulo=inventario.articulo");
+                                                while($row=mysql_fetch_array($pa)){
+                                                    $cat=$row['cat'];
+                                                    $item=$item+$row['cant'];
                                                     $cantidad=$row['cant'];
-                                                    $id_art=$row['articulo'];        
-                                                    $codigo=$row['articulo'];        
-                                                    $cod=$row['codigo'];        
+                                                    $id_art=$row['articulo'];
+                                                    $codigo=$row['articulo'];
+                                                    $cod=$row['codigo'];
                                                     $precio_venta=$row['pv'];
                                                     $valor=$row['p_mayor'];
-                                                    
-                                                                                                                                                           
+
+
                                                     ########################################
                                                     if($row['ref']==NULL){
                                                         $referencia='Sin Referencia';
@@ -340,7 +341,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                     $new_valor=$row['ref'];
                                                     $importe_dos=$row['cant']*$new;
                                                     $neto_full=$neto_full+$importe_dos;
-                                                    
+
                                                     ###############CALCULOS TOTALES#########################
                                                     $importe=$row['cant']*$new;
                                                     $neto=$neto+$importe;
@@ -349,26 +350,26 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                     $p_nombre=$oArticulo->consultar('nombre');
                                                     $costo=$oArticulo->consultar('valor');
                                                     $cost_total=$row['cant']*$costo;
-                                                    
+
                                                     ########################################
                                                    $detalle_sql="INSERT INTO detalle (factura, articulo, codigo, cantidad, valor, importe, tipo, fecha, categoria, almacen)
                                                     VALUES ('$factura','$id_art','$codigo','$cantidad','$new','$importe_dos','VENTA','$fecha','$cat','$id_almacen')";
                                                     mysql_query($detalle_sql);
-                                                    
+
                                                     #########DESCONTAR INVENTARIO################################################################
-                                                     $pwa=mysql_query("SELECT * FROM inventario WHERE articulo='$codigo' and almacen='$id_almacen'");             
+                                                     $pwa=mysql_query("SELECT * FROM inventario WHERE articulo='$codigo' and almacen='$id_almacen'");
                                                     if($roww=mysql_fetch_array($pwa)){
-                                                        $stock=$roww['stock'];  
+                                                        $stock=$roww['stock'];
                                                         $new_cant=$roww['stock']-$cantidad;
                                                         mysql_query("UPDATE inventario SET stock='$new_cant' WHERE articulo='$codigo' and almacen='$id_almacen'");
-                                                    } 
+                                                    }
                                                     ############### GUARDAMOS EN LA TABLA KARDEX#########################
                                                     $detalle_sql="INSERT INTO kardex (factura, tipo, id_articulo, cant, costok, importe, stockk, fecha, sucursal, usu)
                                                                           VALUES ('$factura','VENTA','$id_art','$cantidad','$costo','$cost_total','$new_cant','$fecha','$id_almacen','$usu')";
-                                                    mysql_query($detalle_sql);                                                                                                                                                                                                            
+                                                    mysql_query($detalle_sql);
                                             ?>
                                             <tr>
-                                                <td width="5%" align="left"><?php echo $cantidad; ?></td>                                                
+                                                <td width="5%" align="left"><?php echo $cantidad; ?></td>
                                                 <td width="75%"><?php echo $oArticulo->consultar('nombre');  ?></td>
                                                 <td><div align="right">$<?php echo formato($new); ?></div></td>
                                                 <td width="20%"><div align="right"></div></td>
@@ -391,49 +392,49 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                                                 <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>
                                             </tr>
                                             <tr>
-                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>                                                                                                                    
+                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>
                                             </tr>
                                              <tr>
-                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>                                                                                                                    
+                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>
                                             </tr>
                                             <tr>
-                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>                                                                                                                    
-                                            </tr>  
+                                               <td colspan="4" align="right" class="text-danger" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato(0); ?></td>
+                                            </tr>
                                              <tr>
-                                               <td colspan="4" align="right" class="text-default" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato($netoO); ?></td>                                                                                                                    
-                                            </tr>                            
-                                        </table>    
-                                        
+                                               <td colspan="4" align="right" class="text-default" style="font-size: 16px;">&nbsp;&nbsp;&nbsp;<?php echo formato($netoO); ?></td>
+                                            </tr>
+                                        </table>
+
                                          <div class="row">
-                                                      
-            </div>                                                                                                                         
+
+            </div>
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-                
-            
-               
-           
+
+
+
+
              <!-- /. PAGE INNER  -->
-                                       
+
         </div>
-               
+
     </div>
              <!-- /. PAGE INNER  -->
             </div>
 
-            <?php 
+            <?php
         ######## GUARDAMOS LA INFORMACION DE LA FACTURA EN LAS TABLAS
-        $fecha=date('Y-m-d');                   
+        $fecha=date('Y-m-d');
         $hora=date('H:i:s');
         $mensaje='Venta al "'.$pago.'"';
        mysql_query("INSERT INTO factura (factura,valor,fecha,estado,almacen,usu) VALUE ('$factura','$netoO','$fecha','s','$id_almacen','$usu')");
-             mysql_query("INSERT INTO resumen (cliente,concepto,factura,clase,valor,tipo,fecha,hora,status,usu,almacen,estado) 
+             mysql_query("INSERT INTO resumen (cliente,concepto,factura,clase,valor,tipo,fecha,hora,status,usu,almacen,estado)
                                   VALUES ('$id_cliente','$mensaje','$factura','VENTA','$netoO','VENTA','$fecha','$hora','$pago','$usu','$id_almacen','s')");
         if ($pago == 'CREDITO')
-        {  
+        {
              $guardax=$netoO-$valor_recibido;
              $interesG=($intereR/100)/12;
         $mx=round(($guardax*$interesG*(pow((1+$interesG),($mesR))))/((pow((1+$interesG),($mesR)))-1),2);
@@ -443,7 +444,7 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
                 $totalint=round($totalint+($guardax*$interesG),2);
                 number_format($guardax*$interesG,2,",",".");
                 number_format($mx-($guardax*$interesG),2,",",".");
- 
+
                 $guardax=$guardax-($mx-($guardax*$interesG));
         }
 
@@ -453,15 +454,15 @@ font-size: 16px;">Fecha de Acceso : <?php echo fecha(date('Y-m-d')); ?>
         $interesAg=round($guarda*$interesG,2);
         $m=round(($guarda*$interesG*(pow((1+$interesG),($mesR))))/((pow((1+$interesG),($mesR)))-1),2);
 
-           
-            mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio,interes,cuota,to_interes) 
-                                       VALUES ('$id_cliente','$factura','CXC','$guarda','$fecha','$hora','$usu','$id_almacen','$intereR','$m','$totalint')");          
+
+            mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio,interes,cuota,to_interes,prima)
+                                       VALUES ('$id_cliente','$factura','CXC','$guarda','$fecha','$hora','$usu','$id_almacen','$intereR','$m','$totalint','$valor_recibido')");
         }
             else
             {
-                mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio) 
+                mysql_query("INSERT INTO contable (concepto1,concepto2,tipo,valor,fecha,hora,usu,consultorio)
                                            VALUES ('$mensaje','$factura','ENTRADA','$netoO','$fecha','$hora','$usu','$id_almacen')");
-            } 
+            }
 
         mysql_query("DELETE FROM caja_tmp WHERE usu='$usu'");
         mysql_query("DELETE FROM cliente_tmp WHERE usu='$usu'");
