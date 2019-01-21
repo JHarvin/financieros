@@ -97,7 +97,7 @@
               <span class="caret"></span></a>
              <ul class="dropdown-menu">
                      <li>
-                                <a href="m../../odulos/reportes/cat.php"> Articulos por Categorias</a>
+                                <a href="../../modulos/reportes/cat.php"> Articulos por Categorias</a>
                             </li>
                              <li>
                                 <a href="../../modulos/reportes/report_costo.php"> Articulos por Almacen Costo</a>
