@@ -77,15 +77,15 @@
                                         $estado=limpiar($_POST['estado']);
                                         $iva=limpiar($_POST['iva']);
                                         #tipo y marca
-                                        $modelo=limpiar($_POST['modelo']);
-                                        $estante=limpiar($_POST['estante']);
+                                        //$modelo=limpiar($_POST['modelo']);
+                                        //$estante=limpiar($_POST['estante']);
                                         $marca=limpiar($_POST['marca']);
                                         #stock y precios
                                         $almacen=limpiar($_POST['almacen']);
                                         $stock=limpiar($_POST['stock']);
                                         $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);
+                                       // $pmy=limpiar($_POST['pmy']);
 
                                         /*$costo=limpiar($_POST['costo']);*/
                                         $oND=new Consultar_Deposito($almacen);
@@ -100,9 +100,9 @@
                                             if($row=mysql_fetch_array($pa)){
                                                 echo mensajes('El Articulo "'.$nombre.'" Ya se Encuentra Registrado con el codigo "'.$codigo.'"','rojo');
                                             }else{
-                                                $oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$iva,
-                                                                                                   $modelo,$estante,$marca,
-                                                                                                   $almacen,$stock,$stock_min,$pv,$pmy);
+$oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,
+                                                                                                  $marca,
+                                                                                                   $almacen,$stock,$stock_min,$pv);
                                                 $oArticulos->crear();
                                                 echo mensajes('El Articulo "'.$nombre.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');
                                             }
@@ -120,16 +120,18 @@
                                         $stock=limpiar($_POST['stock']);
                                         $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);
+                                        //$pmy=limpiar($_POST['pmy']);
                                        mysql_query("UPDATE inventario SET almacen='$almacen',
                                                                              stock='$stock',
                                                                              stock_min='$stock_min',
-                                                                             pv='$pv',
-                                                                             pmy='$pmy'
+                                                                             pv='$pv'
+                                                                             
                                                                              WHERE id='$id'");
                                         echo mensajes('El Stock se ha  Actualizado con Exito','verde');
                                       }
                                 ?>
+
+
                                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <form name="form1" method="post" action="">
                                         <input type="hidden" name="id_prenatal" value="<?php echo $id_prenatal; ?>">
@@ -138,9 +140,9 @@
                                         <div class="panel-body">
                                         <div class="row">
                                             <ul class="nav nav-tabs nav-justified">
-                                            <li class="active"><a href="#datos" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> DATOS</a></li>
-                                            <li class="" ><a href="#tipo" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> UBICACION</a></li>
-                                            <li class="" ><a href="#stock" data-toggle="tab"><i class="glyphicon glyphicon-fullscreen" ></i> STOCK Y PRECIOS</a></li>
+                                            <li class="active"><a href="#datos" data-toggle="tab">DATOS</a></li>
+                                            
+                                            <li class="" ><a href="#stock" data-toggle="tab"></i> STOCK Y PRECIOS</a></li>
                                             </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane fade active in" id="datos">
@@ -190,7 +192,7 @@
                                                         <textarea class="form-control" name="detalle" placeholder="Detalle" rows="4" onKeyUp="this.value=this.value.toUpperCase();"></textarea><br>
                                                         </div>
                                                     </div>
-                                                     <div class="tab-pane fade" id="tipo">
+                                                     <!-- <div class="tab-pane fade" id="tipo">
                                                         <br>
                                                         <div class="col-md-6">
                                                           <div class="input-group">
@@ -205,7 +207,10 @@
                                                                 <input class="form-control" name="estante"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>
                                                           </div><br>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
+
+
+
                                                     <div class="tab-pane fade" id="stock">
                                                         <br>
                                                         <div class="col-md-6">
@@ -222,7 +227,7 @@
                                                                     </select>
                                                                     </div><br>
                                                                        <div class="input-group">
-                                                                          <span class="input-group-addon">Stock</span>
+                                                                          <span class="input-group-addon">Cantidad</span>
                                                                           <input class="form-control" name="stock"  autocomplete="off" required><br>
                                                                     </div><br>
                                                                     <div class="input-group">
@@ -235,10 +240,7 @@
                                                                           <span class="input-group-addon">Precio venta</span>
                                                                           <input type="number" class="form-control" name="pv" min="0" step="any" autocomplete="off" required><br>
                                                                     </div><br>
-                                                                    <div class="input-group">
-                                                                          <span class="input-group-addon">Precio Mayoreo</span>
-                                                                          <input type="number" class="form-control" name="pmy" min="0" step="any" autocomplete="off" required><br>
-                                                                    </div><br>
+                                                                   
                                                                     <div class="input-group">
                                                                       <span class="input-group-addon">Estado</span>
                                                                       <select class="form-control" name="estado" autocomplete="off" required>
@@ -345,14 +347,14 @@
                                             <td><?php echo $row['codigo']; ?></td>
                                             <td><?php echo $oArticulos->consultar('nombre'); ?></td>
                                             <td><?php echo $s.' '.formato($row['pv']); ?></td>
-                                            <td><?php echo $stockx; ?></td>
+                                            <td><?php echo $stock_min; ?></td>
                                             <td class="center">
                                                 <a href="#edit<?php echo $row['id']; ?>" role="button" class="btn btn-warning btn-sm" data-toggle="modal">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <a href="../detalle/kardex.php?detalle=<?php echo $row['id']; ?>" role="button" class="btn btn-success btn-sm" title="TARJETA KARDEX" data-toggle="modal">
+                                               <!-- > <a href="../detalle/kardex.php?detalle=<?php echo $row['id']; ?>" role="button" class="btn btn-success btn-sm" title="TARJETA KARDEX" data-toggle="modal">
                                                     <i class="fa fa-search"></i>
-                                                </a>
+                                                </a>--
                                             </td>
                                         </tr>
                                            <!--  Modals Editar-->
@@ -405,7 +407,7 @@
                                                                     </select>
                                                                     </div><br>
                                                                        <div class="input-group">
-                                                                          <span class="input-group-addon">Stock</span>
+                                                                          <span class="input-group-addon">Cantidad</span>
                                                                           <input class="form-control" name="stock" value="<?php echo $row['stock']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
                                                                     </div>
@@ -418,10 +420,7 @@
                                                                           <span class="input-group-addon">Precio venta</span>
                                                                           <input type="number" min="0" step="any" class="form-control" name="pv" value="<?php echo $row['pv']; ?>" autocomplete="off" required><br>
                                                                     </div><br>
-                                                                    <div class="input-group">
-                                                                          <span class="input-group-addon">Precio Mayoreo</span>
-                                                                          <input type="number" min="0" step="any" class="form-control" name="pmy" value="<?php echo $row['pmy']; ?>" autocomplete="off" required><br>
-                                                                    </div><br>
+                                                                    
                                                                 </div>
                                                             </div>
                                                             <?php }else{ echo mensajes("NO TIENES PERMISO PARA REALIZAR ESTA ACCIÓN","rojo"); }?>
@@ -435,6 +434,8 @@
                                                     </form>
                                                 </div>
                                          <!-- End Modals-->
+
+
                                          <!-- Modal -->
                                                 <div class="modal fade" id="eliminar<?php echo $row['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                     <form name="contado" action="index.php?del=<?php echo $row['id']; ?>" method="get">

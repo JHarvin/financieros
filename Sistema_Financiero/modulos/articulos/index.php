@@ -80,7 +80,7 @@
                                         <div class="row">
                                         <ul class="nav nav-tabs nav-justified">
                                             <li class="active"><a href="#datos" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> DATOS</a></li>
-                                            <li class="" ><a href="#tipo" data-toggle="tab"><i class="glyphicon glyphicon-book" ></i> UBICACIÓN</a></li>
+                                            
                                             </ul><br>
                                             <div class="tab-content">
                                             <div class="tab-pane fade active in" id="datos">
@@ -111,19 +111,21 @@
                                                     ?>
                                                 </select>
                                                 </div><br>
-                                                <div class="input-group">
-                                                  <span class="input-group-addon">IVA</span>
-                                                  <select class="form-control" name="iva" autocomplete="off" required>
-                                                    <option value="" selected disabled>---SELECCIONE---</option>
-                                                    <option value="s">ACTIVO</option>
-                                                    <option value="n">NO ACTIVO</option>
-                                                </select>
-                                                </div><br>
+                                               
                                             </div>
                                             <div class="col-md-6">
                                              <div class="input-group">
                                                     <span class="input-group-addon">Marca:</span>
-                                                    <input class="form-control" name="marca" placeholder="Marca" autocomplete="off" required>
+                                                    
+                                                    <select class="form-control" name="marca" placeholder="Marca" autocomplete="off" required>
+                                                   <option value="" selected disabled>---SELECCIONE---</option>
+                                                     <?php
+                                                        $sal=mysql_query("SELECT * FROM marcas WHERE estado='s'");
+                                                        while($col=mysql_fetch_array($sal)){
+                                                            echo '<option value="'.$col['id'].'">'.$col['nombre'].'</option>';
+                                                        }
+                                                    ?>
+                                                </select>
                                             </div><br>
                                             <input type="number" min="0" step="any" class="form-control" name="valor" placeholder="Costo Compra" autocomplete="off" required><br>
                                             <textarea class="form-control" name="detalle" placeholder="Detalle" rows="4"></textarea><br>
@@ -136,21 +138,7 @@
                                                 </div>
                                             </div>
                                             </div>
-                                            <div class="tab-pane fade" id="tipo">
-                                                        <br>
-                                                        <div class="col-md-6">
-                                                          <div class="input-group">
-                                                                <span class="input-group-addon">Modelo:</span>
-                                                                <input class="form-control" name="modelo"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>
-                                                          </div><br>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                           <div class="input-group">
-                                                                <span class="input-group-addon">Estante:</span>
-                                                                <input class="form-control" name="estante"  autocomplete="off" onKeyUp="this.value=this.value.toUpperCase();"><br>
-                                                          </div><br>
-                                                        </div>
-                                                    </div>
+                                     
                                             </div>
                                         </div>
                                         </div>
@@ -183,10 +171,10 @@
                                         $valor=limpiar($_POST['valor']);
                                         $detalle=limpiar($_POST['detalle']);
                                         $estado=limpiar($_POST['estado']);
-                                        $modelo=limpiar($_POST['modelo']);
-                                        $estante=limpiar($_POST['estante']);
+                                        //$modelo=limpiar($_POST['modelo']);
+                                        //$estante=limpiar($_POST['estante']);
                                         $marca=limpiar($_POST['marca']);
-                                        $iva=limpiar($_POST['iva']);
+                                       // $iva=limpiar($_POST['iva']);
 
                                         $oNDP=new Consultar_Articulos($codigo);
                                         $nom_Pdto=$oNDP->consultar('nombre');
@@ -196,13 +184,13 @@
                                             if($row=mysql_fetch_array($pa)){
                                                 echo mensajes('El Articulo "'.$nombre.'" Ya se Encuentra Registrado con el codigo "'.$codigo.'"','rojo');
                                             }else{
-                                                 $oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$modelo,$estante,$marca,$iva);
+$oArticulos=new Proceso_Articulos('',$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$marca);
                                                  $oArticulos->crear();
                                                  echo mensajes('Articulo "'.$nombre.'" Creado con Exito','verde');
                                             }
                                         }else{
                                             $id=limpiar($_POST['id']);
-                                            $oArticulos=new Proceso_Articulos($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$modelo,$estante,$marca,$iva);
+$oArticulos=new Proceso_Articulos($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$marca);
                                             $oArticulos->actualizar();
                                             echo mensajes('Articulo "'.$nombre.'" Actualizado con Exito','verde');
                                         }
@@ -216,7 +204,7 @@
                                         $stock=limpiar($_POST['stock']);
                                         $stock_min=limpiar($_POST['stock_min']);
                                         $pv=limpiar($_POST['pv']);
-                                        $pmy=limpiar($_POST['pmy']);
+                                        //$pmy=limpiar($_POST['pmy']);
                                         $cat=limpiar($_POST['cat']);
                                         $nombrex=limpiar($_POST['nombrex']);
 
@@ -229,7 +217,7 @@
                                         if($row=mysql_fetch_array($pa)){
                                             echo mensajes('El Articulo "'.$nom_art.'" ya se Encuentra asignado al Almacen "'.$nom_depo.'"','rojo');
                                         }else{
-                                            $oInventario=new Proceso_Inventario('',$almacen,$id_art,$codigo,$stock,$stock_min,$pv,$pmy,$cat);
+                                            $oInventario=new Proceso_Inventario('',$almacen,$id_art,$codigo,$stock,$stock_min,$pv,$cat);
                                             $oInventario->crear();
                                             echo mensajes('El Articulo "'.$nombrex.'" Ha sido Ingresado con Exito en el Almacen "'.$nom_depo.'"','verde');
                                         }
@@ -411,14 +399,7 @@
                                                                           <span class="input-group-addon">Valor</span>
                                                                           <input type="number" min="0" step="any" class="form-control" name="valor"  value="<?php echo formato($row['valor']); ?>" autocomplete="off" required><br>
                                                                     </div><br>
-                                                                    <div class="input-group">
-                                                                      <span class="input-group-addon">IVA</span>
-                                                                      <select class="form-control" name="iva" autocomplete="off" required>
-                                                                       <option value="" selected disabled>---SELECCIONE---</option>
-                                                                        <option value="s" <?php if($row['iva']=='s'){ echo 'selected'; } ?>>ACTIVO</option>
-                                                                        <option value="n" <?php if($row['iva']=='n'){ echo 'selected'; } ?>>NO ACTIVO</option>
-                                                                    </select>
-                                                                    </div><br>
+                                                                    
                                                                     </div>
                                                                 <div class="col-md-6">
                                                                      <div class="input-group">
@@ -428,11 +409,11 @@
                                                                       <div class="input-group">
                                                                             <span class="input-group-addon">Marca</span>
                                                                             <input class="form-control" name="marca" placeholder="Marca" autocomplete="off" value="<?php echo $row['marca']; ?>" onKeyUp="this.value=this.value.toUpperCase();" required>
+
+
+                                                                            
                                                                       </div><br>
-                                                                       <div class="input-group">
-                                                                            <span class="input-group-addon">Estante</span>
-                                                                            <input class="form-control" name="estante"  autocomplete="off" value="<?php echo $row['estante']; ?>" onKeyUp="this.value=this.value.toUpperCase();"><br>
-                                                                      </div><br>
+                                                                      
                                                                      <div class="input-group">
                                                                       <span class="input-group-addon">Estado</span>
                                                                       <select class="form-control" name="estado" autocomplete="off" required>
@@ -498,7 +479,7 @@
                                                                     </select>
                                                                     </div><br>
                                                                        <div class="input-group">
-                                                                          <span class="input-group-addon">Stock</span>
+                                                                          <span class="input-group-addon">Cantidad</span>
                                                                           <input class="form-control" name="stock"  autocomplete="off" required><br>
                                                                     </div><br>
                                                                     </div>
@@ -511,10 +492,10 @@
                                                                           <span class="input-group-addon">Precio venta</span>
                                                                           <input type="number" class="form-control"  min="0" step="any" name="pv"  autocomplete="off" required><br>
                                                                     </div><br>
-                                                                    <div class="input-group">
+                                                                   <!-- - <div class="input-group">
                                                                           <span class="input-group-addon">Precio Mayoreo</span>
                                                                           <input type="number" class="form-control"  min="0" step="any" name="pmy"  autocomplete="off" required><br>
-                                                                    </div><br>
+                                                                    </div><br>-->
                                                                 </div>
                                                             </div>
                                                             </div>

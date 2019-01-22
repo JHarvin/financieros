@@ -182,7 +182,7 @@
                                             <td><?php echo $row['codigo']; ?></td>
                                             <td><?php echo $oArticulo->consultar('nombre');  ?></td>
                                             <td><?php echo $oCat->consultar('nombre');  ?></td>
-                                            <td><span class="badge badge-important"><?php echo $row['stock']; ?></span></td>
+                                            <td><?php echo $minima; ?></span></td>
                                         </tr>
                                         <?php }} ?>
                                     </tbody>

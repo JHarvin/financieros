@@ -13,7 +13,7 @@ class Proceso_Articulos{
 	var $marca;
 	var $iva;
 	
-	function __construct($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$modelo,$estante,$marca,$iva){
+	function __construct($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$marca){
 		$this->id=$id;						
 		$this->codigo=$codigo;
 		$this->nombre=$nombre;
@@ -22,10 +22,10 @@ class Proceso_Articulos{
 		$this->valor=$valor;
 		$this->detalle=$detalle;						
 		$this->estado=$estado;
-		$this->modelo=$modelo;
-		$this->estante=$estante;
+		//$this->modelo=$modelo;
+		//$this->estante=$estante;
 		$this->marca=$marca;
-		$this->iva=$iva;
+		//$this->iva=$iva;
 	}
 	
 	function crear(){

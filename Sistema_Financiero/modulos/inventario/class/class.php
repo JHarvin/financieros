@@ -18,7 +18,7 @@ class Proceso_Articulos{
 	var $pv;
 	var $pmy;
 	
-	function __construct($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$iva,$modelo,$estante,$marca,$almacen,$stock,$stock_min,$pv,$pmy){
+	function __construct($id,$codigo,$nombre,$cat,$und,$valor,$detalle,$estado,$marca,$almacen,$stock,$stock_min,$pv){
 		$this->id=$id;						
 		$this->codigo=$codigo;
 		$this->nombre=$nombre;
@@ -27,15 +27,15 @@ class Proceso_Articulos{
 		$this->valor=$valor;
 		$this->detalle=$detalle;						
 		$this->estado=$estado;
-		$this->iva=$iva;
-		$this->modelo=$modelo;
-		$this->estante=$estante;
+		//$this->iva=$iva;
+		//$this->modelo=$modelo;
+		//$this->estante=$estante;
 		$this->marca=$marca;
 		$this->almacen=$almacen;
 		$this->stock=$stock;
 		$this->stock_min=$stock_min;
 		$this->pv=$pv;
-		$this->pmy=$pmy;	
+		//$this->pmy=$pmy;	
 	}
 	
 	function crear(){

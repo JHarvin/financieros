@@ -10,7 +10,7 @@ class Proceso_Inventario{
 	var $pmy;
 	var $cat;
 	
-	function __construct($id,$almacen,$id_art,$codigo,$stock,$stock_min,$pv,$pmy,$cat){
+	function __construct($id,$almacen,$id_art,$codigo,$stock,$stock_min,$pv,$cat){
 		$this->id=$id;						
 		$this->almacen=$almacen;
 		$this->id_art=$id_art;
@@ -18,7 +18,7 @@ class Proceso_Inventario{
 		$this->stock=$stock;
 		$this->stock_min=$stock_min;
 		$this->pv=$pv;						
-		$this->pmy=$pmy;
+		//$this->pmy=$pmy;
 		$this->cat=$cat;	
 	}
 	
