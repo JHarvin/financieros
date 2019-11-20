@@ -71,26 +71,36 @@ if (isset($_REQUEST['nameEnviar'])) {
        color: #2196f3;
     }
 
- 
+
 </style>
-<form action="registro_activo.php" method="GET" autocomplete="off">
-        <section class="wrapper">
+<form action="registro_activo.php" method="GET" autocomplete="off" style="background-color:gray;">
+        <section class="wrapper" style="background-color:gray;">
             <!--INICIO DE FIADOR-->
             <div class="container-fluid">
                 <!-- Basic Validation -->
-                <div class="row clearfix">
+                <div class="row clearfix" >
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="card">
-                            <div class="header">
-                                <h2 class="text-center">REGISTRO DE ACTIVO</h2>
+                            <div class="header" style="background-color:gray">
+
+                                <div class="row">
+                                  <div class="col-md-6">
+                                      <h2 style="color:white;">REGISTRO DE ACTIVO</h2>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <button style="background-color:black; color:white;" type="submit" name="nameEnviar" class="btn m-t-15 waves-effect" value="ok">GUARDAR</button>
+                                  </div>
+
+
+                                </div>
                             </div>
-                            <div class="body">
+                            <div class="body" style="background-color:lightgray;">
                                 <div class="row clearfix mary">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE LA INSTITUCION</strong></span>
+                                                    <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE LA INSTITUCION</strong></span>
                                                     <select class="form-control show-tick maria" name="select_institucion" required="">
 
                                                         <?php foreach ($lista_institucion as $lista) { ?>
@@ -111,7 +121,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL DEPARTAMENTO</strong></span>
+                                                    <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL DEPARTAMENTO</strong></span>
                                                     <select class="form-control show-tick maria" name="select_departamento" required="">
                                                         <?php foreach ($lista_depatamento as $lista) { ?>
 
@@ -129,7 +139,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL TIPO DE ACTIVO</strong></span>
+                                                    <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL TIPO DE ACTIVO</strong></span>
                                                     <select class="form-control show-tick maria" name="select_tipo" required="">
                                                         <option  value="" disabled="">SELECCIONE EL TIPO DE ACTIVO</option>
                                                         <?php foreach ($lista_tipo as $lista2) { ?>
@@ -147,7 +157,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                         <div class="form-group">
                                             <div class="form-line">
                                                 <div class="form-line">
-                                                    <span class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL ENCARGADO</strong></span>
+                                                    <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>SELECCIONE EL ENCARGADO</strong></span>
                                                     <select class="form-control show-tick maria" name="select_encargado" required="">
                                                         <option  value="" disabled="">SELECCIONE ENCARGADO</option>
                                                         <?php foreach ($lista_encargado as $lista3) { ?>
@@ -166,7 +176,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>FECHA ADQUISICION</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>FECHA ADQUISICION</strong></span>
                                                 <input type="date"  class="form-control text-center maria" required="" name="fecha" placeholder="FECHA ADQUISICION">
                                             </div>
                                         </div>
@@ -175,7 +185,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>TIEMPO DE USO (MESES)</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>TIEMPO DE USO (MESES)</strong></span>
                                                 <input type="number"  min="0" step="any"class="form-control text-center maria" name="meses" placeholder="TIEMPO DE USO (MESES)" required="">
                                             </div>
                                         </div>
@@ -185,7 +195,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>OBSERVACIONES</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>OBSERVACIONES</strong></span>
                                                 <input type="text"  class="form-control text-center maria" required="" name="obsevaciones" placeholder="OBSERVACIONES">
                                             </div>
                                         </div>
@@ -194,7 +204,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>CANTIDAD</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>CANTIDAD</strong></span>
                                                 <input type="number"  min="0" step="any"class="form-control text-center maria" name="cantidad" placeholder="UNIDADES" required="">
                                             </div>
                                         </div>
@@ -204,7 +214,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>DESCRIPCION</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>DESCRIPCION</strong></span>
                                                 <input type=""  class="form-control text-center maria" required="" name="descripcion" placeholder="DESCRIPCION">
                                             </div>
                                         </div>
@@ -212,7 +222,7 @@ if (isset($_REQUEST['nameEnviar'])) {
                                        <div class="col-md-6">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <span class="input-group-addon coco" id="basic-addon1"><strong>PRECIO</strong></span>
+                                                <span style="background-color:gray; color:white;" class="input-group-addon coco" id="basic-addon1"><strong>PRECIO</strong></span>
                                                 <input type=""  class="form-control text-center maria" required="" name="precio" placeholder="Precio">
                                             </div>
                                         </div>
@@ -221,9 +231,7 @@ if (isset($_REQUEST['nameEnviar'])) {
 
                                 </div>
 
-                                <div class="text-center">
-                                    <button type="submit" name="nameEnviar" class="btn btn-primary m-t-15 waves-effect" value="ok">GUARDAR</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>

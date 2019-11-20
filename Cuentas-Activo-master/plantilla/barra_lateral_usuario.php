@@ -2,7 +2,7 @@
 <aside id="leftsidebar" class="sidebar">
     <!-- User Info -->
     <div class="user-info">
-        
+
         <div class="info-container">
             <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
             <div class="email"></div>
@@ -132,14 +132,14 @@
                     <span>Registro de Departamento</span>
                 </a>
             </li>
-            
+
         </ul>
     </div>
     <!-- #Menu -->
     <!-- Footer -->
     <div class="legal">
         <div class="copyright">
-            © 2018 <a href="#">UES FMP.</a>
+            © 2019 <a href="#">UES FMP TODOS LOS DERECHOS RESERVADOS.</a>
         </div>
 
     </div>

@@ -60,20 +60,20 @@ and institucion.id_institucion=activo.id_institucion and encargado.id_encargado=
         <div class="container-fluid" id="contenido">
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="background-color:gray;">
                         <div class="header">
                             <h2 class="text-center">Activos</h2>
                         </div>
-                        <div id="heading" class="panel-heading">
-<div id="expedientes" class="panel panel-info">
-          <div class="panel-body">
-            <div class="body">
-                            <div class="row clearfix">
+                        <div id="heading" class="panel-heading" style="background-color:gray;">
+<div id="expedientes" class="panel panel-info" style="background-color:gray;">
+          <div class="panel-body" style="background-color:gray;">
+            <div class="body" style="background-color:gray;">
+                            <div class="row clearfix" style="background-color:gray;">
 
 
 
-<div class="box-body">
-                                <table id="example1" class="table table-bordered table-striped">
+<div class="box-body" style="background-color:gray;">
+                                <table style="background-color:gray;" id="example1" class="table table-bordered table-striped">
                                     <caption></caption>
 
                                     <thead >
@@ -148,7 +148,7 @@ function llamarPagina(id){
 </script>
 <script>
 $(document).ready(function() {
-    
+
 if ( $.fn.dataTable.isDataTable( '#example1' ) ) {
 table = $('#example1').DataTable( );
  paging: true

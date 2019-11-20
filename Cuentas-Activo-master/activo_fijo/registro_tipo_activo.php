@@ -62,14 +62,14 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
        background-color: #F92659
     }
 
- 
+
 </style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 </head>
 <body>
-    
+
 
 <form action="registro_tipo_activo.php" method="GET" autocomplete="off">
     <section class="wrapper">
@@ -78,13 +78,13 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
             <!-- Basic Validation -->
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
+                    <div class="card" style="background-color:gray; color:white;">
                         <div class="header">
-                            <h2 class="text-center">REGISTRO DE TIPO DE ACTIVO</h2>
+                            <h2 style="color:white;">REGISTRO DE TIPO DE ACTIVO</h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <input type="text"class="form-control text-center maria" required="" name="nameNombre" placeholder="Nombre del tipo de Activo">
@@ -92,7 +92,7 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <div class="form-line">
                                             <div class="form-line">
@@ -108,10 +108,11 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <button style="background-color:black;color:white;" type="submit" name="nameEnviar" class="btn m-t-15 waves-effect" value="ok">GUARDAR</button>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" name="nameEnviar" class="btn btn-primary m-t-15 waves-effect" value="ok">GUARDAR</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -131,7 +132,7 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
          <div class="modal-dialog">
              <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel"><font font font font font font color="black">Registro general</font></h3> 
+                    <h3 class="modal-title" id="myModalLabel"><font font font font font font color="black">Registro general</font></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
@@ -141,13 +142,13 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                     <div class="row">
 
                         <div class="col-md-12">
-                            
+
 
                             <div class="row">
                                  <div class="col-md-6">Nombre
                                     <INPUT class="form-control mask-dui" type="text" autocomplete="off" name="duisito" id="nombreAct" value="">
                                 </div>
-                                
+
                             </div><br>
                              <div class="row">
                                  <div class="col-md-6">Clasificacion
@@ -160,18 +161,18 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
                                                     <?php } ?>
                                  </select>
                                 </div>
-                                
+
                             </div><br>
 
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary" >Actualizar</button>
-                </div> 
-                 
+                </div>
+
              </div>
          </div>
      </div>
@@ -179,20 +180,20 @@ $lista_clasificacion = repositorio_clasificacion::lista_clasificacion(Conexion::
 </form>
 
 
-<?php 
+<?php
 
 if (!empty($_REQUEST['duisito'])) {
-    try {        
-    
-    $nombre =  $_REQUEST['duisito']; 
+    try {
+
+    $nombre =  $_REQUEST['duisito'];
     $nombre =  $_REQUEST['NameSelect'];
     $id = $_REQUEST['idDeActualizacion'];
 
      mysqli_query($conexion, "UPDATE departamento SET nombre = '$nombre' WHERE id_departamento = '$id'");
 
-  
+
     } catch (Exception $ex) {
-        
+
     }
 }
 
@@ -211,14 +212,14 @@ if (!empty($_REQUEST['duisito'])) {
                             <th class="acciones" width="10"><font font font font font color="black">Acciones</font></th>
                           </tr>
 
-                           
-                          
-                            
-                        
+
+
+
+
                          </thead>
                           <tbody>
                         <?php
-                        
+
                         include_once '../conexion/conexion.php';
                         $pame = mysqli_query($conexion, "SELECT
                              id_tipo,
@@ -231,34 +232,34 @@ if (!empty($_REQUEST['duisito'])) {
                              tipo_activo
                              INNER JOIN clasificacion
                              ON tipo_activo.id_clasificacion = clasificacion.id_clasificacion");
-                        while ($row = mysqli_fetch_array($pame)) {                            
-                             
+                        while ($row = mysqli_fetch_array($pame)) {
+
                              $nombre = $row['tipoActi'];
-                             $clasificacion =$row['clasif'];                  
-                             $idActivo=$row['id_tipo'];  
-                        
+                             $clasificacion =$row['clasif'];
+                             $idActivo=$row['id_tipo'];
+
 
                         ?>
 
 
 
                      <tr>
-                             <td class="name"><?php echo $row['correlat']; ?></td>   
-                            <td class="name"><?php echo $row['tipoActi']; ?></td>                                  
+                             <td class="name"><?php echo $row['correlat']; ?></td>
+                            <td class="name"><?php echo $row['tipoActi']; ?></td>
                             <td class="clasifica"><?php echo $row['clasif']; ;?></td>
                             <td>
                                     <a class="editar" href="#" data-toggle="modal" data-target="#editarTipoActivo" onclick="Editar_visita('<?php echo $nombre; ?>','<?php echo $clasificacion ;?>','<?php echo $idActivo;?>')" >Editar</a>
 
                             </td>
-                                
-                                 
-                                  
-                                    
-               
+
+
+
+
+
 
                 </tr>
 
-                      
+
 
         <?php } ?>
 

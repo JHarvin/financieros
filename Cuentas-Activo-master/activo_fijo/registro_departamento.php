@@ -55,9 +55,9 @@ if (isset($_REQUEST['nameEnviar'])) {
     }
 
 
-    
 
- 
+
+
 </style>
 
 
@@ -65,24 +65,24 @@ if (isset($_REQUEST['nameEnviar'])) {
 <html>
 
 <head>
-    
+
 </head>
 
 
 <body>
-    
-    
+
+
 
     <form action="registro_departamento.php" method="GET" autocomplete="off">
-    <section class="wrapper">
+    <section class="wrapper" style="background-color:gray;">
         <!--INICIO DE FIADOR-->
-        <div class="container-fluid">
+        <div class="container-fluid" style="background-color:gray;">
             <!-- Basic Validation -->
-            <div class="row clearfix">
+            <div class="row clearfix" style="background-color:gray;">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2 class="text-center">REGISTRO DE DEPARTAMENTOS</h2>
+                    <div class="card" style="background-color:gray;">
+                        <div class="header" style="background-color:gray;">
+                            <h2 style="color:white;">REGISTRO DE DEPARTAMENTOS</h2>
                         </div>
                         <div class="body">
                             <div class="row clearfix">
@@ -96,8 +96,8 @@ if (isset($_REQUEST['nameEnviar'])) {
 
 
                             </div>
-                            <div class="text-center">
-                                <button type="submit" name="nameEnviar" class="btn btn-primary m-t-15 waves-effect" value="ok">GUARDAR</button>
+                            <div>
+                                <button style="background-color:black; color:white" type="submit" name="nameEnviar" class="btn m-t-15 waves-effect" value="ok">GUARDAR</button>
                             </div>
                         </div>
                     </div>
@@ -118,7 +118,7 @@ if (isset($_REQUEST['nameEnviar'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="myModalLabel"><font font font font font font color="black">Registro general</font></h3> 
+                    <h3 class="modal-title" id="myModalLabel"><font font font font font font color="black">Registro general</font></h3>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
 
@@ -128,13 +128,13 @@ if (isset($_REQUEST['nameEnviar'])) {
                     <div class="row">
 
                         <div class="col-md-12">
-                            
+
 
                             <div class="row">
                                  <div class="col-md-6">Nombre
                                     <INPUT class="form-control mask-dui" type="text" autocomplete="off" name="duisito" id="nombreDep" value="">
                                 </div>
-                                
+
                             </div><br>
 
                         </div>
@@ -144,26 +144,26 @@ if (isset($_REQUEST['nameEnviar'])) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary" >Actualizar</button>
-                </div> 
+                </div>
             </div>
-        </div> 
-    </div> 
+        </div>
+    </div>
 </form>
 
 
-<?php 
+<?php
 
 if (!empty($_REQUEST['duisito'])) {
-    try {        
-    
+    try {
+
     $nombre =  $_REQUEST['duisito'];
     $id = $_REQUEST['idDeActualizacion'];
 
      mysqli_query($conexion, "UPDATE departamento SET nombre = '$nombre' WHERE id_departamento = '$id'");
 
-  
+
     } catch (Exception $ex) {
-        
+
     }
 }
 
@@ -175,50 +175,50 @@ if (!empty($_REQUEST['duisito'])) {
                             <thead>
                           <tr>
                             <th class="nombre" width="500"><font color="black">Correlativo</font></th>
-                            <th class="nombre" width="500"><font color="black">Nombre del edpartamento</font></th>                             
+                            <th class="nombre" width="500"><font color="black">Nombre del edpartamento</font></th>
                             <th class="acciones" width="10"><font">Acciones</font></th>
                           </tr>
 
-                           
-                          
-                            
-                        
+
+
+
+
                          </thead>
                           <tbody>
 
-                            
+
                         <?php
 
                         include_once '../conexion/conexion.php';
                         $pame = mysqli_query($conexion, "SELECT id_departamento,nombre,correlativo FROM departamento");
-                        while ($row = mysqli_fetch_array($pame)) {                            
+                        while ($row = mysqli_fetch_array($pame)) {
                              //sacamos estas variables para extraer informacion que se va a editar
-                             $nombre = $row['nombre'];                       
-                             $iddep=$row['id_departamento'];  
-                        
+                             $nombre = $row['nombre'];
+                             $iddep=$row['id_departamento'];
+
 
                         ?>
 
 
 
                      <tr>
-                            <td class="name"><?php echo $row['correlativo']; ?></td>  
+                            <td class="name"><?php echo $row['correlativo']; ?></td>
                             <td class="name"><?php echo $row['nombre']; ?></td>
-                                  
+
                             <!-- <td><?php  $asignar; ?></td> -->
                             <td>
                                     <a class="editar" href="#" data-toggle="modal" data-target="#editardepartamento" onclick="Editar_depar('<?php echo $nombre; ?>','<?php echo $iddep;?>')" >Editar</a>
 
                             </td>
-                                
-                                 
-                                  
-                                    
-               
+
+
+
+
+
 
                 </tr>
 
-                      
+
 
         <?php } ?>
 
@@ -234,7 +234,7 @@ if (!empty($_REQUEST['duisito'])) {
 
 
 <?php
-} 
+}
 include_once '../plantilla/pie.php';
 ?>
 
@@ -250,5 +250,3 @@ function Editar_depar(nombre,pass){
 
 }
 </script>
-
-
